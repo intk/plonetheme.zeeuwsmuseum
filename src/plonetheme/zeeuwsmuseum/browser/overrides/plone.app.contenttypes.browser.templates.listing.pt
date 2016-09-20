@@ -56,7 +56,17 @@
                           
 
                           <div>
-                          <metal:block metal:define-macro="document_byline">
+                          
+                            
+                              <h3 class="item-title">
+                                <a href="#"
+                                 tal:attributes="href item_link;"
+                                 tal:content="item_title"
+                                 >
+                                Title
+                                </a>
+                            </h3>
+                            <metal:block metal:define-macro="document_byline">
                             <p class="event-date">
                             <tal:event condition="item_is_event">
                               <tal:date tal:replace="structure python:view.formatted_date(obj)"/>
@@ -67,15 +77,6 @@
                             
                             </p>
                           </metal:block>
-                            
-                              <h4 class="item-title">
-                                <a href="#"
-                                 tal:attributes="href item_link;"
-                                 tal:content="item_title"
-                                 >
-                                Title
-                                </a>
-                            </h4>
                             <p class="item-description" tal:content="item_description"></p>
                           </div>
 

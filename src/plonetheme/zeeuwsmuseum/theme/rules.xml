@@ -97,7 +97,12 @@
         css:content-children="#viewlet-above-content-title"
         />
 
-      <drop css:content="#viewlet-above-content-title"/>
+      <replace
+        css:theme-children="#below-content"
+        css:content-children="#viewlet-below-content-body"
+        />
+
+      <drop css:content="#viewlet-below-content-body"/>
 
       <replace
         css:theme-children="#slickslideshow"
@@ -162,12 +167,12 @@
                 <div class="clearfix"></div>
             </div>
             
-            <section id="viewlet-below-content-body" class="row">
+            <!--<section id="viewlet-below-content-body" class="row">
                 <div class="col-xs-12 col-sm-12 no-padding">
                  <xsl:copy-of css:select="#viewlet-below-content" />
                 </div>
                 <div class="clearfix"></div>
-            </section>
+            </section>-->
 
           </div><!--/row-->
       </replace>
@@ -195,5 +200,38 @@
       </rules>
 
       <replace css:theme-children="footer .container" css:content-children="#portal-footer-wrapper" />
-    
+      <after css:theme-children=".main-content" css:content=".portlet-rrssb" method="raw"/>
+      <drop css:content="footer .portlet-rrssb"/>
+
+      <!-- Mailchimp portlet -->
+      <replace css:content-children=".portletMailChimp">
+        
+          <xsl:copy-of select="dt[@class='portletTitle']"/>
+          <xsl:copy-of select="dt[@class='portletHeader']"/>
+
+          <dd class="portletItem odd">
+
+          <form id="newsletter-subscriber-form" class="form-inline" role="form" method="post"><xsl:attribute name="action"><xsl:value-of select="div/dl/dd/form/@action"/></xsl:attribute>
+            <div class="input-group">
+              <input type="text"
+                class="text-widget required form-control input-lg textline-field" placeholder="Email" id="form-widgets-email" name="form.widgets.email"></input>
+              <span class="input-group-btn">
+                <button class="submit-button" name="form.buttons.subscribe" id="form-buttons-subscribe" type="submit" role="submit">
+                  <span class="fa fa-chevron-right"></span>
+                </button>
+              </span>
+            </div>
+
+            <xsl:copy-of css:select=".portletMailChimp input[type='hidden']"/>
+            <xsl:copy-of select="div/dl//p"/>
+            <xsl:for-each css:select=".portletMailChimp .fieldErrorBox">
+              <xsl:if test="position()=1">
+                <xsl:copy-of select="." />
+              </xsl:if>
+            </xsl:for-each>
+
+          </form>
+          </dd>
+        
+      </replace>
 </rules>

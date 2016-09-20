@@ -66,11 +66,6 @@ jQuery(document).ready(function($){
   //open/close lateral navigation
   jQuery('.cd-nav-trigger, .cd-nav-trigger-menu').on('click', function(event) {
     event.preventDefault();
-    //stop if nav animation is running 
-
-    /*if (jQuery('.site-KasteelDeHaar').length > 0) {
-      jQuery('.cd-nav-trigger').hide();
-    }*/
 
     if (slickSlideshow != undefined) {
       if (slickSlideshow.playing) {
@@ -86,10 +81,6 @@ jQuery(document).ready(function($){
       jQuery('.cd-navigation-wrapper').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
         //animation is over
         isLateralNavAnimating = false;
-        /*console.log("transation end");
-        if (jQuery('.site-KasteelDeHaar').length > 0) {
-          jQuery('.cd-nav-trigger').show();
-        }*/
       });
     }
   });

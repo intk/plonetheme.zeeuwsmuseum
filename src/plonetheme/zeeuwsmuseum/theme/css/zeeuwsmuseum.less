@@ -15,7 +15,8 @@ body.frontend, body#tinymce {
 		line-height: 1.5;
 		margin: 30px 0;
 		a {
-			text-decoration: underline;
+			text-decoration: none;
+			border-bottom: 1px solid @brand-primary;
 		}
 	}
 
@@ -30,10 +31,14 @@ body.frontend, body#tinymce {
 	}
 
 	a {
-		color: @gray-dark;
+		color: #000000;
+		text-decoration: none;
+		/*border-bottom: 1px solid @brand-primary;*/
 		&:hover,
 		&:focus {
 			color: @brand-primary;
+			text-decoration: @brand-primary;
+			/*border-bottom: 0px;*/
 		}
 	}
 
@@ -82,11 +87,12 @@ body.frontend, body#tinymce {
 			margin-top: 0;
 			a {
 				text-decoration: none;
-				color: @gray-dark;
+				color: #000000;
+				border-bottom: 1px solid @brand-primary;
 				&:hover,
 				&:focus {
 					color: @brand-primary;
-					text-decoration: underline;
+					border-bottom: 0px;
 				}
 			}
 		}

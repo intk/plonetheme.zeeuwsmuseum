@@ -6,7 +6,7 @@
 
 body {
   font-family: 'UniversLight', Arial, sans-serif;
-  font-size: 19px;
+  font-size: 16px;
   color: #404040;
 }
 p {
@@ -375,12 +375,12 @@ form .row:first-child .floating-label-form-group {
 ::-moz-selection {
   color: white;
   text-shadow: none;
-  background: #7dadde;
+  background: @brand-primary;
 }
 ::selection {
   color: white;
   text-shadow: none;
-  background: #7dadde;
+  background: @brand-primary;
 }
 img::selection {
   color: white;

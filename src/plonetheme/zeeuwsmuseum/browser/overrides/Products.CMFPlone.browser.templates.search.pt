@@ -234,6 +234,7 @@
                                                  allowAnonymousViewAbout python:context.portal_registry['plone.allow_anon_views_about'];
                                                  show_about python:not isAnon or allowAnonymousViewAbout;">
                         <div class="searchResults">
+                          
                           <tal:results repeat="item batch">
                             
                               <div class="search-item row"
@@ -272,10 +273,10 @@
                                   <p class="item-description" tal:condition="item/CroppedDescription" tal:content="item/CroppedDescription">Subtitle</p>
                                   
                               </div>
-                            </div>
-                              
-                            
+                            </div>  
                           </tal:results>
+
+
                         </div>
                         <div metal:use-macro="context/batch_macros/macros/navigation" />
                       </metal:results>

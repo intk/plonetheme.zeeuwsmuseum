@@ -23,7 +23,8 @@
 <body>
     <div id="website-wrapper">
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-fixed-top plone-navbar cd-auto-hide-header" id="website-nav">
+    <nav class="navbar navbar-default navbar-fixed-top plone-navbar" id="website-nav">
+        
     </nav>
 
     <!--<div class="logo-wrapper">

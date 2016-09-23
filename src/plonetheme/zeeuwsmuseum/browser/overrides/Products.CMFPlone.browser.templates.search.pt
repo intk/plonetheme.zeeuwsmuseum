@@ -242,7 +242,7 @@
                                             item_obj python: item.getObject();
                                             item_is_event python:view.is_event(item)">
 
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 no-padding-left">
+                                <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 no-padding-left">
                                   <tal:leadmedia tal:condition="leadmedia">
                                     <a href="#" tal:define="item_url item/getURL;item_type item/PortalType"
                                      tal:attributes="href python:item_type in use_view_action and (item_url + '/view') or item_url;
@@ -252,9 +252,8 @@
                                   </tal:leadmedia>
                                 </div>
 
-                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-
-                                
+                                <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7">
+                                  
                                   <a href="#" tal:define="item_url item/getURL;item_type item/PortalType"
                                      tal:attributes="href python:item_type in use_view_action and (item_url + '/view') or item_url;
                                                      class string:state-${item/review_state}">

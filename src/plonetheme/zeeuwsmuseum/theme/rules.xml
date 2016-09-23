@@ -55,8 +55,8 @@
         css:content-children=".plone-navbar-nav" />-->
 
       <replace
-        css:theme-children=".cd-primary-nav"
-        css:content-children=".plone-navbar-nav" />
+        css:theme-children="#website-nav"
+        css:content-children="#portal-globalnav-wrapper" />
 
       <!-- Title and description -->
       <replace

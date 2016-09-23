@@ -14,9 +14,6 @@
       <li class="previous" tal:condition="batch/has_previous">
         <a tal:attributes="href python:view.make_link(batch.previouspage)">
           &larr;
-          <span i18n:translate="batch_previous_x_items" tal:omit-tag="">
-            Previous <span i18n:name="number" tal:content="batch/pagesize" tal:omit-tag="">n</span> items
-          </span>
         </a>
       </li>
 
@@ -77,11 +74,6 @@
       </tal:comment>
       <li class="next" tal:condition="batch/has_next">
         <a tal:attributes="href python:view.make_link(batch.nextpage)">
-          <span i18n:translate="batch_next_x_items" tal:omit-tag="">
-            Next
-            <span i18n:name="number" tal:omit-tag="" tal:content="batch/next_item_count">n</span>
-            items
-          </span>
           &rarr;
         </a>
       </li>

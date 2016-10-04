@@ -33,4 +33,12 @@
         description="Shows the online experience view"
         />
 
+  <browser:page
+        name="advancedsearch"
+        class=".advanced_search.views.AdvancedSearchView"
+        permission="zope2.View"
+        for="*"
+        template="advanced_search/templates/advanced_search.pt"
+    />
+
 </configure>

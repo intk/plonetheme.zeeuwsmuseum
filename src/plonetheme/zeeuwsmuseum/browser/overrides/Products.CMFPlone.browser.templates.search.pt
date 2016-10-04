@@ -31,6 +31,8 @@
           role="search"
           class="searchPage pat-formautofocus"
           tal:define="portal context/@@plone_portal_state/portal;
+                      extra_filters portal/@@advancedsearch/getExtraFilters;
+                      advanced_query portal/@@advancedsearch/getAdvancedButtonQuery;
                       first_call not:request/advanced_search|nothing;
                       st python:request.get('SearchableText', '');
                       DateTime python:modules['DateTime'].DateTime;
@@ -60,7 +62,10 @@
                 </span>
         </div>
         
-        <div class="visualClear"></div>
+        <div class="visualClear div-advanced-search">
+          <a class="advanced-search" tal:attributes="href python: context.absolute_url()+'/@@advancedsearch?'+advanced_query if advanced_query else context.absolute_url()+'/@@advancedsearch'" i18n:translate="label_advanced_search">Advanced search</a>
+        </div>
+        
         <dl class="actionMenu"
             tal:attributes="class python:view.show_advanced_search() and 'actionMenu' or 'actionMenu'">
 
@@ -202,6 +207,16 @@
               <div id="search-results-bar">
                 
               </div>
+               <div class="clearfix extra-fields" i18n:domain="plonetheme.zeeuwsmuseum">
+                      <tal:define_extra
+                        tal:define="extra_filters python: extra_filters">
+                        <p tal:condition="extra_filters" tal:content="python: 'Verfijnen: ' if getattr(context, 'language', None) == 'nl' else 'Refine: '"></p>
+                        <tal:items repeat="extra_filter extra_filters">
+                          <p i18n:translate=""><tal:hasparam tal:condition="python: extra_filter['param'] != ''"><span i18n:translate="" tal:content="python: extra_filter['param']"></span>: </tal:hasparam><span tal:content="python: extra_filter['value']"></span><span> <a tal:attributes="href python: extra_filter['link']" class="glyphicon glyphicon-remove extra-filter-remove"></a></span></p>
+                          <input type="hidden" tal:attributes="value python: extra_filter['value']; name python: extra_filter['param']"/>
+                        </tal:items>
+                      </tal:define_extra>
+                      </div>
 
               <metal:searchresults define-macro="search_results">
                 <div class="autotabs">
@@ -222,6 +237,8 @@
                     
                     <div id="search-results"
                          tal:define="navigation_root_url context/@@plone_portal_state/navigation_root_url;">
+                         
+                     
 
                       <metal:noresults tal:condition="not: batch">
                         <p i18n:domain="plone"><strong i18n:translate="description_no_results_found">No results were found.</strong></p>

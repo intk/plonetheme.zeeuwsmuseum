@@ -43,7 +43,7 @@ else:
 def getImageObject(item):
     if item:
         if item.portal_type == "Image":
-            return item.getURL()+"/@@images/image/preview"
+            return item.getURL()+"/@@images/image/mini"
         if item.hasMedia and item.leadMedia != None:
             uuid = item.leadMedia
             catalog = getToolByName(context, 'portal_catalog')
@@ -51,7 +51,7 @@ def getImageObject(item):
             if brains:
                 media_object = brains[0]
                 if media_object:
-                    return media_object.getURL()+"/@@images/image/preview"
+                    return media_object.getURL()+"/@@images/image/mini"
 
 
 """def formatted_date(item):

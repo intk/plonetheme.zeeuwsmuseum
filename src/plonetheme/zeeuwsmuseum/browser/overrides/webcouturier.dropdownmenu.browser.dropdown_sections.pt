@@ -11,15 +11,15 @@
     <div class="container-fluid">
 
       <div class="plone-navbar-header navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#portal-globalnav-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
+        <a href="#portal-globalnav-collapse" class="nav-trigger" data-toggle="collapse" data-target="#portal-globalnav-collapse" aria-expanded="false">
+          <span>
+            <em aria-hidden="true"></em>
+          </span>
+        </a>
         <a class="navbar-brand" href="/">
           ZEEUWS MUSEUM
         </a>
+        <img src="++resource++plonetheme.zeeuwsmuseum/icon-search-blue.svg" style="display: none;"/>
       </div>
 
       <div class="plone-collapse collapse navbar-collapse" id="portal-globalnav-collapse">

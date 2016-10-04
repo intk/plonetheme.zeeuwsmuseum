@@ -22,4 +22,25 @@
       <value key="enabled">True</value>
       <value key="compile">True</value>
     </records>
+
+    <record name="advancedsearch.fields">
+      <field type="plone.registry.field.Tuple">
+          <title>Advanced search fields</title>
+          <description>List of fields in advanced search</description>
+          <value_type type="plone.registry.field.TextLine" />
+      </field>
+    </record>
+
+    <records interface="plone.app.querystring.interfaces.IQueryField"
+           prefix="plone.app.querystring.field.hasMedia">
+      <value key="title">hasMedia</value>
+      <value key="description">Has media field</value>
+      <value key="enabled">True</value>
+      <value key="sortable">True</value>
+      <value key="operations">
+          <element>plone.app.querystring.operation.boolean.isTrue</element>
+          <element>plone.app.querystring.operation.boolean.isFalse</element>
+      </value>
+      <value key="group">Metadata</value>
+    </records>
 </registry>

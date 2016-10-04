@@ -17,9 +17,10 @@
 
 
   <div class="container-fluid" id="row-items">
-    <tal:events tal:repeat="obj view/results">
+    <tal:events tal:repeat="obj view/results"
+                tal:define="portlet_class python: 'col-lg-4 col-md-4 col-sm-6 col-xs-12' if context.portal_type == 'Portlet Page' else 'col-lg-6 col-md-6 col-sm-6 col-xs-12'">
 
-    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
+    <div tal:attributes="class portlet_class" class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
         tal:define="plone_view context/@@plone;
                     oddrow repeat/obj/odd;
                     useView python:obj.portal_type in viewActions;
@@ -67,9 +68,23 @@
         </div>
 
     </div>
-    <tal:clearfix condition="python: number % 2 == 0" tal:define="number repeat/obj/number">
+    
+    <tal:notportletpage tal:condition="python: context.portal_type != 'Portlet Page'">
+      <tal:clearfix condition="python: number % 2 == 0" tal:define="number repeat/obj/number">
         <div class="clearfix visible-lg visible-md"></div>
       </tal:clearfix> 
+    </tal:notportletpage>
+    
+    <tal:portletpage tal:condition="python: context.portal_type == 'Portlet Page'">
+      <tal:clearfix condition="python: number % 3 == 0" tal:define="number repeat/obj/number">
+        <div class="clearfix visible-lg visible-md"></div>
+      </tal:clearfix> 
+
+      <tal:clearfixmd condition="python: number % 2 == 0" tal:define="number repeat/obj/number">
+        <div class="clearfix visible-sm"></div>
+      </tal:clearfixmd>
+    </tal:portletpage>
+
       <!--<tal:clearfixmd condition="python: number % 2 == 0" tal:define="number repeat/obj/number">
         <div class="clearfix visible-sm"></div>
       </tal:clearfixmd>-->

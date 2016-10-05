@@ -1,0 +1,338 @@
+/* OBJECT fields */
+
+body.portaltype-object.template-edit,
+body.portaltype-object.userrole-authenticated:not(.template-edit) {
+	.form-horizontal {
+		clear: both;
+		padding-top: 20px;
+	}
+
+	.control-label {
+		text-align: left;
+	}
+
+	fieldset {
+		padding-bottom: 40px;
+	}
+
+	.select2-search-choice a {
+		border-bottom: 0px !important;
+	}
+
+	textarea {
+		color: #696969;
+	}
+
+
+	/* Identificatie */
+	@media (min-width: 992px) {
+		#formfield-form-widgets-identification_identification_part,
+		#formfield-form-widgets-identification_identification_totNumber {
+			width: 50%;
+			float: left;
+			clear: none;
+		}
+
+		#formfield-form-widgets-identification_identification_part {
+			label {
+				width: 50%;
+			}
+
+			.fieldset-input {
+				width: 47%;
+			}
+		}
+
+		#formfield-form-widgets-identification_identification_totNumber {
+			label {
+				width: 30%;
+				text-align: right;
+			}
+
+			.fieldset-input {
+				width: 70%;
+			}
+		}
+
+		#formfield-form-widgets-identification_identification_copyNumber,
+		#formfield-form-widgets-identification_identification_edition {
+			width: 50%;
+			float: left;
+			clear: none;
+		}
+
+		#formfield-form-widgets-identification_identification_copyNumber {
+			label {
+				width: 50%;
+			}
+
+			.fieldset-input {
+				width: 47%;
+			}
+		}
+
+		#formfield-form-widgets-identification_identification_edition {
+			label {
+				width: 30%;
+				text-align: right;
+			}
+
+			.fieldset-input {
+				width: 70%;
+			}
+		}
+	}
+
+	/* Production and Dating */
+
+	/* Physical characteristics */
+	div.field.field-repeatable {
+		.control-label:not(.add-link) {
+			display: none;
+		}
+
+		.fieldset-input:not(.add-link) {
+			width: 100% !important;
+			padding-left: 0px !important;
+			padding-right: 0px !important;
+		}
+
+		&.field-block {
+			.datagridwidget-block-edit-cell .datagridwidget-block {
+				clear: both;
+				padding-left: 0px;
+
+				&> div.label {
+					width: 29% !important;
+					float: left;
+
+					label {
+						float: left;
+					}
+				}
+
+				&> div:not(.label),
+				&> input,
+				&> select,
+				&> textarea {
+					width: 70% !important;
+				}
+
+				&> .select2-container {
+					min-width: auto !important;
+				}
+			}
+
+			.datagridwidget-block-edit-cell {
+				
+			}
+
+			.datagridwidget-row:not(.datagridfield-last-filled-row) .datagridwidget-block-edit-cell {
+				padding-bottom: 20px;
+			}
+		}
+
+		.datagridwidget-table-view {
+			border: 0px !important;
+			.datagridwidget-manipulator {
+				border: 0px !important;
+			}
+		}
+
+		.datagridwidget-cell {
+			padding-left: 0px;
+		}
+
+		.datagridwidget-table-view-block .datagridwidget-row {
+			border: 0px !important;
+			background: #ffffff;
+		}
+
+		.datagridwidget-block-edit-cell {
+			border: 0px !important;
+			background: #ffffff;
+		}
+
+		th.header, 
+		.datagridwidget-body,
+		.datagridwidget-cell {
+			background: #ffffff;
+			border: 0px;
+		}
+
+		th.header {
+			padding-left: 0px;
+			color: #404040;
+		}
+
+		
+	}
+
+	/* General */
+
+	.page-header {
+		margin-top: 20px !important;
+	}
+
+	#formfield-form-widgets-identification_identification_institutionNames,
+	#formfield-form-widgets-productionDating_productionDating {
+		h4 {
+			margin-top: 5px !important;
+		}
+	}
+
+	a.add-link {
+		border-bottom: 0px !important;
+	}
+
+	.fieldset-input.add-link {
+		padding-bottom: 10px;
+	}
+
+	fieldset:not(#fieldset-default) {
+		span.required {
+			display: none;
+		}
+	}
+
+	
+
+}
+
+
+/* OBJECTS logged in view */
+body.portaltype-object.userrole-authenticated:not(.template-edit) {
+	div.field.field-repeatable {
+		&.field-block {
+			.datagridwidget-block-edit-cell .datagridwidget-block {
+
+				&> div.label {
+					width: 26.9% !important;
+					float: left;
+
+					label {
+						float: left;
+					}
+				}
+
+				&> div:not(.label),
+				&> input,
+				&> select,
+				&> textarea {
+					width: 72.4% !important;
+				}
+
+				&> .select2-container {
+					min-width: auto !important;
+				}
+			}
+		}
+	}
+
+	a.add-link {
+		display: none !important;
+	}
+
+	.datagridwidget-table-view {
+		background: #ffffff;
+	}
+
+	th.header:not([class*='cell']) {
+		display: none;
+	}
+
+	.datagridwidget-cell {
+	  vertical-align: top;
+	  padding: 10px;
+	  padding-left: 15px;
+	  padding-right: 15px;
+	}
+
+	.datagridwidget-cell > input:only-child {
+		width: 100%;
+	}
+
+	h4.page-header {
+		.backendFont();
+		font-size: 18px;
+		margin-right: 15px;
+	}
+
+	.select2-search-choice a {
+		border-bottom: 1px solid @brand-primary !important;
+	}
+
+	.select2-choices {
+		pointer-events: none;
+	}
+
+	#formfield-form-widgets-physicalCharacteristics_keyword {
+		td.datagridwidget-cell {
+			width: 25%;
+		}
+	}
+
+	#formfield-form-widgets-physicalCharacteristics_technique {
+		td.datagridwidget-cell {
+			width: 33.33%;
+		}
+	}
+
+	#formfield-form-widgets-physicalCharacteristics_material {
+		td.cell-3 {
+			width: 60%;
+		}
+
+		td:not(.cell-3) {
+			width: 20%;
+		}
+	}
+
+	#formfield-form-widgets-physicalCharacteristics_frame {
+		td.cell-2 {
+			width: 75%;
+		}
+	}
+
+	fieldset {
+		margin-left: 15px;
+	}
+
+	fieldset > div:nth-child(2) h4.page-header {
+		margin-top: 5px !important;
+	}
+
+
+	#formfield-form-widgets-reproductions_reproduction {
+		.datagridwidget-widget-type,
+		.datagridwidget-widget-format,
+		.datagridwidget-widget-date,
+		.datagridwidget-widget-creator {
+			display: none;
+		}
+	}
+
+	#formfield-form-widgets-labels {
+		th.header.cell-3,
+		td.cell-3 {
+			display: none;
+		}
+	}
+
+	#formfield-form-widgets-notes_free_fields {
+		.cell-3 {
+			label {
+				display: none;
+			}
+
+			input {
+				margin-left: 40%;
+			}
+		}
+	}
+}
+
+
+
+
+

@@ -78,7 +78,7 @@ body:not(.frontend).portaltype-object {
 	    top: 0;
 	    left: 0;
 	    width: 100%;
-	    height: 100%;
+	    height: 100% !important;
 	    padding-bottom: 0px !important;
 
 
@@ -578,6 +578,32 @@ body.frontend.portaltype-object:not(.userrole-authenticated) {
     }
 }
 
+body:not(.portaltype-object) {
+    #slideshow-controls {
+            display: none !important;
+    }
+}
+
+
+body:not(.portaltype-object) {
+    #slickslideshow .slick-slideshow.regular:not(.fullscreen) .inner-bg img {
+            padding-bottom: 0px !important;
+    }
+}
+
+body.portaltype-object:not(.template-edit).userrole-authenticated {
+	.info-btn {
+		display: none;
+	}
+}
+
+body.portaltype-object.userrole-authenticated {
+	#slide-description {
+		a {
+			color: #ffffff !important;
+		}
+	}
+}
 
 
 

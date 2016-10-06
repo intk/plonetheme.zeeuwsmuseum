@@ -41,4 +41,9 @@
         template="advanced_search/templates/advanced_search.pt"
     />
 
+  <subscriber
+        for="plone.dexterity.interfaces.IDexterityContainer
+        zope.lifecycleevent.interfaces.IObjectMovedEvent"
+        handler=".views.objectTranslated" />
+
 </configure>

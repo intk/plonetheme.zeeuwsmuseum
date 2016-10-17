@@ -2,6 +2,7 @@
     i18n:domain="plone"
     tal:define="collection_url view/collection_url;
                 collection_item view/collection;
+                collection_id collection_item/UID;
                 plone_view context/@@plone;
                 toLocalizedTime nocall:plone_view/toLocalizedTime;
                 viewActions python:context.portal_registry.get('plone.types_use_view_action_in_listings', []);"
@@ -30,12 +31,12 @@
                     item_wf_state_class python:'state-' + plone_view.normalizeString(item_wf_state);
                     item_type obj/portal_type;
                     item_type_class python:'contenttype-' + plone_view.normalizeString(item_type);
-                    item_obj python:obj.getObject();
-                    item_is_event python:view.is_event(obj);
+                    item_is_event python: item_type in ['Event', 'Exhibition'];
+                    item_index repeat/obj/index;
                     number repeat/obj/number;"
         >
         <div class="thumb-wrapper">         
-          <a class="thumb-image" tal:condition="python: ((has_media != None and has_media != '' and 'Missing' not in str([has_media])) or item_type == 'Image')" href="" tal:attributes="href python: itemUrl"
+          <a class="thumb-image" tal:condition="python: ((has_media != None and has_media != '' and 'Missing' not in str([has_media])) or item_type == 'Image')" href="" tal:attributes="href python: itemUrl+'?collection_id='+collection_id+'&b_start='+str(item_index) if collection_item != None and item_type == 'Object' else itemUrl"
             tal:define="item_img python:view.getImageObject(obj)">
             <img tal:define="images_src python:item_img;
                                "
@@ -56,7 +57,7 @@
           <metal:block metal:define-macro="document_byline">
           <p class="event-date">
           <tal:event condition="item_is_event">
-            <tal:date tal:replace="structure python:view.formatted_date(item_obj)"/>
+            <tal:date tal:replace="structure python:view.formatted_date(obj)"/>
             <span tal:condition="obj/location" i18n:translate="label_event_byline_location">&mdash;
               <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
             </span>

@@ -92,7 +92,6 @@
                             <div tal:define="result_url similar/getURL;
                                             result_type similar/portal_type;
                                             created_date similar/CreationDate;
-                                            item_obj python: similar.getObject();
                                             item_is_event python:similar.portal_type == 'Event';
                                             leadmedia similar/leadMedia;
 

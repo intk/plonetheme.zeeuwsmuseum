@@ -256,8 +256,8 @@
                             
                               <div class="search-item row"
                                 tal:define="leadmedia python: view.getImageObject(item);
-                                            item_obj python: item.getObject();
-                                            item_is_event python:view.is_event(item)">
+                                            item_type item/PortalType;
+                                            item_is_event python: item_type in ['Event', 'Exhibition'];">
 
                                 <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 no-padding-left">
                                   <tal:leadmedia tal:condition="leadmedia">
@@ -280,7 +280,7 @@
                                   
                                   <p class="post-meta event-date">
                                     <tal:event condition="item_is_event">
-                                      <tal:date tal:replace="structure python:view.formatted_date(item_obj)"/>
+                                      <tal:date tal:replace="structure python:view.formatted_date(item)"/>
                                       <span tal:condition="item/location" i18n:translate="label_event_byline_location">&mdash;
                                         <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
                                       </span>

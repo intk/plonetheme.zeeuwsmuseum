@@ -4968,14 +4968,7 @@ body.frontend.template-advancedsearch {
 	body.frontend.portaltype-personorinstitution.userrole-authenticated #content-core,
 	body.frontend.portaltype-treatment.userrole-authenticated #content-core,
 	body.frontend.portaltype-outgoingloan.userrole-authenticated #content-core,
-	body.frontend.portaltype-incomingloan.userrole-authenticated #content-core,
-	body.frontend.portaltype-objectentry.userrole-authenticated #content-core,
-	body.frontend.portaltype-image.userrole-authenticated #content-core,
-	body.frontend.portaltype-book.userrole-authenticated #content-core,
-	body.frontend.portaltype-audiovisual.userrole-authenticated #content-core,
-	body.frontend.portaltype-article.userrole-authenticated #content-core,
-	body.frontend.portaltype-serial.userrole-authenticated #content-core,
-	body.frontend.portaltype-resource.userrole-authenticated #content-core {
+	body.frontend.portaltype-incomingloan.userrole-authenticated #content-core {
 	    width: auto;
 	    margin: 0 auto;
 	}
@@ -4986,14 +4979,7 @@ body.portaltype-object,
 body.portaltype-personorinstitution,
 body.portaltype-treatment,
 body.portaltype-outgoingloan,
-body.portaltype-incomingloan,
-body.portaltype-objectentry,
-body.portaltype-image,
-body.portaltype-book,
-body.portaltype-audiovisual,
-body.portaltype-article,
-body.portaltype-serial,
-body.portaltype-resource {
+body.portaltype-incomingloan {
 	#slide-description {
 		max-width: 100%;
 	    text-overflow: ellipsis;
@@ -5086,14 +5072,7 @@ body.portaltype-object.template-edit,
 body.portaltype-personorinstitution.template-edit,
 body.portaltype-treatment.template-edit,
 body.portaltype-outgoingloan.template-edit,
-body.portaltype-incomingloan.template-edit,
-body.portaltype-objectentry.template-edit,
-body.portaltype-image.template-edit,
-body.portaltype-book.template-edit,
-body.portaltype-audiovisual.template-edit,
-body.portaltype-article.template-edit,
-body.portaltype-serial.template-edit,
-body.portaltype-resource.template-edit {
+body.portaltype-incomingloan.template-edit {
 	#slickslideshow {
 		display: block;
 	}
@@ -5217,80 +5196,6 @@ body.portaltype-image {
 		height: auto !important;
 	}
 }
-
-body.frontend {
-	section.portletSearch {
-		box-shadow: none;
-		.portletHeader {
-			background: none;
-			border: 0px;
-			padding-top: 60px;
-			h1 a {
-				border-bottom: 0px !important;
-			}
-		}
-
-		.portletContent {
-			border: 0px;
-			padding-bottom: 40px;
-		}
-
-		.portletFooter {
-			display: none;
-		}
-
-		.searchButton {
-			.buttonField();
-		}
-
-		@media (min-width: 992px) {
-			.LSBox {
-				width: 90%;
-				margin: 0 auto;
-
-				input.searchField {
-					width: 80%;
-					float: left;
-				}
-
-				input.searchButton {
-					width: 20%;
-					float: left;
-				}
-
-				&:after {
-					display: table;
-					content: " ";
-					clear:both;
-				}
-			}
-		}
-
-		@media (max-width: 991px) {
-			.LSBox {
-				input.searchField,
-				input.searchButton {
-					width: 100%;
-				}
-
-				input.searchField {
-					margin-bottom: 15px;
-				}
-			}
-		}
-	}
-}
-
-/* Books folder listing */
-th.header-book_author {
-	width: 30%;
-}
-
-th.header-titleAuthorImprintCollation_imprint_year {
-	width: 10%;
-}
-
-
 
 
 

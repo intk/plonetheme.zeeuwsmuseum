@@ -1,7 +1,29 @@
 /* OBJECT fields */
 
 body.portaltype-object.template-edit,
-body.portaltype-object.userrole-authenticated:not(.template-edit) {
+body.portaltype-object.userrole-authenticated:not(.template-edit),
+body.portaltype-personorinstitution.template-edit,
+body.portaltype-personorinstitution.userrole-authenticated:not(.template-edit),
+body.portaltype-treatment.template-edit,
+body.portaltype-treatment.userrole-authenticated:not(.template-edit),
+body.portaltype-outgoingloan.template-edit,
+body.portaltype-outgoingloan.userrole-authenticated:not(.template-edit),
+body.portaltype-incomingloan.template-edit,
+body.portaltype-incomingloan.userrole-authenticated:not(.template-edit),
+body.portaltype-objectentry.template-edit,
+body.portaltype-objectentry.userrole-authenticated:not(.template-edit),
+body.portaltype-image.template-edit,
+body.portaltype-image.userrole-authenticated:not(.template-edit),
+body.portaltype-book.template-edit,
+body.portaltype-book.userrole-authenticated:not(.template-edit),
+body.portaltype-audiovisual.template-edit,
+body.portaltype-audiovisual.userrole-authenticated:not(.template-edit),
+body.portaltype-article.template-edit,
+body.portaltype-article.userrole-authenticated:not(.template-edit),
+body.portaltype-serial.template-edit,
+body.portaltype-serial.userrole-authenticated:not(.template-edit),
+body.portaltype-resource.template-edit,
+body.portaltype-resource.userrole-authenticated:not(.template-edit) {
 	.form-horizontal {
 		clear: both;
 		padding-top: 20px;
@@ -21,6 +43,29 @@ body.portaltype-object.userrole-authenticated:not(.template-edit) {
 
 	textarea {
 		color: #696969;
+	}
+
+	.datagridwidget-block {
+		h4.page-header {
+			color: #404040 !important;
+			padding-top: 20px !important;
+		}
+
+		&.bool-field {
+			div.label {
+				display: block !important;
+			}
+		}
+	}
+
+	#form-widgets-freeFieldsAndNumbers_freeFields .cell-3 {
+		span.option {
+			text-align: center;
+		}
+
+		label {
+			display: none;
+		}
 	}
 
 
@@ -194,14 +239,133 @@ body.portaltype-object.userrole-authenticated:not(.template-edit) {
 			display: none;
 		}
 	}
-
-	
-
 }
 
+body.portaltype-outgoingloan.template-edit,
+body.portaltype-outgoingloan.userrole-authenticated:not(.template-edit) {
+	@media (min-width: 992px) {
+		#formfield-form-widgets-loanRequest_requestDetails_periodFrom,
+		#formfield-form-widgets-loanRequest_requestDetails_to {
+			width: 50%;
+			float: left;
+			clear: none;
+		}
+
+		#formfield-form-widgets-loanRequest_requestDetails_periodFrom {
+			label {
+				width: 50%;
+			}
+
+			.fieldset-input {
+				width: 47%;
+			}
+		}
+
+		#formfield-form-widgets-loanRequest_requestDetails_to {
+			label {
+				width: 30%;
+				text-align: right;
+			}
+
+			.fieldset-input {
+				width: 70%;
+			}
+		}
+
+		#formfield-form-widgets-loanRequest_requestConfirmation_date,
+		#formfield-form-widgets-loanRequest_requestConfirmation_digRef {
+			width: 50%;
+			float: left;
+			clear: none;
+		}
+
+		#formfield-form-widgets-loanRequest_requestConfirmation_date {
+			label {
+				width: 50%;
+			}
+
+			.fieldset-input {
+				width: 47%;
+			}
+		}
+
+		#formfield-form-widgets-loanRequest_requestConfirmation_digRef {
+			label {
+				width: 30%;
+				text-align: right;
+			}
+
+			.fieldset-input {
+				width: 70%;
+			}
+		}
+	}
+
+	.page-header-top {
+		margin-bottom: 0px; 
+		padding-top: 40px !important; 
+		clear: both;
+	}
+}
+
+body.portaltype-article.template-edit,
+body.portaltype-article.userrole-authenticated:not(.template-edit),
+body.portaltype-audiovisual.template-edit,
+body.portaltype-audiovisual.userrole-authenticated:not(.template-edit),
+body.portaltype-book.template-edit,
+body.portaltype-book.userrole-authenticated:not(.template-edit),
+body.portaltype-serial.template-edit,
+body.portaltype-serial.userrole-authenticated:not(.template-edit) {
+	@media (min-width: 992px) {
+		#formfield-form-widgets-abstractAndSubjectTerms_startDate,
+		#formfield-form-widgets-abstractAndSubjectTerms_endDate {
+			width: 50%;
+			float: left;
+			clear: none;
+		}
+
+		#formfield-form-widgets-abstractAndSubjectTerms_startDate {
+			label {
+				width: 50%;
+			}
+
+			.fieldset-input {
+				width: 47%;
+			}
+		}
+
+		#formfield-form-widgets-abstractAndSubjectTerms_endDate {
+			label {
+				width: 30%;
+				text-align: right;
+			}
+
+			.fieldset-input {
+				width: 70%;
+			}
+		}
+	}
+
+	.page-header-top {
+		margin-bottom: 0px; 
+		padding-top: 40px !important; 
+		clear: both;
+	}
+}
 
 /* OBJECTS logged in view */
-body.portaltype-object.userrole-authenticated:not(.template-edit) {
+body.portaltype-object.userrole-authenticated:not(.template-edit),
+body.portaltype-personorinstitution.userrole-authenticated:not(.template-edit),
+body.portaltype-treatment.userrole-authenticated:not(.template-edit),
+body.portaltype-outgoingloan.userrole-authenticated:not(.template-edit),
+body.portaltype-incomingloan.userrole-authenticated:not(.template-edit),
+body.portaltype-objectentry.userrole-authenticated:not(.template-edit),
+body.portaltype-image.userrole-authenticated:not(.template-edit),
+body.portaltype-book.userrole-authenticated:not(.template-edit),
+body.portaltype-audiovisual.userrole-authenticated:not(.template-edit),
+body.portaltype-article.userrole-authenticated:not(.template-edit),
+body.portaltype-serial.userrole-authenticated:not(.template-edit),
+body.portaltype-resource.userrole-authenticated:not(.template-edit) {
 	div.field.field-repeatable {
 		&.field-block {
 			.datagridwidget-block-edit-cell .datagridwidget-block {

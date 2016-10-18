@@ -1472,6 +1472,47 @@ body.frontend, body#tinymce {
     	}
 	}
 
+	/* Iframe and images in content */		
+	div#parent-fieldname-text {
+		iframe {
+			border: 0px;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		.iframe-wrapper {
+			position: relative;
+			clear: both;
+			margin-top: 40px;
+		}
+
+		.iframe-wrapper:before {
+			display: block;
+			content: "";
+			min-width: 100%;
+			padding-top: 56.26%;
+			clear: both;
+		}
+
+		@media (min-width: 1025px) {
+			.iframe-wrapper {
+				margin-left: -100px;
+				margin-right: -100px;
+			}
+
+			.img-wrapper {
+				min-width: 100%;
+				margin-left: -100px;
+				margin-right: -100px;
+			}
+		}
+	}
+
+
+
 	span.explain {
 		cursor: initial;
 	}

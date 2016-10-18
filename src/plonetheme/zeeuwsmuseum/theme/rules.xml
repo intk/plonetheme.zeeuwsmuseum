@@ -234,4 +234,17 @@
           </dd>
         
       </replace>
+
+      <replace css:content="#parent-fieldname-text iframe">
+        <div class="iframe-wrapper">
+          <xsl:copy-of select="."/>
+        </div>
+      </replace>
+
+      <replace css:content="#parent-fieldname-text img.image-inline">
+        <div class="img-wrapper">
+          <xsl:copy-of select="."/>
+        </div>
+      </replace>
+
 </rules>

@@ -1272,10 +1272,17 @@ body.frontend, body#tinymce {
     	}
 
     	.subheading {
-    		color: #666666;
-    		font-size: 1.063em;
+    		color: #000000;
+    		font-size: 1.250em;
     		letter-spacing: 0.05em;
-    		.universRoman();
+    		line-height: 37px;
+    		display: block;
+    		margin-top: 32px;
+    		.universObl();
+
+    		&:empty {
+    			margin-top: -15px;
+    		}
     	}
 
     	.separator-wrapper {
@@ -1681,6 +1688,7 @@ body.frontend, body#tinymce {
 		.event.summary {
 			li {
 				padding-bottom: 20px;
+				margin-top: 34px;
 			}
 		}
 	}
@@ -1701,8 +1709,8 @@ body.frontend, body#tinymce {
 		@media (max-width: 768px) {
 			.portletMailChimp,
 			.portlet-mailplus {
-				margin-left: -30px;
-				margin-right: -30px;
+				margin-left: -15px;
+				margin-right: -15px;
 			}
 		}
 
@@ -1792,9 +1800,12 @@ body.frontend, body#tinymce {
 				width: 170px;
 			}
 		}
-
-		.portlet-collection-wat-is-er-te-zien {
-			padding-top: 0px;
+		
+		&:not(.section-collectie) {
+			.portlet-collection-wat-is-er-te-zien,
+			.portlet-collection-nu-in-het-museum {
+				padding-top: 0px;
+			}
 		}
 
 		@media (min-width: 769px) {
@@ -1844,6 +1855,18 @@ body.frontend, body#tinymce {
 			letter-spacing: 0.05em;
 		}
 
+		@media (max-width: 768px) {
+			.formHelp {
+				display: block;
+				padding-top: 5px;
+				padding-bottom: 5px;
+			}
+		}
+
+		article#content {
+			margin-bottom: 75px;
+		}
+
 		label {
 			letter-spacing: 0.05em;
 		}
@@ -1860,6 +1883,17 @@ body.frontend, body#tinymce {
 			}
 		}
 
+		div.plone_jscalendar {
+			select {
+				width: auto;
+				display: inline-block;
+			}
+		}
+
+		.row.control-group {
+			padding-top: 10px;
+		}
+
 		.title-container {
 			padding-bottom: 0px !important;
 
@@ -1870,7 +1904,7 @@ body.frontend, body#tinymce {
 				font-weight: 400;
 				text-transform: uppercase;
 				letter-spacing: 0.05em;
-				padding-bottom: 30px;
+				padding-bottom: 0px;
 
 				@media (max-width: 768px) {
 					font-size: 35px;
@@ -1895,7 +1929,7 @@ body.frontend, body#tinymce {
 
 		#content-core {
 			p {
-				margin: 0px 0;
+				margin: 20px 0;
 			}
 
 			h3 {
@@ -3087,7 +3121,7 @@ body.frontend.template-advancedsearch {
 		margin-bottom: 5px;
 		margin-top: 20px;
 		@media (min-width: 768px) {
-			margin-top: 0px;
+			margin-top: -5px;
 		}
 	}
 
@@ -3520,7 +3554,8 @@ body.frontend {
 }
 
 body.frontend,
-body.portaltype-object.template-edit {
+body.portaltype-object.template-edit,
+body.template-collective-object-object {
 
 	.slideshow-btn-wrapper {
 		position: absolute;
@@ -3837,7 +3872,8 @@ body.frontend.site-ZM {
 }
 
 body.frontend #slickslideshow,
-body.portaltype-object.template-edit #slickslideshow {
+body.portaltype-object.template-edit #slickslideshow,
+body.template-collective-object-object #slickslideshow {
 	background: #f2f2f2 !important;
 }
 
@@ -3935,6 +3971,38 @@ body.frontend {
 
 	#below-content #row-items {
 		padding-bottom: 5px;
+	}
+
+	#below-content .portletCollection {
+		@media (max-width: 768px) {
+			.tileImage {
+				margin-bottom: 14px;
+			}
+
+			h3.item-title {
+				margin-bottom: 0px;
+			}
+
+			p.event-date {
+				margin-top: 0px;
+				margin-bottom: 1px;
+			}
+
+			p.item-description {
+				margin-bottom: 50px;
+				margin-top: 0px;
+			}
+
+			#row-items .col-lg-6:nth-child(2) p.item-description {
+				margin-bottom: 0px;
+			}
+		}
+	}
+
+	#below-content .sharing-buttons-wrapper {
+		@media (max-width: 768px) {
+			padding-bottom: 40px;
+		}
 	}
 }
 
@@ -4888,7 +4956,9 @@ body.portaltype-formfolder {
 }
 
 body.frontend:not(.portaltype-object) .intro-header,
-body.template-edit.portaltype-object .intro-header {
+body.template-edit.portaltype-object .intro-header,
+body.template-collective-object-object .intro-header,
+body.portaltype-object:not(.template-edit).userrole-authenticated {
 	margin-top: 59px;
 }
 
@@ -5034,7 +5104,8 @@ body.portaltype-book,
 body.portaltype-audiovisual,
 body.portaltype-article,
 body.portaltype-serial,
-body.portaltype-resource {
+body.portaltype-resource,
+body.template-collective-object-object {
 	#slide-description {
 		max-width: 100%;
 	    text-overflow: ellipsis;
@@ -5119,6 +5190,7 @@ body.portaltype-resource {
 	}
 }
 
+
 body.template-edit #slickslideshow {
 	display: none;
 }
@@ -5134,7 +5206,8 @@ body.portaltype-book.template-edit,
 body.portaltype-audiovisual.template-edit,
 body.portaltype-article.template-edit,
 body.portaltype-serial.template-edit,
-body.portaltype-resource.template-edit {
+body.portaltype-resource.template-edit,
+body.template-collective-object-object {
 	#slickslideshow {
 		display: block;
 	}
@@ -5330,6 +5403,8 @@ th.header-book_author {
 th.header-titleAuthorImprintCollation_imprint_year {
 	width: 10%;
 }
+
+
 
 
 

@@ -66,3 +66,7 @@ msgstr "Type to search"
 msgid 'path'
 msgstr "path"
 
+#: ../object.py
+msgid 'object_on_display'
+msgstr "Now on display"
+

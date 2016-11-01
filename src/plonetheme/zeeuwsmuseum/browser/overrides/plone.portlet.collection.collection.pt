@@ -28,6 +28,7 @@
                     itemUrl python:useView and obj.getURL() + '/view' or obj.getURL();
                     item_wf_state obj/review_state;
                     has_media nocall:obj/leadMedia;
+                    item_on_display obj/object_on_display|nothing;
                     item_wf_state_class python:'state-' + plone_view.normalizeString(item_wf_state);
                     item_type obj/portal_type;
                     item_type_class python:'contenttype-' + plone_view.normalizeString(item_type);
@@ -38,6 +39,11 @@
         <div class="thumb-wrapper">         
           <a class="thumb-image" tal:condition="python: ((has_media != None and has_media != '' and 'Missing' not in str([has_media])) or item_type == 'Image')" href="" tal:attributes="href python: itemUrl+'?collection_id='+collection_id+'&b_start='+str(item_index) if collection_item != None and item_type == 'Object' else itemUrl"
             tal:define="item_img python:view.getImageObject(obj)">
+
+            <div class="on-display-wrapper" tal:condition="item_on_display" i18n:domain="plonetheme.zeeuwsmuseum">
+              <div i18n:translate="object_on_display" class="label_inner">Nu te zien</div>
+            </div>
+            
             <img tal:define="images_src python:item_img;
                                "
                    src="" alt=""

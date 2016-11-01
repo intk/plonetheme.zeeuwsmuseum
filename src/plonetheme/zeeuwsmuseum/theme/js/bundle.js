@@ -663,7 +663,7 @@ slickSlideshow.resizeSlide = function() {
 
 slickSlideshow.resizeImages = function() {
 
-  if (jQuery("body").hasClass("portaltype-object") && !jQuery("body").hasClass("userrole-authenticated")) {
+  if (jQuery("body").hasClass("portaltype-object")) {
     h = slickSlideshow.$obj.height();
     w = slickSlideshow.$obj.width();
 
@@ -735,7 +735,7 @@ slickSlideshow.startPlayInstrument = function(currSlide) {
 };
 
 slickSlideshow.resizeImage = function(current, is_obj) {
-  if ((jQuery("body").hasClass("portaltype-object") && !jQuery("body").hasClass("userrole-authenticated")) || (is_obj == true)) {
+  if (jQuery("body").hasClass("portaltype-object") || (is_obj == true)) {
     var gap = slickSlideshow.gap;
 
     if (slickSlideshow.isCollection) {
@@ -752,7 +752,7 @@ slickSlideshow.resizeImage = function(current, is_obj) {
       slickSlideshow.$obj.attr("style", "height:"+(h-gap)+"px;");
     }
     
-    if (slickSlideshow.resize) {
+    if (slickSlideshow.resize || jQuery("body").hasClass("portaltype-object")) {
       h = slickSlideshow.$obj.height();
       w = slickSlideshow.$obj.width();
 
@@ -2626,7 +2626,9 @@ jQuery(document).ready(function() {
       if  (!(jQuery("body").hasClass("portaltype-object") && (jQuery("body").hasClass("userrole-authenticated")))) {
         jQuery("#row-items, .object-fields, .page-container").mouseenter(function() {
           if (jQuery("#slickslideshow").hasClass("fullscreen")) {
-            jQuery("#slideshow-controls").fadeOut();
+            if (slickSlideshow.$obj.getSlick().$slides.length > 1) {
+              jQuery("#slideshow-controls").fadeOut();
+            }
             jQuery(".wrap-prev, .wrap-next").css("opacity", 0);
             jQuery(".video-play-btn").css("opacity", 0);
           }
@@ -2634,7 +2636,113 @@ jQuery(document).ready(function() {
       }
     }
   }
-})
+});
+
+var init_datagrid = function(element) {
+    element.find('.datagridwidget-body').each(function() {
+        var $this = $(this);
+        
+        aa = $this.children(".auto-append").size() > 0;
+        $this.data("auto-append", aa);
+
+        // Hint CSS
+        if (aa) {
+            $this.addClass("datagridwidget-body-auto-append");
+        } else {
+            $this.addClass("datagridwidget-body-non-auto-append");
+        }
+
+        dataGridField2Functions.updateOrderIndex(this, false);
+
+        if (!aa) {
+            dataGridField2Functions.ensureMinimumRows(this);
+        }
+    }); 
+}
+
+var INPUTS_QUERY = "div.template-edit input, div.template-edit select:not(.formTabs), div.template-edit textarea, div.template-edit button"
+
+
+var disable_inputs = function() {
+    jQuery(INPUTS_QUERY).prop("disabled", true);
+};
+
+var ajaxLoadTabs = function(fieldset_id) {
+    if ((jQuery("body").hasClass("template-edit") || jQuery("body div.template-edit").length > 0) && jQuery("body").hasClass("portaltype-object") && !jQuery("body").hasClass("template-all_tabs")) {
+        if (fieldset_id != "default") {
+
+            var query = "/@@all_tabs";
+
+            var link = window.location.href;
+            if (window.location.search != "" || window.location.hash != "") {
+                link = window.location.protocol + "//" + window.location.host + window.location.pathname;   
+            } 
+
+            link_split = link.split('/');
+            last_member = link_split[link_split.length-1]
+            if (last_member == "view" || last_member == "view/" || last_member == "contents_view" || last_member == "contents_view/") {
+                link_split[link_split.length-1] = ""; 
+                link = link_split.join('/');
+            }
+
+            url = link + query;
+
+            $.ajax({
+                url: url,
+                success: function(data) {
+                    setTimeout(function() {
+                        var fieldsets = jQuery(data).find("fieldset");
+                        fieldsets.each(function() {
+                            var _id = jQuery(this).attr("id");
+
+                            if (jQuery("body").hasClass("template-edit")) {
+                                if (_id != 'fieldset-default') {
+                                    var fieldset = jQuery(this);
+                                    var original_fieldset = jQuery("fieldset#"+_id);
+                                    original_fieldset.append(fieldset.html());
+                                } 
+                            } else {
+                                if (_id != 'fieldset-default' && _id != 'fieldset-identification') {
+                                    var fieldset = jQuery(this);
+                                    var original_fieldset = jQuery("fieldset#"+_id);
+                                    original_fieldset.append(fieldset.html());
+                                } 
+                            }
+                        });
+                        disable_inputs();
+                        jQuery(document).trigger("readyAgain", [{fieldset_id: "fieldset:not(#fieldset-identification)"}]);
+                        init_datagrid(jQuery("fieldset:not(#fieldset-identification)"));
+                    }, 50);
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    if (errorThrown == "") {
+                        errorThrown = "Unable to get tabs. Please <a href='"+window.location.href+"'>refresh</a> the page."
+                    } else {
+                        errorThrown = errorThrown + " - Unable to get tabs."
+                    }
+                }
+            });
+        }
+    }
+};
+
+require(['jquery', 'pat-registry'],
+  function(jQuery, registry) {
+    jQuery(document).on('readyAgain', function(event, data) {
+      var scansearch = jQuery('body');
+      if (event.type == "readyAgain") {
+        scansearch = data.fieldset_id;
+        registry.scan(jQuery(scansearch));
+      }
+    });
+});
+
+jQuery(document).ready(function() {
+  if (!jQuery("body").hasClass('template-edit')) {
+    ajaxLoadTabs("all");
+  };
+});
+
 
 
 require([

@@ -2,6 +2,7 @@
 
 body.portaltype-object.template-edit,
 body.portaltype-object.userrole-authenticated:not(.template-edit),
+body.template-collective-object-object,
 body.portaltype-personorinstitution.template-edit,
 body.portaltype-personorinstitution.userrole-authenticated:not(.template-edit),
 body.portaltype-treatment.template-edit,
@@ -492,6 +493,75 @@ body.portaltype-resource.userrole-authenticated:not(.template-edit) {
 			input {
 				margin-left: 40%;
 			}
+		}
+	}
+}
+
+body.template-collective-object-object {
+	.label, label {
+		color: #404040;
+		padding-left: 0px;
+		.backendFont();
+	}
+
+	select {
+		height: 34px;
+		.backendFont();
+	}
+	.datagridwidget-table-view .header,
+	.select2-container a,
+	textarea {
+		.backendFont();
+	}
+
+	textarea {
+		padding-top: 7px;
+		color: #696969;
+	}
+
+	.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice {
+    	padding: 0px 4px 3px 5px;
+	}
+
+	input[type="text"].text-widget {
+		padding-top: 4px;
+		.backendFont();
+	}
+
+	.select2-container-multi.pat-relateditems .select2-choices .select2-search-choice {
+		margin: 4px 0 3px 5px;
+	}
+
+	.pat-select2 .select2-search-choice a {
+		color: #696969;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: @brand-primary;
+		}
+	}
+
+	.select2-container.pat-relateditems .select2-search-choice span {
+		color: #696969;
+		.backendFont();
+		&.pattern-relateditems-item-path {
+			color: #696969;
+			font-size: 11px;
+		}
+	}
+
+	.autotoc-nav a {
+		.backendFont();
+		color: #337ab7;
+	    border-radius: 4px 4px 0 0;
+	    border: 1px solid #e5e5e5 !important;
+	    background: #fcfcfd;
+	    border-bottom: 1px solid #cccccc !important;
+
+	    &:hover {
+		    text-decoration: none;
+		    background: #ffffff;
 		}
 	}
 }

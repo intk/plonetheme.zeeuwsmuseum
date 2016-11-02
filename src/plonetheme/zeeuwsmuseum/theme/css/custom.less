@@ -2847,12 +2847,18 @@ body.template-default_error_message #content-core p {
 	width: auto;
 }
 
+
 /* Search page */
 body.frontend.template-search,
 body.frontend.template-advancedsearch {
 	.extra-fields p {
     	display: inline-block;
 	}
+
+	.select2-container {
+		margin-bottom: 0px;
+	}
+
 
 	div.div-advanced-search {
 		margin-top: 10px;	
@@ -3241,6 +3247,12 @@ body.frontend.template-advancedsearch {
 		#searchform {
 			padding-top: 25px;
 		}
+	}
+}
+
+body.frontend.template-advancedsearch {
+	article#content {
+		margin-bottom: 80px;
 	}
 }
 

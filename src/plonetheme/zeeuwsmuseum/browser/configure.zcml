@@ -18,7 +18,7 @@
       />
 
   <browser:page
-        name="online_experience"
+        name="online_experience_view"
         for="*"
         template="templates/online_experience.pt"
         class=".views.OnlineExperienceView"
@@ -29,7 +29,7 @@
         for="*"
         menu="plone_displayviews"
         title="Online experience view"
-        action="@@online_experience"
+        action="@@online_experience_view"
         description="Shows the online experience view"
         />
 

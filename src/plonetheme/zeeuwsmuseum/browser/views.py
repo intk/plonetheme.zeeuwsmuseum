@@ -6,30 +6,54 @@ from collective.leadmedia.utils import addCropToTranslation
 from plone.app.multilingual.interfaces import ITranslatable
 from plone.app.multilingual.interfaces import ITranslationManager
 
-class OnlineExperienceView(BrowserView):
+from plone.app.contenttypes.browser.collection import CollectionView
+from plone.app.uuid.utils import uuidToCatalogBrain
 
-    def getSlideshowItems(self):
-        context = self.context
-        inc = 2
-        nthchild = 1
 
-        inline_css = ""
-        template = ".cd-fixed-bg:nth-child(%s) { background-image: url('%s');}"
+class OnlineExperienceView(CollectionView):
 
-        if 'slideshow' in context:
-            slideshow = context['slideshow']
-            for _id in slideshow:
-                obj = slideshow[_id]
-                if obj:
-                    portal_type = getattr(obj, 'portal_type', None)
-                    if portal_type == "Image":
-                            url = obj.absolute_url()+"/@@images/image/large"
-                            new_image = template % (nthchild, url)
-                            inline_css += new_image
-                            nthchild += inc
+    def getImageObject(self, item):
+        if item.portal_type == "Image":
+            return item.getURL()+"/@@images/image/large"
+        if item.leadMedia != None:
+            uuid = item.leadMedia
+            media_object = uuidToCatalogBrain(uuid)
+            if media_object:
+                return media_object.getURL()+"/@@images/image/large"
+            else:
+                return None
+        else:
+            return None
 
-        final_inline_css = "<style>" + inline_css + "</style>"
-        return final_inline_css
+    def getImageClass(self, item, has_media=False):
+
+        item_class = "entry"
+
+        if item.portal_type == "Image":
+            image_obj = item.getObject()
+            if getattr(image_obj, 'image', None):
+                try:
+                    w, h = image_obj.image.getImageSize()
+                    if w > h:
+                        item_class = "%s %s" %(item_class, 'landscape')
+                    else:
+                        item_class = "%s %s" %(item_class, 'portrait')
+                except:
+                    return item_class
+        elif has_media:
+            image = uuidToCatalogBrain(item.leadMedia)
+            image_obj = image.getObject()
+            if getattr(image_obj, 'image', None):
+                try:
+                    w, h = image_obj.image.getImageSize()
+                    if w > h:
+                        item_class = "%s %s" %(item_class, 'landscape')
+                    else:
+                        item_class = "%s %s" %(item_class, 'portrait')
+                except:
+                    return item_class
+
+        return item_class
 
 
 def objectTranslated(ob, event):

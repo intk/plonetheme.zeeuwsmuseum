@@ -6,6 +6,7 @@ from Products.CMFPlone.browser.search import Search
 from AccessControl import getSecurityManager
 from zope.component import getUtility
 from plone.registry.interfaces import IRegistry
+from plone.app.uuid.utils import uuidToCatalogBrain
 
 class AdvancedSearchView(BrowserView, Search):
     """
@@ -31,6 +32,26 @@ class AdvancedSearchView(BrowserView, Search):
             q = "&".join(["%s=%s" %(param,value) for param,value in params if param in advancedfields and value])
 
         return q
+
+    def getSearchFilters(self):
+        searchFilters = []
+        registry = getUtility(IRegistry)
+        try:
+            searchFiltersRecord = registry['searchfilters.folders']
+        except:
+            searchFiltersRecord = ['7c00323d7114470ca50ff73f6586947f', '1aae4add8d094ed1b81459573cd2abb8', '1f57d68cb7f64917bb51e161c2910364',
+                                    '1431a8b32fc94c7492cf296688be5233', 'af85e21e2e4f4c80a8123bcdd94dc5ed', '0a35ff0214bc47c5b719593aab4c0b0a']
+
+        if searchFiltersRecord:
+            filters = list(searchFiltersRecord)
+
+            if filters:
+                for uid in filters:
+                    item = uuidToCatalogBrain(uid)
+                    if item:
+                        searchFilters.append({"name": item.Title, "path": item.getPath()})
+
+        return searchFilters
 
     def getExtraFilters(self):
         params = self.request.form.items()

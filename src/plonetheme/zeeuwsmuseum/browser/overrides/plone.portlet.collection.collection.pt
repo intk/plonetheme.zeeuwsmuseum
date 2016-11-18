@@ -10,7 +10,7 @@
     <header class="portletHeader">
         <span class="portletTopLeft"></span>
         <a tal:attributes="href collection_url" tal:omit-tag="not:view/data/show_more">
-            <h1 tal:content="view/data/header"></h1>
+            <h1 tal:content="view/data/header"></h1><h1 class="arrow-title"><span class="fa fa-chevron-right"></span></h1>
         </a>
         <h2 tal:content="collection_item/Description"></h2>
         <span class="portletTopRight"></span>
@@ -19,7 +19,7 @@
 
   <div class="container-fluid" id="row-items">
     <tal:events tal:repeat="obj view/results"
-                tal:define="portlet_class python: 'col-lg-4 col-md-4 col-sm-6 col-xs-12' if context.portal_type == 'Portlet Page' else 'col-lg-6 col-md-6 col-sm-6 col-xs-12'">
+                tal:define="portlet_class python: 'col-lg-4 col-md-4 col-sm-6 col-xs-12' if context.portal_type in ['Portlet Page', 'Event', 'Document'] else 'col-lg-6 col-md-6 col-sm-6 col-xs-12'">
 
     <div tal:attributes="class portlet_class" class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
         tal:define="plone_view context/@@plone;
@@ -50,7 +50,8 @@
                    tal:attributes="src images_src; class python:'tileImage'; alt obj/Title; title obj/Title;" /> 
           </a> 
         </div>
-        <div>
+        
+        <div class="entry-wrapper">
         
             <h3 class="item-title">
               <a href="#"
@@ -60,29 +61,32 @@
               Title
               </a>
           </h3>
+        </div>
+        <div>
           <metal:block metal:define-macro="document_byline">
-          <p class="event-date">
           <tal:event condition="item_is_event">
+            <p class="event-date">
             <tal:date tal:replace="structure python:view.formatted_date(obj)"/>
             <span tal:condition="obj/location" i18n:translate="label_event_byline_location">&mdash;
               <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
             </span>
+            </p>
           </tal:event>
           
-          </p>
+          
         </metal:block>
           <p tal:content="obj/Description" class="item-description"></p>
         </div>
 
     </div>
     
-    <tal:notportletpage tal:condition="python: context.portal_type != 'Portlet Page'">
+    <tal:notportletpage tal:condition="python: context.portal_type not in ['Portlet Page', 'Event', 'Document']">
       <tal:clearfix condition="python: number % 2 == 0" tal:define="number repeat/obj/number">
         <div class="clearfix visible-lg visible-md"></div>
       </tal:clearfix> 
     </tal:notportletpage>
     
-    <tal:portletpage tal:condition="python: context.portal_type == 'Portlet Page'">
+    <tal:portletpage tal:condition="python: context.portal_type in ['Portlet Page', 'Event', 'Document']">
       <tal:clearfix condition="python: number % 3 == 0" tal:define="number repeat/obj/number">
         <div class="clearfix visible-lg visible-md"></div>
       </tal:clearfix> 
@@ -91,10 +95,6 @@
         <div class="clearfix visible-sm"></div>
       </tal:clearfixmd>
     </tal:portletpage>
-
-      <!--<tal:clearfixmd condition="python: number % 2 == 0" tal:define="number repeat/obj/number">
-        <div class="clearfix visible-sm"></div>
-      </tal:clearfixmd>-->
     </tal:events>
   </div>
   <div class="clearfix"></div>

@@ -33,10 +33,12 @@
           tal:define="portal context/@@plone_portal_state/portal;
                       extra_filters portal/@@advancedsearch/getExtraFilters;
                       advanced_query portal/@@advancedsearch/getAdvancedButtonQuery;
+                      search_filters portal/@@advancedsearch/getSearchFilters;
                       first_call not:request/advanced_search|nothing;
                       st python:request.get('SearchableText', '');
                       DateTime python:modules['DateTime'].DateTime;
-                      navigation_root_url view/navroot_url;">
+                      navigation_root_url view/navroot_url;
+                      ">
 
         <input type="hidden" name="advanced_search" value="False" />
         <input type="hidden" name="sort_on" value="" />
@@ -83,20 +85,43 @@
           <dd class="actionMenuContent">
             <div id="search-filter" i18n:domain="plone">
               <fieldset class="noborder">
-                <legend i18n:translate="label_item_type">Item type</legend>
+                <h3 i18n:translate="label_new_items_since" i18n:translate="narrow_search_options">Filter the results</h3>
+                  
                   <div class="field"
                        tal:define="portal_types portal/portal_types;
                                    types_list view/types_list;
-                                   all_checked python:(len(types_list) == len(request.get('portal_type', []))) or first_call;
+                                   all_checked python:(len(search_filters) == len(request.get('path', [])));
                                    toggle_select_state python:all_checked and 'true' or 'false';">
+
+                    <div class="images-only-filter"
+                      tal:define="images_checked python: request.get('hasMedia', None) == True">
+                      <input type="checkbox" name="hasMedia:boolean" value="False" id="images-only-filter"
+                        tal:attributes="checked python: images_checked"/>
+                      
+                      <label for="images-only-filter" tal:condition="python: getattr(context, 'language', 'en') == 'en'">Images only</label>
+                      <label for="images-only-filter" tal:condition="python: getattr(context, 'language', 'en') == 'nl'">Alleen met beeld</label>
+                    </div>
+
                     <div class="optionsToggle">
                       <input type="checkbox" onchange="" name="pt_toggle" value="#" id="pt_toggle" class="noborder" checked="checked"
                              tal:attributes="checked python:all_checked and 'checked' or '';" />
 
-                      <label for="pt_toggle"
-                             i18n:translate="label_toggle">Select All/None</label>
+                      <tal:en tal:condition="python: getattr(context, 'language', 'en') == 'en'">
+                       <label for="pt_toggle"
+                         i18n:translate=""
+                         >Only in the collection
+                       </label>
+                      </tal:en>
+
+                      <tal:nl tal:condition="python: getattr(context, 'language', 'en') == 'nl'">
+                        <label for="pt_toggle"
+                         i18n:translate=""
+                         >Alleen in de collectie
+                       </label>
+                      </tal:nl>
                     </div>
-                    <div class="search-type-options">
+                    
+                    <div class="search-type-options" style="display:none;">
                       <tal:div tal:define="typeLists python:context.createMultiColumnList(types_list, numCols=2, sort_on='self');"
                                tal:repeat="sublist typeLists">
                         <tal:items repeat="type sublist">
@@ -114,7 +139,7 @@
                     </div>
                   </div>
                 </fieldset>
-                <fieldset class="noborder">
+                <fieldset class="noborder" style="display:none;">
                   <legend i18n:translate="label_new_items_since">New items since</legend>
                   <div class="field">
                     <div class="search-date-options">
@@ -154,6 +179,36 @@
                     <input type="hidden" name="created.range:record" value="min" />
                   </div>
                 </fieldset>
+
+
+                <fieldset class="noborder filters">
+                  
+                  <div class="field"
+                    tal:define="searchfilters search_filters;
+                                all_checked python:(len(searchfilters) == len(request.get('path', [])));
+                                toggle_select_state python:all_checked and 'true' or 'false';">
+
+                    <div class="search-collection-options">
+                      
+                      <div class="search-type-options">
+                        <tal:items repeat="filter searchfilters">
+                            <div>
+                              <input type="checkbox" name="path:list" value="#" class="noborder" checked="checked"
+                                     tal:attributes="value filter/path;
+                                                     id string:folder_${filter/name};
+                                                     checked python:((filter.get('path') in request.get('path', []))) and 'checked' or '';"/>
+                                <label for="" i18n:translate=""
+                                       tal:attributes="for string:folder_${filter/name}"
+                                       tal:content="filter/name" />
+                            </div>
+                        </tal:items>
+                      </div>
+
+                    </div>
+                  </div>
+                </fieldset>
+
+
               </div>
             </dd>
           </dl>
@@ -192,6 +247,7 @@
               </p>
             </div>
             <div class="visualClear"><!-- --></div>
+            
             <div id="search-results-wrapper"
                  tal:define="b_start python:0;
                              b_start request/b_start | b_start;
@@ -283,14 +339,16 @@
                                      tal:content="python:item.getDataOrigin().pretty_title_or_id()">Title</h4>
                                    </a>
                                   
-                                  <p class="post-meta event-date">
+                                  
                                     <tal:event condition="item_is_event">
+                                      <p class="post-meta event-date">
                                       <tal:date tal:replace="structure python:view.formatted_date(item)"/>
                                       <span tal:condition="item/location" i18n:translate="label_event_byline_location">&mdash;
                                         <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
                                       </span>
+                                      </p>
                                     </tal:event>
-                                  </p>
+                                 
                                   <p class="item-description" tal:condition="item/CroppedDescription" tal:content="item/CroppedDescription">Subtitle</p>
                                   
                               </div>

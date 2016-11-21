@@ -22,7 +22,8 @@
     <tal:results define="batch view/batch;
                          b_start python: request.get('b_start', 0);">
       <tal:listing condition="batch">
-        <div class="entries" metal:define-slot="entries">
+        <div class="entries" metal:define-slot="entries"
+          tal:define="patterns python: view.getPatterns(batch)">
           <tal:repeat repeat="item batch" metal:define-macro="entries">
             <tal:wrapper tal:define="
                 item_url item/getURL;
@@ -45,12 +46,27 @@
                 context_portal_type context/portal_type|nothing;
                 item_index repeat/item/index;
                 item_image python: view.getImageObject(item);
-                item_class python: view.getImageClass(item, has_media);"
+                current_pattern python: patterns[item_index];"
                 >
               <metal:block define-slot="entry">
-                <article class="entry" tal:attributes="class item_class">
-                  <img src="" class="line-image" tal:attributes="src item_image"/>
-                </article>
+
+              <tal:single tal:condition="python: current_pattern['position'] == 'single'">
+                <div class="col-xs-12 col-sm-12 col-lg-12">
+                  <article class="entry" tal:attributes="class python: 'entry %s %s' %(current_pattern['size'], current_pattern['orientation'])">
+                    <img src="" class="line-image" tal:attributes="src item_image"/>
+                  </article>
+                </div>
+              </tal:single>
+
+              <tal:pair tal:condition="python: current_pattern['position'] == 'pair'">
+                <div class="col-xs-12 col-sm-12 col-lg-6" tal:attributes="class python: 'col-xs-12 col-sm-12 col-md-6 col-lg-6 pair-landscape %s' %(current_pattern['size']) if current_pattern['size'] == 'small' and current_pattern['orientation'] == 'landscape' else 'col-xs-12 col-sm-12 col-md-6 col-lg-6 %s pair-portrait' %(current_pattern['size'])">
+                  <article class="entry" tal:attributes="class python: 'entry %s %s' %(current_pattern['size'], current_pattern['orientation'])">
+                    <img src="" class="line-image" tal:attributes="src item_image"/>
+                  </article>
+                </div>
+                <div class="clearfix" tal:condition="python: current_pattern['clearfix']"></div>
+              </tal:pair>
+
               </metal:block>
             </tal:wrapper>
           </tal:repeat>

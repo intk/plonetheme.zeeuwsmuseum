@@ -45,47 +45,27 @@
                 item_is_event python:item_type in ['Event', 'Exhibition'];
                 item_has_image python:item.getIcon;
                 context_portal_type context/portal_type|nothing;
-                item_image python: view.getImageObject(item);
-                image_properties python: view.getImageProperties(item);
-                item_title python: image_properties['title'] if item_type == 'Image' else item_title;
-                item_link python: image_properties['link'] if item_type == 'Image' else item_link;
-                item_description python: image_properties['description'] if item_type == 'Image' else item_description;"
+                item_image python: view.getImageObject(item);"
                 >
               <metal:block define-slot="entry">
 
               <tal:single tal:condition="python: current_item['position'] == 'single'">
-                <div class="col-xs-12 col-sm-12 col-lg-12" tal:attributes="class python: 'col-xs-12 col-sm-12 col-lg-12 %s' %(current_item['right'])">
+                <div class="col-xs-12 col-sm-12 col-lg-12">
                   <article class="entry" tal:attributes="class python: 'entry %s %s' %(current_item['size'], current_item['orientation'])">
-                    <a href="#" class="image-wrapper" tal:attributes="href item_link">
-                      <img src="" class="line-image" tal:attributes="src item_image"/>
-                      <span class="inner">
-                        <span class="helper"></span>
-                        <span class="info">
-                          <h3 tal:content="item_title"></h3>
-                          <p tal:content="item_description"></p>
-                        </span>
-                      </span>
-                    </a>
+                    <img src="" class="line-image" tal:attributes="src item_image"/>
                   </article>
                 </div>
               </tal:single>
 
               <tal:pair tal:condition="python: current_item['position'] == 'pair'">
-                <div class="col-xs-12 col-sm-12 col-lg-6" tal:attributes="class python: 'col-xs-12 col-sm-12 col-md-6 col-lg-6 pair-landscape %s %s' %(current_item['size'], current_item['bottom']) if current_item['size'] == 'small' and current_item['orientation'] == 'landscape' else 'col-xs-12 col-sm-12 col-md-6 col-lg-6 %s %s pair-portrait' %(current_item['size'], current_item['bottom'])">
+                <div class="col-xs-12 col-sm-12 col-lg-6" tal:attributes="class python: 'col-xs-12 col-sm-12 col-md-6 col-lg-6 pair-landscape %s' %(current_item['size']) if current_item['size'] == 'small' and current_item['orientation'] == 'landscape' else 'col-xs-12 col-sm-12 col-md-6 col-lg-6 %s pair-portrait' %(current_item['size'])">
                   <article class="entry" tal:attributes="class python: 'entry %s %s' %(current_item['size'], current_item['orientation'])">
-                    <a href="#" class="image-wrapper" tal:attributes="href item_link">
-                    <img src="" class="line-image" tal:attributes="src item_image; title item_title; alt item_title"/>
-                    <span class="inner">
-                        <span class="helper"></span>
-                        <span class="info">
-                          <h3 tal:content="item_title"></h3>
-                          <p tal:content="item_description"></p>
-                        </span>
-                    </span>
+                    <img src="" class="line-image" tal:attributes="src item_image"/>
                   </article>
                 </div>
                 <div class="clearfix" tal:condition="python: current_item['clearfix']"></div>
               </tal:pair>
+
               </metal:block>
             </tal:wrapper>
           </tal:repeat>

@@ -912,9 +912,6 @@ body.template-online_experience_view {
 		}
 	}
 
-	.inner {
-		display: none !important;
-	}
 	#content-core {
 		a {
 			border-bottom: 0px !important;
@@ -943,8 +940,10 @@ body.template-online_experience_view {
 
 	.entry img {
 		width: 100%;
-		padding: 50px 35px !important;
+	}
 
+	.entry {
+		padding: 50px 35px !important;
 		@media (max-width: 768px) {
 			padding: 20px !important;
 		}
@@ -956,6 +955,20 @@ body.template-online_experience_view {
 
 	.entries > div:nth-child(even) article.entry {
 		float: left;
+	}
+
+	.entries div.left article.entry {
+		float: left;
+	}
+
+	.entries div.right article.entry {
+		float: right;
+	}
+
+	@media(min-width: 992px) {
+		.entries div.bottom article.entry {
+			margin-top: 160px;
+		}
 	}
 
 	@media(min-width: 992px) {
@@ -971,6 +984,77 @@ body.template-online_experience_view {
 
 		div.pair-portrait:not(.big) {
 			width: 40%;
+		}
+	}
+
+	.entry .inner {
+	    position: absolute;
+	    padding: 20px 25px;
+	    top: 0;
+	    bottom: 0;
+	    right: 0;
+	    left: 0;
+	    color: #000000;
+	    background-color: #fafafa;
+	    width: 100%;
+	    opacity: 0;
+	    transition: 400ms;
+	    text-align: center;
+	}
+
+	.entry .inner .helper {
+	    height: 100%;
+	    display: inline-block;
+	    vertical-align: middle;
+	    white-space: nowrap;
+	}
+
+	.entry .inner .info {
+	    display: inline-block;
+	    max-width: 95%;
+	    max-height: 100%;
+	    width: auto;
+	    height: auto;
+	    vertical-align: middle;
+	    text-align: center;
+	}
+
+	.entry .info h3 {
+	    color: #000000;
+	    margin: 0;
+	    padding: 0;
+	    word-wrap: break-word;
+	    text-transform: uppercase;
+	    .universCn();
+	}
+
+	.entry .info h3::after {
+	    content: "\a ─";
+	    white-space: pre-wrap;
+	}
+
+	.entry .info p {
+	    color: #000000;
+	    word-wrap: break-word;
+	    line-height: 30px;
+    	font-size: 1.063em;
+    	margin-top: 0px;
+    	margin-bottom: 0px;
+	}
+
+	.entry .image-wrapper {
+		position: relative;
+		display: block;
+	}
+
+	.entries .small {
+		font-size: 100% !important;
+	}
+
+	@media (min-width: 992px) {
+		.entry a.image-wrapper:hover .inner {
+		    opacity: 1;
+		    transition: none;
 		}
 	}
 }

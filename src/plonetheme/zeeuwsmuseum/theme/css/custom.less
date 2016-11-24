@@ -4379,7 +4379,7 @@ body.frontend, body.mce-content-body {
 		}
 
 		footer .portletWrapper:nth-child(3) {
-			padding-right: 75px;
+			padding-right: 0px;
 		}
 	}
 }
@@ -5856,6 +5856,92 @@ body.frontend {
 	line-height: 27px;
 	display: inline-block;
 }
+
+body.template-folder_contents .portlet-rrssb {
+	display: none !important;
+}
+
+body:not(.frontend) .portlet-rrssb {
+	display: none !important;
+}
+
+body.frontend.portaltype-document,
+body.frontend.portaltype-event {
+	li.event-category {
+		display: none;
+	}
+}
+
+body.portaltype-portlet-page.section-zeeuws-museum-v4,
+body.portaltype-portlet-page.subsection-front-page-fullscreen,
+  {
+	footer, .main-container, #column1-container, #column2-container, .page-container {
+		display: none;
+	}
+
+	#website-wrapper {
+		height: 100%;
+	}
+
+	.intro-header, #slickcarousel {
+		height: 100%;
+	}
+
+	.intro-header {
+		margin-top: 0px !important;
+	}
+
+	#slickcarousel:before {
+		display: none;
+	}
+
+	/* 1. No object-fit support: */
+	@media (min-aspect-ratio: 16/9) {
+	  #slickcarousel .carousel-item.video-slide iframe { height: 300%; top: -100%; }
+	}
+
+	@media (max-aspect-ratio: 16/9) {
+	  #slickcarousel .carousel-item.video-slide iframe { width: 300%; left: -100%; }
+	}
+	
+	/* 2. If supporting object-fit, overriding (1): */
+	#slideshow-btn {
+		margin: 10px 20px !important;
+		display: inline-block;
+		text-transform: uppercase;
+		background: transparent;
+		color: #ffffff;
+		border: 1px solid #ffffff;
+		width: 200px;
+		
+		&:hover,
+		&:focus {
+			background: @brand-primary;
+			border: 1px solid @brand-primary;
+		}
+	}
+
+	.slideshow-btn-wrapper {
+		display: block;
+		text-align: center;
+		
+		z-index: 4 !important;
+		width: 486px;
+		margin-left: -243px !important;
+
+		@media(max-width: 767px) {
+			width: 240px;
+			margin-left: -120px !important;
+		}	
+
+		@media screen and (orientation:landscape) and (max-width: 768px) {
+			width: 486px !important;
+			margin-left: -243px !important;
+			bottom: 20px;
+		}
+	}
+}
+
 
 
 

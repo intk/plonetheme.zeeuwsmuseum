@@ -74,7 +74,7 @@ class OnlineExperienceView(CollectionView):
         FIRST_ITEM = 0
         
         items = results
-        total_items = len(items)
+        total_items = len(items._sequence)
         items_checked = []
         final_patterns = []
 

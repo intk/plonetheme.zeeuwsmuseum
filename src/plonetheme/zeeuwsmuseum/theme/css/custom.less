@@ -1567,6 +1567,11 @@ body.frontend, body#tinymce {
 		.inputField();
 	}
 
+	/* I.E
+	line-height: 20px !important;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    */
 
 	/* Multiple content page */
 	&.portaltype-collection, 
@@ -3814,6 +3819,8 @@ body.template-online_experience {
 		display: none;
 	}
 
+	
+
 	&:not(.navigation-is-open) .website-wrapper {
 		-webkit-transform: none;
 	    -moz-transform: none;
@@ -5943,7 +5950,29 @@ body.portaltype-portlet-page.subsection-front-page-fullscreen,
 }
 
 
+html.ie11,
+html.ie10,
+html.ie9 {
+	input[type="text"]:not(.btn):not(.text-widget),
+	input[type="button"]:not(.btn),
+	input[type="password"]:not(.btn) {
+		line-height: 20px !important;
+	    padding-bottom: 16px !important;
+	    padding-top: 16px !important;
+	}
 
+	.portletMailChimp {
+		input[type="text"] {
+			line-height: 20px !important;
+		    padding-bottom: 16px !important;
+		    padding-top: 16px !important;
+		}
+	}
+
+	body.template-advancedsearch.frontend .select2-container-multi .select2-choices {
+		padding-bottom: 0px !important;
+	}
+}
 
 
 

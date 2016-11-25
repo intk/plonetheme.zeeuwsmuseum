@@ -32,6 +32,7 @@
         action="@@search"
         class="form-horizontal"
         id="advanced_search_form"
+        tal:attributes="action python: '/%s/@@search' %(getattr(context, 'language', 'nl'))"
         tal:define="portal context/@@plone_portal_state/portal;
           first_call not:request/advanced_search|nothing;
           st python:request.get('SearchableText', '');

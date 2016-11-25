@@ -54,7 +54,7 @@
               <metal:block define-slot="entry">
 
               <tal:single tal:condition="python: current_item['position'] == 'single'">
-                <div class="col-xs-12 col-sm-12 col-lg-12" tal:attributes="class python: 'col-xs-12 col-sm-12 col-lg-12 %s' %(current_item['right'])">
+                <div class="col-xs-12 col-sm-12 col-lg-12" tal:attributes="class python: 'col-xs-12 col-sm-12 col-lg-12 %s single' %(current_item['right'])">
                   <article class="entry" tal:attributes="class python: 'entry %s %s' %(current_item['size'], current_item['orientation'])">
                     <a href="#" class="image-wrapper" tal:attributes="href item_link">
                       <img src="" class="line-image" tal:attributes="src item_image"/>

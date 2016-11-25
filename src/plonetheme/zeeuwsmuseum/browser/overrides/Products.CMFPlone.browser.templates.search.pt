@@ -30,10 +30,12 @@
           action="@@search"
           role="search"
           class="searchPage pat-formautofocus"
+          tal:attributes="action python: '/%s/@@search' %(getattr(context, 'language', 'nl'))"
           tal:define="portal context/@@plone_portal_state/portal;
+                      language python:getattr(context, 'language', 'nl');
                       extra_filters portal/@@advancedsearch/getExtraFilters;
                       advanced_query portal/@@advancedsearch/getAdvancedButtonQuery;
-                      search_filters portal/@@advancedsearch/getSearchFilters;
+                      search_filters python: portal.restrictedTraverse('@@advancedsearch').getSearchFilters(language);
                       first_call not:request/advanced_search|nothing;
                       st python:request.get('SearchableText', '');
                       DateTime python:modules['DateTime'].DateTime;
@@ -65,7 +67,7 @@
         </div>
         
         <div class="visualClear div-advanced-search">
-          <a class="advanced-search" tal:attributes="href python: context.absolute_url()+'/@@advancedsearch?'+advanced_query if advanced_query else context.absolute_url()+'/@@advancedsearch'" i18n:translate="label_advanced_search">Advanced search</a>
+          <a class="advanced-search" tal:attributes="href python: '/%s/@@advancedsearch?%s' %(getattr(context,'language', 'nl'), advanced_query) if advanced_query else '/%s/@@advancedsearch' %(getattr(context, 'language', 'nl'))" i18n:translate="label_advanced_search">Advanced search</a>
         </div>
         
         <dl class="actionMenu"

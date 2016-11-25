@@ -765,11 +765,20 @@ body.template-advancedsearch {
 
 
 /* Online experience */
+
+body.template-online_experience_view {
+	nav.pagination {
+		display: none !important;
+	}
+}
+
 body.template-online_experience_view,
 .portletOnlineExperience {
 	.line {
 		padding-bottom: 100px;
 	}
+
+
 
 	.line .line-image {
 		max-width: 100%;
@@ -1064,6 +1073,10 @@ body.template-online_experience_view,
 
 	@media(min-width: 992px) {
 		.entries > div:first-child .entry.big.portrait {
+			width: 55% !important;
+		}
+
+		.entries .single .entry.big.portrait {
 			width: 55% !important;
 		}
 	}

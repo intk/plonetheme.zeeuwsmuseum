@@ -64,7 +64,7 @@
       <tal:comment replace="nothing">
         <!-- Last page -->
       </tal:comment>
-      <li class="last" tal:condition="batch/show_link_to_last">
+      <li class="last">
         <a tal:attributes="href python:view.make_link(batch.lastpage)"
             tal:content="batch/lastpage" />
       </li>

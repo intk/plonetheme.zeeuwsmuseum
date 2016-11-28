@@ -37,6 +37,20 @@ jQuery(document).ready(function($){
      document.documentElement.className+=' ie'+document.documentMode;
   }
 
+  var body = document.body,
+    timer;
+
+  window.addEventListener('scroll', function() {
+    clearTimeout(timer);
+    if(!body.classList.contains('disable-hover')) {
+      body.classList.add('disable-hover')
+    }
+    
+    timer = setTimeout(function(){
+      body.classList.remove('disable-hover')
+    }, 250);
+  }, false);
+
    if (jQuery("body").hasClass('template-advancedsearch')) {
       jQuery("#advanced_search_form").submit(function() {
           jQuery('input').each(function() {

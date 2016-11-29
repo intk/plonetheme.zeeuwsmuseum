@@ -5901,14 +5901,8 @@ body.frontend.portaltype-event {
 }
 
 body.portaltype-portlet-page.section-zeeuws-museum-v4,
-body.portaltype-portlet-page.subsection-front-page-fullscreen {
-
-	#global_statusmessage {
-	    position: fixed !important;
-	    top: 60px !important;
-    	width: 100% !important;
-	}
-    
+body.portaltype-portlet-page.subsection-front-page-fullscreen,
+  {
 	footer, .main-container, #column1-container, #column2-container, .page-container {
 		display: none;
 	}
@@ -5946,7 +5940,7 @@ body.portaltype-portlet-page.subsection-front-page-fullscreen {
 		background: transparent;
 		color: #ffffff;
 		border: 1px solid #ffffff;
-		width: 228px;
+		width: 200px;
 		
 		&:hover,
 		&:focus {
@@ -5960,17 +5954,17 @@ body.portaltype-portlet-page.subsection-front-page-fullscreen {
 		text-align: center;
 		
 		z-index: 4 !important;
-		width: 542px;
+		width: 486px;
 		margin-left: -243px !important;
 
 		@media(max-width: 767px) {
-			width: 268px;
-			margin-left: -134px !important;
+			width: 240px;
+			margin-left: -120px !important;
 		}	
 
 		@media screen and (orientation:landscape) and (max-width: 768px) {
-			width: 542px !important;
-			margin-left: -271px !important;
+			width: 486px !important;
+			margin-left: -243px !important;
 			bottom: 20px;
 		}
 	}

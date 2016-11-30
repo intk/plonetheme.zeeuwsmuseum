@@ -1004,7 +1004,7 @@ body.template-online_experience_view,
 	    right: 0;
 	    left: 0;
 	    color: #000000;
-	    background-color: #fafafa;
+	    background-color: transparent;
 	    width: 100%;
 	    opacity: 0;
 	    transition: 400ms;
@@ -1060,10 +1060,21 @@ body.template-online_experience_view,
 		font-size: 100% !important;
 	}
 
+	.entry a.image-wrapper img {
+		opacity: 1;
+	    transition: 400ms;
+	}
+
 	@media (min-width: 992px) {
 		.entry a.image-wrapper:hover .inner {
 		    opacity: 1;
 		    transition: none;
+		    background: transparent;
+		}
+
+		.entry a.image-wrapper:hover img {
+			opacity: 0.15;
+			transition: none;
 		}
 	}
 

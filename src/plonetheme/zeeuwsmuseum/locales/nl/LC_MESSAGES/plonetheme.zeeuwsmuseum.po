@@ -59,6 +59,14 @@ msgid 'identification_taxonomy_commonName'
 msgstr "Populaire naam"
 
 #: ../object.py
+msgid 'associations_associatedSubjects_subject'
+msgstr 'Trefwoord'
+
+#: ../object.py
+msgid 'identification_taxonomy_scientificName'
+msgstr 'Wetenschappelijke naam'
+
+#: ../object.py
 msgid 'Title'
 msgstr "Titel"
 

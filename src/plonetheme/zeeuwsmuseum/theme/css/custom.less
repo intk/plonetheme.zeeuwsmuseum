@@ -4408,7 +4408,7 @@ body.template-listing_view {
 
 .plone-navbar-nav li .submenu {
     background-color: #ffffff;
-    @media (min-width: 1151px) {
+    @media (min-width: 1080px) {
 	    padding-top: 22px;
 	    padding-bottom: 18px;
 	}
@@ -5961,7 +5961,7 @@ body.portaltype-portlet-page.subsection-front-page-fullscreen {
 		
 		z-index: 4 !important;
 		width: 542px;
-		margin-left: -243px !important;
+		margin-left: -271px !important;
 
 		@media(max-width: 767px) {
 			width: 268px;
@@ -6063,6 +6063,129 @@ html.ie9 {
 		}
 	}
 }
+
+
+body.subsection-nu-in-het-museum-overzicht {
+	#portletPageTopRow > div:first-child .portletWrapper {
+		border-bottom: 1px solid #e7e7e7;
+	}
+
+	#portletPageTopRow > div:nth-child(2) .portletCollection {
+		padding-top: 50px !important;
+	}
+}
+
+/* Jaarverslag */
+
+body.template-folder_contents {
+	#portal-breadcrumbs-context {
+		display: none !important;
+	}
+}
+
+body.frontend {
+	#website-nav {
+		.plone-breadcrumb {
+			padding-top: 0px;
+			margin-bottom: 0px;
+			margin-top: 0px;
+			text-align: center;
+			background-color: #ffffff;
+
+			.breadcrumbs-wrapper {
+				a {
+					.universCn();
+					text-transform: uppercase;
+					letter-spacing: 0.1em;
+					font-size: 1.00em;
+					line-height: 20px;
+				}
+
+				ol > li + li:after {
+					color: #ffffff;
+					top: -7px;
+				}
+
+				ol > li + li:before {
+					top: -7px;
+				}
+
+				ol > li {
+					padding-left: 10px;
+					margin-right: 10px;
+				}
+
+				li span:not(.fa) {
+					.universCn();
+					color: #808080;
+					text-transform: uppercase;
+					letter-spacing: 0.1em;
+					font-size: 1.00em;
+					line-height: 20px;
+				}
+
+				ol {
+					padding-top: 20px;
+					padding-bottom: 16px;
+				}
+			}
+		}
+
+		.breadcrumbs-container {
+			border-top: 1px solid #c3c3c3;
+			padding-top: 0px;
+			padding-bottom: 0px;
+		}
+
+		.more-dropdown .dropdown-toggle {
+			text-align: left;
+			font-size: 1.00em;
+		}
+
+		.more-dropdown {
+			.navbar-nav > li > a {
+				color: #808080;
+			}
+		}
+
+		@media (max-width: 767px) {
+			.visible-xs {
+			    display: inline-block !important;
+			}
+		}
+
+		@media (max-width: 991px) and (min-width: 768px) {
+			.visible-sm {
+			    display: inline-block !important;
+			}
+		}
+
+		
+	}
+	.abovecontent-portlets {
+		.portletBreadcrumbs {
+			display: none !important;
+		}
+	}
+}
+
+body:not(.plone-toolbar-left-expanded) {
+	@media (max-width: 1080px) {
+		.breadcrumbs-wrapper {
+			display: none;
+		}
+	}
+}
+
+body.plone-toolbar-left-expanded {
+	@media (max-width: 1185px) {
+		.breadcrumbs-wrapper {
+			display: none;
+		}
+	}
+}
+
+
 
 
 

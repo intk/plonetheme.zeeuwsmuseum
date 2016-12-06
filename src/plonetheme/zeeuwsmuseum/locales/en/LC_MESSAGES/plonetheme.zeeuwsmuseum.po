@@ -59,6 +59,15 @@ msgid 'identification_taxonomy_commonName'
 msgstr 'Common name'
 
 #: ../object.py
+msgid 'associations_associatedSubjects_subject'
+msgstr 'Keyword'
+
+#: ../object.py
+msgid 'identification_taxonomy_scientificName'
+msgstr 'Scientific name'
+
+
+#: ../object.py
 msgid 'type_to_search'
 msgstr "Type to search"
 

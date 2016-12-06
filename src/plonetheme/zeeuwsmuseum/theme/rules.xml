@@ -145,6 +145,9 @@
       <!-- No breadcrumbs in this theme -->
       <drop css:content="#portal-breadcrumbs" />
 
+      <after css:theme-children="#website-nav" css:content="#portal-breadcrumbs-context" method="raw"/>
+      <drop css:content="#portal-breadcrumbs-context" />
+
       <!-- Alert message -->
       <replace
         css:theme-children="#global_statusmessage"

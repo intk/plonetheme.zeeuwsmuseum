@@ -29,7 +29,7 @@ class AdvancedSearchView(BrowserView, Search):
         if searchFiltersRecord:
             advancedfields = list(searchFiltersRecord)
             advancedfields.append("SearchableText")
-            q = "&".join(["%s=%s" %(param,value) for param,value in params if param in advancedfields and value])
+            q = "&".join(["%s=%s" %(param,value.decode('utf-8').encode('ascii', 'ignore')) for param,value in params if param in advancedfields and value])
 
         return q
 
@@ -64,7 +64,7 @@ class AdvancedSearchView(BrowserView, Search):
 
         # Needs fix
         widget_fields = ['identification_identification_collection', 'physicalCharacteristics_materials',
-                         'physicalCharacteristics_techniques', 'identification_objectName_objectname_type']
+                         'physicalCharacteristics_techniques', 'identification_objectName_objectname_type', 'associations_associatedSubjects_subject']
 
 
         new_params = []
@@ -140,6 +140,9 @@ class AdvancedSearchView(BrowserView, Search):
             },
             'identification_objectName_objectname': {
                 'data':'{"orderable": true, "vocabularyUrl": "%s/@@getVocabulary?name=collective.object.objectname&field=types", "initialValues": {}, "separator": "_"}' % (context_url)
+            },
+            'associations_associatedSubjects_subject': {
+                'data':'{"orderable": true, "vocabularyUrl": "%s/@@getVocabulary?name=collective.object.associatedsubjects&field=subject", "initialValues": {}, "separator": "_"}' % (context_url)
             }
         }
         

@@ -74,7 +74,8 @@ class OnlineExperienceView(CollectionView):
         FIRST_ITEM = 0
         
         items = results
-        total_items = len(items._sequence)
+        sequence_items = items._sequence
+        total_items = len(sequence_items)
         items_checked = []
         final_patterns = []
 
@@ -82,15 +83,16 @@ class OnlineExperienceView(CollectionView):
         previous_pair = ""
 
         for i in range(total_items):
+
             if i not in items_checked:
 
                 right_pattern = "right" if right else "left"
                 pattern = {
                     "size": "small",
-                    "orientation": self.find_orientation(items[i]),
+                    "orientation": self.find_orientation(sequence_items[i]),
                     "position": "pair",
                     "clearfix": False,
-                    "item": items[i],
+                    "item": sequence_items[i],
                     "right": right_pattern,
                     "bottom": ""
                 }
@@ -106,7 +108,7 @@ class OnlineExperienceView(CollectionView):
                         right = True
                 else:
                     if i+1 < total_items:
-                        next_orientation = self.find_orientation(items[i+1])
+                        next_orientation = self.find_orientation(sequence_items[i+1])
 
                         if next_orientation == pattern["orientation"] == "landscape":
                             pattern["position"] = "single"
@@ -124,7 +126,7 @@ class OnlineExperienceView(CollectionView):
                                 "orientation": pattern['orientation'],
                                 "position": "pair",
                                 "clearfix": True,
-                                "item": items[i+1],
+                                "item": sequence_items[i+1],
                                 "right": pattern['right'],
                                 "bottom": pattern['bottom']
                             }

@@ -64,7 +64,8 @@ class AdvancedSearchView(BrowserView, Search):
 
         # Needs fix
         widget_fields = ['identification_identification_collection', 'physicalCharacteristics_materials',
-                         'physicalCharacteristics_techniques', 'identification_objectName_objectname_type', 'associations_associatedSubjects_subject']
+                         'physicalCharacteristics_techniques', 'identification_objectName_objectname_type', 'associations_associatedSubjects_subject',
+                         'identification_taxonomy_commonName', 'identification_taxonomy_scientificName']
 
 
         new_params = []
@@ -143,6 +144,13 @@ class AdvancedSearchView(BrowserView, Search):
             },
             'associations_associatedSubjects_subject': {
                 'data':'{"orderable": true, "vocabularyUrl": "%s/@@getVocabulary?name=collective.object.associatedsubjects&field=subject", "initialValues": {}, "separator": "_"}' % (context_url)
+            },
+            'identification_taxonomy_commonName': {
+                'data':'{"orderable": true, "vocabularyUrl": "%s/@@getVocabulary?name=collective.object.commonname&field=common_name", "initialValues": {}, "separator": "_"}' % (context_url)
+            
+            },
+            'identification_taxonomy_scientificName': {
+                'data':'{"orderable": true, "vocabularyUrl": "%s/@@getVocabulary?name=collective.object.scientificname&field=scientific_name", "initialValues": {}, "separator": "_"}' % (context_url)
             }
         }
         

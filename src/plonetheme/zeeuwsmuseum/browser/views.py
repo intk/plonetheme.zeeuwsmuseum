@@ -9,6 +9,28 @@ from plone.app.multilingual.interfaces import ITranslationManager
 from plone.app.contenttypes.browser.collection import CollectionView
 from plone.app.uuid.utils import uuidToCatalogBrain
 
+from datetime import date
+from DateTime import DateTime
+import time
+
+class ContextToolsView(BrowserView):
+
+    def isEventPast(self, event):
+        """ Checks if the event is already past """
+        if event.portal_type != 'Event':
+            return False
+        else:
+            try:
+                t = DateTime(time.time())
+                if event.end is not None:
+                    end = DateTime(event.end)
+                    return end.year() < t.year() or (end.year() == t.year() and end.month() < t.month()) or(end.year() == t.year() and end.month() == t.month() and end.day() < t.day())
+                else:
+                    start = DateTime(event.start)
+                    return start.year() < t.year() or (start.year() == t.year() and start.month() < t.month()) or(start.year() == t.year() and start.month() == t.month() and start.day() < t.day())
+            except:
+                return False
+        return True
 
 class OnlineExperienceView(CollectionView):
 
@@ -209,6 +231,30 @@ class OnlineExperienceView(CollectionView):
                     return item_class
 
         return item_class
+
+
+class FullScreenCollectionView(CollectionView):
+
+    def getLeadMediaURL(self, item, scale="large"):
+        if item.portal_type == "Image":
+            url = item.getURL()
+            if url:
+                return "%s/@@images/image/%s" %(item.getURL(), scale)
+            else:
+                return None
+        if item.leadMedia != None:
+            media_object = uuidToCatalogBrain(item.leadMedia)
+            if media_object:
+                return "%s/@@images/image/%s" %(media_object.getURL(), scale)
+            else:
+                return None
+        return None
+
+
+
+
+
+
 
 
 def objectTranslated(ob, event):

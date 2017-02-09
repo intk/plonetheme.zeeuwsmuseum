@@ -5904,7 +5904,8 @@ body.frontend.portaltype-event {
 }
 
 body.portaltype-portlet-page.section-zeeuws-museum-v4,
-body.portaltype-portlet-page.subsection-front-page-fullscreen {
+body.portaltype-portlet-page.subsection-front-page-fullscreen,
+body.portaltype-collection.template-fullscreen_collection_view {
 
 	#global_statusmessage {
 	    position: fixed !important;
@@ -6186,6 +6187,88 @@ body.plone-toolbar-left-expanded {
 			display: none;
 		}
 	}
+}
+
+/* Jaarverslag */
+
+
+body.section-jaarverslag:not(.portaltype-folder),
+body.portaltype-object.section-collectie:not(.userrole-authenticated) {
+	.intro-header {
+		padding-top: 59px !important;
+		@media (max-width: 1185px) {
+			padding-top: 55px !important;
+		}
+	}
+}
+
+body.section-jaarverslag.template-fullscreen_collection_view {
+	.intro-header {
+		padding-top: 119px !important;
+		@media (max-width: 1185px) {
+			padding-top: 115px !important;
+		}
+	}
+}
+
+body.section-jaarverslag.portaltype-document:not(.portaltype-folder) {
+	footer {
+		border-top: 1px solid #c3c3c3 !important;
+	}
+}
+
+body.template-folder_contents #slickcarousel {
+	display: none !important;
+}
+
+body.section-jaarverslag.portaltype-document {
+	table tr:first-child td {
+		padding-left: 20px !important;
+		padding-right: 20px !important;
+		font-size: 16px !important;
+		height: 70px !important;
+	}
+}
+
+
+
+body.section-jaarverslag .extra-padding-left {
+	@media(min-width: 768px) {
+		padding-left: 40px;
+	}
+
+	@media (max-width: 767px) {
+		padding-left: 0px !important;
+		padding-right: 0px !important;
+	}
+}
+
+body.section-jaarverslag {
+	@media (max-width: 1025px) and (min-width: 768px) {
+		.more-dropdown {
+			width: 50% !important;
+
+			.visible-xs {
+				display: none !important;
+			}
+
+			.visible-sm {
+				display: inline-block !important;
+			}
+
+			.hidden-sm {
+				display: none !important;
+			}
+		}
+	}
+}
+
+body.frontend.section-jaarverslag #below-content .portletWrapper:nth-last-child(odd) {
+    background: #ffffff !important;
+}
+
+.event-date.past {
+	text-decoration: line-through !important;
 }
 
 

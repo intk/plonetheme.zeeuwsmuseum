@@ -18,6 +18,13 @@
       />
 
   <browser:page
+        name="context_tools"
+        for="*"
+        class=".views.ContextToolsView"
+        permission="zope2.View"
+  />
+
+  <browser:page
         name="online_experience_view"
         for="*"
         template="templates/online_experience.pt"
@@ -31,6 +38,22 @@
         title="Online experience view"
         action="@@online_experience_view"
         description="Shows the online experience view"
+        />
+
+  <browser:page
+        name="fullscreen_collection_view"
+        for="*"
+        template="templates/fullscreen_collection_view.pt"
+        class=".views.FullScreenCollectionView"
+        permission="zope2.View"
+        />
+
+  <browser:menuItem
+        for="*"
+        menu="plone_displayviews"
+        title="Fullscreen collection view"
+        action="@@fullscreen_collection_view"
+        description="Shows the fullscreen collection view"
         />
 
   <browser:page

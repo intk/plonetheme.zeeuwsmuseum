@@ -13,6 +13,7 @@ from datetime import date
 from DateTime import DateTime
 import time
 
+
 class ContextToolsView(BrowserView):
 
     def isEventPast(self, event):

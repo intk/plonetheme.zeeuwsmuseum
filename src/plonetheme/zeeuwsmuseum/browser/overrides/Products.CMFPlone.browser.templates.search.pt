@@ -128,6 +128,16 @@
                                tal:repeat="sublist typeLists">
                         <tal:items repeat="type sublist">
                           <div>
+                            <tal:all_checked tal:condition="all_checked">
+                            <input type="checkbox" name="portal_type:list" value="#" class="noborder" checked="checked"
+                                   tal:attributes="value type;
+                                                   id string:portal_type_${repeat/sublist/number}_${repeat/type/number};
+                                                   checked python:((type in ['Object']) and 'checked' or '')"/>
+                              <label for="" i18n:translate=""
+                                     tal:attributes="for string:portal_type_${repeat/sublist/number}_${repeat/type/number}"
+                                     tal:content="python: portal_types.getTypeInfo(type).Title()" />
+                            </tal:all_checked>
+                            <tal:not_all_checked tal:condition="not:all_checked">
                             <input type="checkbox" name="portal_type:list" value="#" class="noborder" checked="checked"
                                    tal:attributes="value type;
                                                    id string:portal_type_${repeat/sublist/number}_${repeat/type/number};
@@ -135,6 +145,7 @@
                               <label for="" i18n:translate=""
                                      tal:attributes="for string:portal_type_${repeat/sublist/number}_${repeat/type/number}"
                                      tal:content="python: portal_types.getTypeInfo(type).Title()" />
+                            </tal:not_all_checked>
                           </div>
                         </tal:items>
                       </tal:div>

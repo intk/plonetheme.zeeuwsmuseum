@@ -1,9 +1,9 @@
 <section class="portlet portletCollection"
     i18n:domain="plone"
-    tal:define="collection_url view/collection_url;
-                collection_item view/collection;
-                collection_id collection_item/UID;
-                plone_view context/@@plone;
+    tal:define="collection_url python: view.collection_url;
+                collection_item python: view.collection();
+                collection_id python:collection_item.UID();
+                plone_view python: context.restrictedTraverse('@@plone');
                 toLocalizedTime nocall:plone_view/toLocalizedTime;
                 viewActions python:context.portal_registry.get('plone.types_use_view_action_in_listings', []);"
     tal:attributes="class string:portlet portletCollection ${view/css_class}">
@@ -18,19 +18,17 @@
 
 
   <div class="container-fluid" id="row-items">
-    <tal:events tal:repeat="obj view/results"
+    <tal:events tal:repeat="obj python: view.results()"
                 tal:define="portlet_class python: 'col-lg-4 col-md-4 col-sm-6 col-xs-12' if context.portal_type in ['Portlet Page', 'Event', 'Document'] else 'col-lg-6 col-md-6 col-sm-6 col-xs-12'">
 
     <div tal:attributes="class portlet_class" class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
-        tal:define="plone_view context/@@plone;
+        tal:define="plone_view python:context.restrictedTraverse('@@plone');
                     oddrow repeat/obj/odd;
-                    useView python:obj.portal_type in viewActions;
+                    item_type python:obj.portal_type;
+                    useView python:item_type in viewActions;
                     itemUrl python:useView and obj.getURL() + '/view' or obj.getURL();
-                    item_wf_state obj/review_state;
                     has_media nocall:obj/leadMedia;
-                    item_on_display obj/object_on_display|nothing;
-                    item_wf_state_class python:'state-' + plone_view.normalizeString(item_wf_state);
-                    item_type obj/portal_type;
+                    item_on_display python: getattr(obj, 'object_on_display', None);
                     item_type_class python:'contenttype-' + plone_view.normalizeString(item_type);
                     item_is_event python: item_type in ['Event', 'Exhibition'];
                     item_index repeat/obj/index;
@@ -40,7 +38,7 @@
           <a class="thumb-image" tal:condition="python: ((has_media != None and has_media != '' and 'Missing' not in str([has_media])) or item_type == 'Image')" href="" tal:attributes="href python: itemUrl+'?collection_id='+collection_id+'&b_start='+str(item_index) if collection_item != None and item_type == 'Object' else itemUrl"
             tal:define="item_img python:view.getImageObject(obj)">
 
-            <div class="on-display-wrapper" tal:condition="item_on_display" i18n:domain="plonetheme.zeeuwsmuseum">
+            <div class="on-display-wrapper" tal:condition="python:item_on_display" i18n:domain="plonetheme.zeeuwsmuseum">
               <div i18n:translate="object_on_display" class="label_inner">Nu te zien</div>
             </div>
             
@@ -68,7 +66,7 @@
            tal:define="is_past python: context.restrictedTraverse('@@context_tools').isEventPast(obj)">
             <p class="event-date" tal:attributes="class python: 'event-date past' if is_past else 'event-date'">
             <tal:date tal:replace="structure python:view.formatted_date(obj)"/>
-            <span tal:condition="obj/location" i18n:translate="label_event_byline_location">&mdash;
+            <span tal:condition="python: getattr(obj, 'location', None)" i18n:translate="label_event_byline_location">&mdash;
               <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
             </span>
             </p>
@@ -104,7 +102,7 @@
             tal:define="showMore view/data/show_more">
         <span class="portletBottomLeft"></span>
         <div class="formControls">
-        <span tal:condition="showMore">
+        <span tal:condition="python:showMore">
         <a tal:attributes="href collection_url">
            <span class="hiddenStructure"><span tal:replace="view/data/header" /> - </span>
            <input i18n:attributes="value more_url" type="submit" class="btn-default show-more" value="More&hellip;"/>

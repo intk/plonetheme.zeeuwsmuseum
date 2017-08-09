@@ -3776,9 +3776,9 @@ body.template-collective-object-object {
 
 	.slideshow-btn-wrapper {
 		position: absolute;
+		text-align: center;
 	    bottom: 120px;
-	    left: 50%;
-	    margin-left: -115px;
+	    width: 100%;
 	    z-index: 2;
 
 	    @media (max-width: 480px) {
@@ -5950,7 +5950,7 @@ body.portaltype-collection.template-fullscreen_collection_view {
 		background: transparent;
 		color: #ffffff;
 		border: 1px solid #ffffff;
-		width: 228px;
+		min-width: 228px;
 		
 		&:hover,
 		&:focus {
@@ -5962,19 +5962,15 @@ body.portaltype-collection.template-fullscreen_collection_view {
 	.slideshow-btn-wrapper {
 		display: block;
 		text-align: center;
-		
 		z-index: 4 !important;
-		width: 542px;
-		margin-left: -271px !important;
+		width: 100%;
 
 		@media(max-width: 767px) {
-			width: 268px;
-			margin-left: -134px !important;
+			width: 100%;
 		}	
 
 		@media screen and (orientation:landscape) and (max-width: 768px) {
-			width: 542px !important;
-			margin-left: -271px !important;
+			width: 100%;
 			bottom: 20px;
 		}
 	}
@@ -6269,6 +6265,17 @@ body.frontend.section-jaarverslag #below-content .portletWrapper:nth-last-child(
 
 .event-date.past {
 	text-decoration: line-through !important;
+}
+
+
+body.subsection-publicaties-handwerk-handboek.frontend {
+	.iframe-wrapper:before {
+		display:none !important;
+	}
+
+	.iframe-wrapper iframe {
+		position: static !important;
+	}
 }
 
 

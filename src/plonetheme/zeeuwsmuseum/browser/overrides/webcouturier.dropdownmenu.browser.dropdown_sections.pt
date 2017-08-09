@@ -2,7 +2,7 @@
      xmlns:tal="http://xml.zope.org/namespaces/tal"
      xmlns:metal="http://xml.zope.org/namespaces/metal"
      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-     tal:define="portal_tabs view/portal_tabs"
+     tal:define="portal_tabs python: view.portal_tabs"
      i18n:domain="plone">
 
   <p class="hiddenStructure" i18n:translate="heading_sections">Navigation</p>
@@ -28,7 +28,7 @@
             <a href="#" type="input" class="btn btn-default nav-btn" tal:attributes="href python: '/'+language+'/search'"><i class="fa fa-search fa-lg"></i></a>
         </form>
         
-        <tal:testlang tal:condition="not:extra_languages">
+        <tal:testlang tal:condition="python: not extra_languages">
           <form class="navbar-form navbar-right language-selector" tal:condition="python: language == 'nl'">
             <a href="#" type="input" class="btn btn-default nav-btn lang-btn" tal:attributes="href python: '/@@multilingual-selector/'+view.getTranslationGroup()+'/en?set_language=en'">EN</a>
           </form>
@@ -37,7 +37,7 @@
           </form>
         </tal:testlang>
 
-        <tal:testlang tal:condition="extra_languages">
+        <tal:testlang tal:condition="python: extra_languages">
           <ul id="language-dropdown" class="nav plone-nav plone-navbar-nav navTreeRoot navbar-nav navbar-right">
             <li class="dropdown">
               <tal:testlang tal:condition="python: language == 'en'">
@@ -91,7 +91,7 @@
                                   class string:${class_position}${class_children}${class_selected}">
 
                   <a
-                      tal:condition="subitems"
+                      tal:condition="python: subitems"
                       tal:attributes="title title; target target;"
                       href="#"
                       class="dropdown-toggle ${review_state}"
@@ -102,12 +102,12 @@
                       <tal:text replace="tab/name"/>
                       <span class="fa fa-angle-down"></span></a>
                   <a
-                      tal:condition="not:subitems"
+                      tal:condition="python: not subitems"
                       tal:attributes="href href; title title; target target;"
                       class="${review_state}"
                       tal:content="tab/name">Tab Name</a>
 
-                  <tal:block tal:condition="subitems">
+                  <tal:block tal:condition="python:subitems">
                   <ul class="submenu dropdown-menu">
                   <tal:subitems tal:replace="structure subitems">
                     <tal:comment replace="nothing">Submenu</tal:comment>

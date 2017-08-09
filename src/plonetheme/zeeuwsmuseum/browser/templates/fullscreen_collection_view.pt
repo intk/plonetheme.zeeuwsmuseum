@@ -19,7 +19,7 @@
   </div>
 
   <tal:carousel tal:define="batch view/batch">
-    <div class="carousel" id="slickcarousel" tal:condition="batch">
+    <div class="carousel" id="slickcarousel" tal:condition="python:batch">
         <div class="carousel-wrapper">
             <div class="slideshow-wrapper">
               <tal:items tal:repeat="item batch">
@@ -75,7 +75,7 @@
                                         <tal:usepicture tal:condition="python: item_img != None">
                                             <div class="video-play-btn"></div>
 
-                                            <tal:slideshowbtn tal:condition="first">
+                                            <tal:slideshowbtn tal:condition="python:first">
                                                 <div tal:condition="view/data/show_dates" class="slideshow-btn-down"></div>
                                             </tal:slideshowbtn>
 

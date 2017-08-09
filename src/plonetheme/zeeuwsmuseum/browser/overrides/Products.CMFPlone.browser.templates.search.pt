@@ -10,7 +10,7 @@
   <metal:block metal:fill-slot="head_slot">
 
     <link rel="alternate" title="RSS 1.0" type="application/rss+xml"
-          tal:define="here_url context/@@plone_context_state/object_url;"
+          tal:define="here_url nocall:context/@@plone_context_state/object_url;"
           tal:condition="request/SearchableText|nothing"
           tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}"/>
     <link rel="home" title="Home" i18n:attributes="title" tal:attributes="href view/navroot_url" />
@@ -31,10 +31,10 @@
           role="search"
           class="searchPage pat-formautofocus"
           tal:attributes="action python: '/%s/@@search' %(getattr(context, 'language', 'nl'))"
-          tal:define="portal context/@@plone_portal_state/portal;
+          tal:define="portal python:context.restrictedTraverse('@@plone_portal_state').portal();
                       language python:getattr(context, 'language', 'nl');
-                      extra_filters portal/@@advancedsearch/getExtraFilters;
-                      advanced_query portal/@@advancedsearch/getAdvancedButtonQuery;
+                      extra_filters nocall: portal/@@advancedsearch/getExtraFilters;
+                      advanced_query nocall: portal/@@advancedsearch/getAdvancedButtonQuery;
                       search_filters python: portal.restrictedTraverse('@@advancedsearch').getSearchFilters(language);
                       first_call not:request/advanced_search|nothing;
                       st python:request.get('SearchableText', '');
@@ -245,13 +245,13 @@
             </h1>
 
             <p id="rss-subscription" i18n:domain="plone"
-               tal:define="syndication context/@@tools/syndication|nothing"
+               tal:define="syndication nocall:context/@@tools/syndication|nothing"
                tal:condition="syndication/isSiteSyndicationAllowed|nothing">
                <img src="" alt="RSS"
                     tal:attributes="src string:${portal_url}/rss.gif"/>
                 <a href=""
                    class="link-feed"
-                   tal:define="here_url context/@@plone_context_state/object_url"
+                   tal:define="here_url nocall:context/@@plone_context_state/object_url"
                    tal:attributes="href string:$here_url/search_rss?${request/QUERY_STRING}">
                     <span i18n:translate="title_subscribe_rss_feed">
                       Subscribe to an always-updated RSS feed.
@@ -305,7 +305,7 @@
                     </nav>
                     
                     <div id="search-results"
-                         tal:define="navigation_root_url context/@@plone_portal_state/navigation_root_url;">
+                         tal:define="navigation_root_url nocall:context/@@plone_portal_state/navigation_root_url;">
                          
                      
 
@@ -314,7 +314,7 @@
                       </metal:noresults>
 
                       <metal:results tal:condition="batch"
-                                     tal:define="isAnon context/@@plone_portal_state/anonymous;
+                                     tal:define="isAnon nocall:context/@@plone_portal_state/anonymous;
                                                  toLocalizedTime nocall: context/@@plone/toLocalizedTime;
                                                  use_view_action python:context.portal_registry.get('plone.types_use_view_action_in_listings', []);
                                                  allowAnonymousViewAbout python:context.portal_registry['plone.allow_anon_views_about'];

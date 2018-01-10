@@ -1,4 +1,4 @@
-from Acquisition import aq_inner
+from Acquisition import aq_inner, aq_parent
 from Products.Five import BrowserView
 from plone.app.multilingual.subscriber import createdEvent
 
@@ -13,8 +13,33 @@ from datetime import date
 from DateTime import DateTime
 import time
 
+from plone.app.event.browser.event_listing import EventEventListing, EventListing, EventListingIcal
+import plone.api
 
 class ContextToolsView(BrowserView):
+
+    def isAnonymous(self):
+        annon = True
+        if not plone.api.user.is_anonymous():
+            return False
+
+        return annon
+
+    def isSlideshowPublished(self, item):
+        obj = item.getObject()
+        slideshow = obj.get('slideshow', None)
+        
+        if slideshow:
+            slideshow_brain = uuidToCatalogBrain(slideshow.UID())
+            if slideshow_brain:
+                if slideshow_brain.review_state != 'published':
+                    return False
+                else:
+                    return True
+            else:
+                return True
+        else:
+            return True
 
     def isEventPast(self, event):
         """ Checks if the event is already past """
@@ -56,16 +81,17 @@ class OnlineExperienceView(CollectionView):
                     return item_class
         elif item.hasMedia:
             image = uuidToCatalogBrain(item.leadMedia)
-            image_obj = image.getObject()
-            if getattr(image_obj, 'image', None):
-                try:
-                    w, h = image_obj.image.getImageSize()
-                    if w > h:
-                        item_class = "%s" %('landscape')
-                    else:
-                        item_class = "%s" %('portrait')
-                except:
-                    return item_class
+            if image:
+                image_obj = image.getObject()
+                if getattr(image_obj, 'image', None):
+                    try:
+                        w, h = image_obj.image.getImageSize()
+                        if w > h:
+                            item_class = "%s" %('landscape')
+                        else:
+                            item_class = "%s" %('portrait')
+                    except:
+                        return item_class
 
         return item_class
 
@@ -253,9 +279,59 @@ class FullScreenCollectionView(CollectionView):
 
 
 
+class CustomEventEventListing(EventEventListing):
+    def getLeadMedia(self, brain):
+            
+        acc_context = brain.context
+        lead_obj = acc_context
+        if getattr(acc_context, 'portal_type', None) == "Occurrence":
+            lead_obj = aq_parent(aq_inner(acc_context))
+
+        item = uuidToCatalogBrain(lead_obj.UID())
+
+        if item.portal_type == "Image":
+            return item.getURL()+"/@@images/image/mini"
+        
+        if item.leadMedia != None:
+            uuid = item.leadMedia
+            media_object = uuidToCatalogBrain(uuid)
+            if media_object:
+                return media_object.getURL()+"/@@images/image/mini"
+            else:
+                return None
+        else:
+            return None
+
+        return ""
+
+class CustomEventListing(EventListing):
+    def getLeadMedia(self, brain):
+            
+        acc_context = brain.context
+        lead_obj = acc_context
+        if getattr(acc_context, 'portal_type', None) == "Occurrence":
+            lead_obj = aq_parent(aq_inner(acc_context))
+
+        item = uuidToCatalogBrain(lead_obj.UID())
+
+        if item.portal_type == "Image":
+            return item.getURL()+"/@@images/image/mini"
+        
+        if item.leadMedia != None:
+            uuid = item.leadMedia
+            media_object = uuidToCatalogBrain(uuid)
+            if media_object:
+                return media_object.getURL()+"/@@images/image/mini"
+            else:
+                return None
+        else:
+            return None
+
+        return ""
 
 
-
+class CustomEventListingIcal(EventListingIcal):
+    pass
 
 
 def objectTranslated(ob, event):

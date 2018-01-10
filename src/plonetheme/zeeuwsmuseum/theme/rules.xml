@@ -5,7 +5,9 @@
        xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
        xmlns:xi="http://www.w3.org/2001/XInclude">
 
-
+    <theme href="index_online_experience.html" css:if-content="body.template-etickets"/>
+    <theme href="backend.html" css:if-content="body.template-cart"/>
+    <theme href="backend.html" css:if-content="body.template-mollie_payment_success"/>
     <theme href="backend.html" css:if-not-content="body.frontend"/>
     <theme href="index.html" css:if-content="body.frontend"/>
 
@@ -75,6 +77,19 @@
         css:theme=".documentDescription"
         css:content-children=".documentDescription"
         method="raw" />
+
+      <replace
+        css:theme-children="#website-title h1.website-title"
+        css:content-children=".documentFirstHeading"
+        method="raw" css:if-content="body.template-cart" />
+      <replace
+        css:theme-children="#website-title h1.website-title"
+        css:content-children=".documentFirstHeading"
+        method="raw" css:if-content="body.template-checkout" />
+      <replace
+        css:theme-children="#website-title h1.website-title"
+        css:content-children=".documentFirstHeading"
+        method="raw" css:if-content="body.template-mollie_payment_success" />
       
       <drop css:content=".documentDescription"/>
       <drop css:content=".documentFirstHeading"/>

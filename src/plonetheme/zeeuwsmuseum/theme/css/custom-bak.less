@@ -2321,7 +2321,7 @@ footer, body.mce-content-body {
 
 body.portaltype-folder,
 body.portaltype-collection,
-body:not(.portaltype-document):not(.portaltype-event) {
+body:not(.portaltype-document):not(.portaltype-event):not(.portaltype-occurrence) {
 	footer {
 		border-top: 1px solid #c3c3c3;
 	}
@@ -2945,7 +2945,8 @@ body.frontend.section-contact {
 	}
 }
 
-body.frontend.template-listing_view article#content {
+body.frontend.template-listing_view article#content,
+body.frontend.template-event_listing article#content, {
 	margin-bottom: 0px;
 	@media (max-width: 768px) {
 		padding-top: 30px;
@@ -5253,7 +5254,8 @@ body.frontend {
 	}
 
 	&.portaltype-document,
-	&.portaltype-event {
+	&.portaltype-event,
+	&.portaltype-occurrence {
 
 		@media (min-width: 992px) {
 			#above-content {
@@ -5762,7 +5764,7 @@ th.header-titleAuthorImprintCollation_imprint_year {
 	width: 10%;
 }
 
-body:not(.portaltype-event) .event.summary {
+body:not(.portaltype-event):not(.portaltype-occurrence) .event.summary {
 	display: none;
 }
 
@@ -6276,16 +6278,6 @@ body.subsection-publicaties-handwerk-handboek.frontend {
 	.iframe-wrapper iframe {
 		position: static !important;
 	}
-}
-
-body.subsection-publicaties.portaltype-document.frontend {
-        .iframe-wrapper:before {
-                display:none !important;
-        }
-
-        .iframe-wrapper iframe {
-                position: static !important;
-        }
 }
 
 
@@ -7244,6 +7236,563 @@ body.template-checkout #form-checkout #field-checkout-accept_terms_and_condition
 	padding-bottom: 0px !important;
 }
 
+	.cd-navigation-wrapper {
+		padding-top: 120px !important;
+	}
+
+	select {
+	    background-color: #f5f5f5;
+	    border: 0 !important;
+	    -webkit-box-shadow: none !important;
+	    box-shadow: none !important;
+	    font-weight: 400 !important;
+	    font-size: 1.000em !important;
+	    color: #000000 !important;
+	    vertical-align: top;
+	    height: 43px;
+	    cursor: pointer;
+
+	    option {
+	    	color: #000000;
+	    }
+	}
+
+	div.field input[type="text"]:not(#form-widgets-email),
+	div.field input[type="email"]:not(#form-widgets-email) {
+	    font-weight: 400 !important;
+	    font-size: 1.000em !important;
+	    color: #000000 !important;
+	    background-color: #f5f5f5 !important;
+	    border: 0 !important;
+	    -webkit-box-shadow: none !important;
+	    box-shadow: none !important;
+	    padding: 0.4em!important;
+	    padding-top: 0.7em !important;
+    	padding-left: 0.9em !important;
+    	width: 15em;
+    	height: 43px;
+    	.universLight();
+    	
+    	/*.inputField();
+    	width: 15em;*/
+	}
+
+	div.field label {
+	    font-weight: 400 !important;
+	    font-size: 1.100em !important;
+	    display: inline-block;
+	    max-width: 100%;
+	    margin-bottom: 15px;
+	    .universLight();
+	}
+
+	h2 {
+		padding-top: 10px;
+		margin-top: 1em;
+	    margin-bottom: 0.5em;
+	    padding-bottom: 0.25em;
+	    border-bottom: 0.1em solid #bbb;
+	    font-weight: 700;
+	    color: #7BB0E7;
+	    line-height: 36px;
+	    font-size: 1.350em !important;
+	    margin: 0 0;
+	    letter-spacing: 0.05em;
+	    .universCn();
+	}
+
+	#input-checkout-checkout_back,
+	#input-checkout-next {
+		.buttonField();
+	}
+
+	#cart_summary {
+		.universLight();
+		font-size: 18px;
+	}
+
+	.mode_display .field {
+		.universLight();
+		font-size: 16px;
+	}
+
+	.checkout_cart_overview {
+		.cart_item h4 {
+			font-size: 1.150em !important;
+		    padding-bottom: 20px !important;
+		    text-transform: uppercase;
+		    letter-spacing: 0.075em;
+			.universLightCn();
+		}
+
+		.cart_item td.quantity-col {
+			padding-top: 37px !important;
+			padding-bottom: 12px !important;
+		}
+
+		tr.cart-header th h4 {
+			font-size: 1.125em !important;
+			.universLightCn();
+		}
+
+		.cart_item td {
+			padding-top: 35px !important;
+		}
+
+		.subtotal-col,
+		.subtotal-th {
+			padding-right: 0px !important;
+		}
+
+		.cart_sum_content {
+			font-size: 1.125em !important;
+		}
+	}
+
+	#form-checkout.mode_display label {
+    	display: none;
+	}
+
+	#form-checkout #field-checkout-accept_terms_and_conditions-accept label {
+	    display: inline !important;
+	}
+
+	#form-checkout #field-checkout-accept_terms_and_conditions-accept a {
+		color: #000000 !important;
+		text-decoration: underline !important;
+		&:hover,
+		&:active,
+		&:focus {
+			color: #000000 !important;
+		}
+	}
+
+	#form-checkout #field-checkout-accept_terms_and_conditions-accept {
+		padding-bottom: 15px;
+	}
+
+	.checkbox {
+	    display: inline-block;
+	}
+
+	#input-checkout-confirm_back,
+	#input-checkout-finish {
+		.buttonField();
+		font-size: 1.000em !important;
+	}
+
+	@media(max-width: 768px) {
+		div.field {
+			width: 100% !important;
+			clear: both !important;
+			display: block;
+			input:not([type="radio"]) {
+				width: 100% !important;
+			}
+
+			select {
+				width: 100% !important;
+			}
+		}
+
+		.intro-header {
+			height: 400px !important;
+		}
+
+		.navbar-fixed-top {
+			background: transparent !important;
+			border: 0px !important;
+		}
+	}
+
+	#input-checkout-checkout_back,
+	#input-checkout-next,
+	#input-checkout-confirm_back,
+	#input-checkout-finish {
+	    font-family: 'UniversCn', Arial, sans-serif;
+	    padding: 17px;
+	    border: 1px solid #7bb0e7;
+	    border-radius: 0px;
+	    text-transform: uppercase;
+	    height: auto;
+	    color: #7bb0e7;
+	    letter-spacing: 0.1em;
+	    width: auto;
+	    font-size: 17px;
+	    background-color: #ffffff;
+	    letter-spacing: 0.05em;
+	    text-shadow: 0px 0px 0px #ffffff;
+	    font-weight: 400;
+	    padding-left: 28px;
+	    padding-right: 28px;
+	    padding-bottom: 12px;
+	    text-align: center;
+	    margin-top: 30px;
+	    margin-right: 10px;
+	    display: inline-block;
+	}
+
+	#input-checkout-confirm_back,
+	#input-checkout-finish {
+		padding: 13px 28px !important;
+    	padding-bottom: 12px !important;
+	}
+}
+
+.template-etickets * {
+    font-weight: 400 !important;
+}
+
+body.template-etickets {
+
+	#slickcarousel, #logo-wrapper, #cd-nav, .cd-nav-trigger, .title-container {
+		display: none !important;
+	}
+
+	#portal-logo {
+		display: none !important;
+	}
+
+	#cart {
+		width: 100% !important;
+	    padding-left: 55px !important;
+	    padding-right: 55px !important;
+	    padding-top: 0px !important;
+	    background: transparent !important;
+	    z-index: 10000 !important;
+	}
+
+	.ticket-item:not(:first-child) #ticket-header {
+    	margin-top: 35px !important;
+	}
+
+	.ticket-item #ticket-header {
+    	padding: 20px !important;
+    	background-color: @brand-primary !important;
+    	border-radius: 0px !important;
+	}
+
+	.cart_item {
+    	padding-top: 15px !important;
+    	width: 100% !important;
+    	border-bottom: 0px !important;
+	}
+
+	table {
+    	width: 100%;
+	}
+
+	.cart_item tr {
+    	height: 40px !important;
+    	color: #666666;
+    	font-size: 1.000em;
+	}
+
+	td:not(.ticket-info) {
+    	padding-right: 0px !important;
+    	line-height: 24px !important;
+    	padding: 0px !important;
+	}
+
+	td {
+		padding-left: 10px !important;
+	}
+
+	td.ticket-info {
+	    width: 55%;
+	    font-size: 9px !important;
+	    padding-top: 0px !important;
+	}
+
+	span {
+    	font-size: 16px !important;
+    	color: #666666 !important;
+    	.universLight() !important;
+	}
+
+	.info-div {
+    	margin-left: 12px !important;
+	}
+
+	.info-div p {
+    	letter-spacing: 0.015em !important;
+	}
+
+	.info-div p {
+    	margin: 3px !important;
+    	line-height: 10px !important;
+    	font-size: 9px !important;
+    	margin: 0px 0 !important;
+
+    	&:first-child {
+    		margin-top: 0px !important;
+    	}
+	}
+
+	#content ul {
+   	 	margin-left: 0px !important;
+        -webkit-padding-start: 15px !important;
+	}
+
+	li  {
+		display: list-item;
+	}
+
+	h3 {
+	    font-size: 16px !important;
+	    color: @brand-primary !important;
+	    font-weight: 800 !important;
+	    letter-spacing: 0.06em !important;
+	    line-height: 24px;
+	    margin: 0 0;
+	}
+
+	#ticket-footer {
+	    padding-top: 25px !important;
+	    height: auto !important;
+	    padding-right: 50px !important;
+	    padding:0px !important;
+	}
+
+	#ticket-footer div {
+    	padding-left: 0px !important;
+    	padding-top: 5px !important;
+	}
+
+	h4 {
+    	color: @brand-primary !important;
+    	font-weight: 800 !important;
+    	letter-spacing: 0.06em !important;
+    	line-height: 21px;
+	    margin: 0 0;
+	    margin-top: 0px !important;
+	    font-size: 16px !important;
+	}
+
+	#ticket-footer p, #ticket-footer ul > li {
+	    font-size: 9px !important;
+	    line-height: 12px !important;
+	    letter-spacing: 0.07em !important;
+	    color: #666666 !important;
+	    margin: 1px 0 !important;
+	}
+
+	.logo-container {
+    	height: 50px !important;
+	}
+
+	.tickets-title h1 {
+	    font-family: sans-serif !important;
+	    margin-left: 3px;
+	}
+
+	h1 {
+	    font-size: 20px !important;
+	    color: #ffffff !important;
+	    line-height: 160px !important;
+	    text-transform: uppercase !important;
+	    margin-top: 120px !important;
+	    color: #ffffff !important;
+	}
+
+	.tickets-title {
+	    height: 100px !important;
+	}
+
+	.title-aux {
+	    font-family: sans-serif !important;
+	    text-transform: uppercase;
+	    margin-bottom: 0px !important;
+	    font-size: 40px;
+	    color: #ffffff !important;
+	    margin: 0 0 !important;
+	}
+
+	.intro-header {
+		display: none !important;
+	}
+
+	.ticket-barcode {
+		padding-bottom: 30px !important;
+	}
+
+	.main-container {
+		padding: 0px !important;
+	}
+
+	.ticket-item:not(:last-child) {
+		padding-bottom: 60px !important;
+	}
+
+}
+
+
+body.template-etickets footer {
+	display: none;
+}
+
+body.template-etickets img.logo {
+	width: 240px !important;
+	height: auto !important;
+}
+
+
+body.template-etickets {
+	#logos-wrapper {
+		width: 100%;
+		text-align: left;
+	}
+
+	#logos-wrapper img {
+		max-width: 100%;
+		margin: 0 auto;
+
+	}
+
+	.ticket-title {
+		font-style: italic;
+	}
+
+	.lorentz-formule {
+		font-style: italic;
+	}
+}
+
+body.template-cart {
+	@media(max-width: 768px) {
+		.navbar-fixed-top {
+			background: transparent !important;
+			border: 0px !important;
+		}
+	}
+}
+
+body.template-mollie_payment_success {
+
+	.intro-header {
+		background-image: url(https://www.zeeuwsmuseum.nl/nl/over-het-museum/pers/persberichten-1/nieuwe-website-zeeuws-museum-volledige-museumcollectie-online-toegankelijk/slideshow/beeldmerk-zeeuws-museum-foto-koen-hauser-liggend.jpg/@@images/image/large);
+	    position: relative;
+	    height: 100%;
+	    background-repeat: no-repeat;
+	    background-size: cover;
+		background-position: center;
+
+		@media (min-width: 992px) {
+			margin-top: 49px;
+		}
+	}
+
+	.intro-header:before {
+		padding-top: 35%;
+		content: "";
+		display: table;
+	}
+
+	.intro-header {
+		position: relative;
+	}
+
+	article#content {
+		padding-top: 50px;
+	}
+
+	div#website-title {
+		position: absolute;
+		top: 48%;
+		text-align: center;
+		width: 100%;
+
+		h1 {
+		    font-weight: 800 !important;
+		    font-size: 2.125em !important;
+		    line-height: 50px !important;
+		    color: #ffffff !important;
+		    letter-spacing: 0.02em;
+		    text-transform: uppercase;
+		    margin: 0 auto;
+		    display: block;
+		    .universLight();
+
+		    @media (max-width: 991px) {
+				font-size: 36px !important;
+			}	
+		}
+
+		@media (max-width: 991px) {
+			margin-left: -150px;
+			margin-top: -25px;
+		}
+
+		
+	}
+
+	.brand-name {
+		display: none !important;
+	}
+
+	.title-container {
+		padding-top: 50px;
+	}	
+
+	.wrapper-result-page {
+		@media (min-width: 991px) {
+		    width: 650px;
+		    margin: 0 auto;
+		    background: #ffffff;
+		}
+	}
+
+	p {
+	    font-weight: 400;
+	    line-height: 33px;
+	    color: #333333;
+	    margin: 0 0 10.5px;
+	    font-size: 1.00em !important;
+	    letter-spacing: 0.00em !important;
+	}
+
+	a.payment_button {
+		.buttonField();
+		text-shadow: none !important;
+	}
+	#ordernumber_order_text strong {
+		color: #000000 !important;
+	}
+}
+
+body.template-etickets {
+	p.logo-text {
+		.universCn();
+		font-size: 30px;
+		text-transform: uppercase;
+		color: #ffffff;
+		margin-top: 0px;
+	}
+}
+
+body.template-checkout #form-checkout #field-checkout-subscribe-subscribe {
+	padding-bottom: 15px !important;
+	margin-top: 0px;
+	label {
+		display: inline !important;
+		span {
+			@media(min-width: 992px) {
+				margin-left: 20px;
+				font-style: italic;
+				display: block;
+			}
+		}
+	}
+}
+
+body.template-checkout #tag-checkout-subscribe-heading {
+	display: none !important;
+}
+
+body.template-checkout #form-checkout #field-checkout-accept_terms_and_conditions-accept {
+	padding-bottom: 0px !important;
+}
+
 
 #bdajax-overlays {
 	display:none !important;
@@ -7262,5 +7811,67 @@ body.portaltype-event, body.portaltype-document {
 
 
 
+
+body i.glyphicon.link-external,
+body i.glyphicon.link-mailto,
+body i.glyphicon.link-https {
+    display: none !important;
+}
+
+body.portaltype-portlet-page {
+	.slick-slider {
+		margin-bottom: 0px !important;
+	}
+}
+
+body.frontend.template-event_listing {
+	.vevent div.cal_info {
+		margin-left: 0 !important;
+	}
+
+	div.cal_date {
+		display: none !important;
+	}
+
+	ul.horizontal.metadata {
+		display: none !important;
+	}
+}
+
+body.frontend.template-event_listing.portaltype-event {
+	.thumb-wrapper {
+		display: none !important;
+	}
+
+	.listing-item {
+		width: 100% !important;
+
+		@media(min-width: 769px) {
+			padding-left: 0px !important;
+			padding-right: 0px !important;
+		}
+
+		.event-date {
+			margin-bottom: 10px !important;
+			margin-top: 10px !important;
+		}
+	}
+}
+
+body.frontend {
+	button[name='riedit'] {
+		display: none !important;
+	}
+
+	button[name='ridelete'] {
+		display: none !important;
+	}
+}
+
+body.frontend ul.event.summary {
+	textarea {
+		display: none !important;
+	}
+}
 
 

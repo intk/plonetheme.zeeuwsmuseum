@@ -518,7 +518,7 @@ body.frontend.portaltype-object:not(.userrole-authenticated) {
     }
 }
 
-body:not(.portaltype-object) {
+body:not(.portaltype-object):not(.section-jaarverslag) {
     #slideshow-controls {
             display: none !important;
     }
@@ -1121,6 +1121,93 @@ body.portaltype-object.slideshow-empty {
 	}
 }
 
+body.section-jaarverslag {
+/* Slideshw controls */
+		#slideshow-controls {
+			position: absolute;
+		    bottom: 0;
+		    left: 0;
+		    height: 80px;
+		    width: 100%;
+		    background-color: #242424;
+		    padding-right: 0px;
+		    padding-left: 0px;
+		    opacity: 0.8;
+
+		    > div {
+		    	height: 100%;
+
+		    	p {
+		    		line-height: 33px;
+				    padding: 23.5px;
+				    margin:0;
+		    	}
+		    }
+
+		    .slide-description {
+		    	color: #ffffff !important;
+
+		    	span {
+		    		padding-right: 20px;
+		    	}
+		    }
+
+		    #slide-description {
+				.universCn();
+			}
+
+			#slide-count {
+				.universCn();
+			}
+
+			#slide-description {
+				max-width: 100%;
+			    text-overflow: ellipsis;
+			    white-space: nowrap;
+			    white-space: -moz-nowrap;
+			    white-space: -nowrap;
+			    white-space: -o-nowrap;
+			    word-wrap: break-word;
+			}
+
+		    .btn.share-btn .fa.fa-share-alt,
+		    .btn.expand-btn .fa.fa-expand,
+		    .btn.expand-btn .fa.fa-compress,
+		    .btn.info-btn .fa.fa-info-circle,
+		    .btn.info-btn .fa.fa-times,
+		    .btn-share-btn .fa.fa-share-alt {
+		    	line-height: 55px;
+			    color: #ffffff;
+			    font-size: 1.400em;
+			    opacity: 0.6;
+			    font-weight: 400;
+		    }
+
+		    .btn {
+		    	width: 32%;
+		    	height: 100%;
+    			background-color: #242424;
+    			float: right;
+			    border: 0px;
+			    border-left: 0px solid #2b2b2b;
+			    border-right: 0px solid #2b2b2b;
+			    padding: 15px 25px;
+		    }
+
+		    .btn.expand-btn, .btn.share-btn {
+		    	display: block;
+		    }
+
+		    .btn.expand-btn:hover .fa, .btn.share-btn:hover .fa, .btn.info-btn:hover .fa, .btn.share-btn:hover {
+		    	opacity: 1;
+		    }
+
+		    .actions-div {
+		    	padding-right: 0px;
+    			padding-left: 0px;
+		    }
+		}
+}
 
 
 

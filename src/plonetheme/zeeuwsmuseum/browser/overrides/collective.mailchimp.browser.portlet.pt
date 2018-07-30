@@ -9,7 +9,8 @@
     <dt class="portletTitle">
       <p i18n:translate="" tal:condition="python: getattr(context, 'language', 'nl') == 'nl'">Nieuwsbrief</p>
       <p i18n:translate="" tal:condition="python: getattr(context, 'language', 'nl') == 'en'">Newsletter</p>
-      <p i18n:translate="" tal:condition="python: not getattr(context, 'language', 'nl')">Nieuwsbrief</p>
+      <p i18n:translate="" tal:condition="python: getattr(context, 'language', 'nl') == 'de'">Newsletter</p>
+      <p i18n:translate="" tal:condition="python: not getattr(context, 'language', 'nl')">Newsletter</p>
     </dt>
 
     <dt class="portletHeader">

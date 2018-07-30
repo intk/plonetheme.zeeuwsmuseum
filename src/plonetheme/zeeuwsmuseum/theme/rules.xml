@@ -232,7 +232,7 @@
         </replace>
       </rules>
 
-      <replace css:theme-children="footer .container" css:content-children="#portal-footer-wrapper" />
+      
       <!--<after css:theme-children=".main-content" css:content=".portlet-rrssb" method="raw"/>
       <drop css:content="footer .portlet-rrssb"/>-->
 
@@ -280,5 +280,7 @@
           <xsl:copy-of select="."/>
         </div>
       </replace>
+
+      <replace css:theme-children="footer .container" css:content-children="#portal-footer-wrapper" />
 
 </rules>

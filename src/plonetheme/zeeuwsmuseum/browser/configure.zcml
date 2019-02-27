@@ -90,10 +90,10 @@
         layer="..interfaces.IPlonethemeModernBaseLayer"
         />
 
-  <subscriber
+  <!--<subscriber
         for="plone.dexterity.interfaces.IDexterityContainer
         zope.lifecycleevent.interfaces.IObjectMovedEvent"
-        handler=".views.objectTranslated" />
+        handler=".views.objectTranslated" />-->
 
 
 

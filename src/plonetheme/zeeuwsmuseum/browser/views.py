@@ -15,8 +15,78 @@ import time
 
 from plone.app.event.browser.event_listing import EventEventListing, EventListing, EventListingIcal
 import plone.api
+from zope.component import getMultiAdapter
+from plone.event.interfaces import IEvent
+from zope.contentprovider.interfaces import IContentProvider
+
+from Products.CMFCore.utils import getToolByName
+
+from zope.i18nmessageid import MessageFactory
+_ = MessageFactory('plonetheme.zeeuwsmuseum')
+
+YEAR_LIMIT = 2024
 
 class ContextToolsView(BrowserView):
+
+    def formatted_date(self, obj):
+        try:
+            item = obj.getObject()
+        except:
+            item = obj
+            pass
+
+        provider = getMultiAdapter(
+            (self.context, self.request, self),
+            IContentProvider, name='formatted_date'
+        )
+
+        rec = getattr(item, 'recurrence', None)
+        if rec and getattr(self.context, 'portal_type', None) != 'Event':
+            if "FREQ=DAILY" in rec:
+                return self.context.translate(_("DAILY"))
+            elif "FREQ=MONDAYFRIDAY" in rec:
+                return self.context.translate(_("MONDAYFRIDAY"))
+            elif "FREQ=WEEKDAYS" in rec:
+                return self.context.translate(_("WEEKDAYS"))
+            elif "FREQ=WEEKLY" in rec:
+                return self.context.translate(_("WEEKLY"))
+            elif "FREQ=MONTHLY" in rec:
+                return self.context.translate(_("MONTHLY"))
+            elif "FREQ=YEARLY" in rec:
+                return self.context.translate(_("YEARLY"))
+            else:
+                return provider(item)
+        else:
+            end_date = getattr(item, 'end', None)
+            if end_date:
+                end = DateTime(end_date)
+                if end.year() >= YEAR_LIMIT:
+                    return ""
+                else:
+                    return provider(item)
+            else:
+                return provider(item)
+
+    def getImageObject(self, item, scale="mini", with_description=False):
+        if item.portal_type == "Image":
+            return item.getURL()+"/@@images/image/%s" %(scale)
+        if item.leadMedia != None:
+            uuid = item.leadMedia
+            media_object = uuidToCatalogBrain(uuid)
+            if media_object:
+                if with_description:
+                    img_data = {
+                        "url": media_object.getURL()+"/@@images/image/%s" %(scale),
+                        "description": media_object.Description
+                    }
+                    return img_data
+                else:
+                    return media_object.getURL()+"/@@images/image/%s" %(scale)
+            else:
+                return None
+        else:
+            return None
+
 
     def isAnonymous(self):
         annon = True
@@ -43,6 +113,11 @@ class ContextToolsView(BrowserView):
 
     def isEventPast(self, event):
         """ Checks if the event is already past """
+
+        rec = getattr(event, 'recurrence', None)
+        if rec:
+            return False
+
         if event.portal_type != 'Event':
             return False
         else:

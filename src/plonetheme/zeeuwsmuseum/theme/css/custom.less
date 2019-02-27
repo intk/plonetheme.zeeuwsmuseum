@@ -1732,8 +1732,20 @@ body.frontend, body#tinymce {
 			display: none;
 		}
 
-		.title-container {
-			display: none;
+		&:not(.subsection-nu-in-het-museum-overzicht):not(.subsection-zien-en-doen-overzicht):not(.subsection-now-in-the-museum-exhibitions-exhibitions) {
+			.title-container {
+				display: none;
+			}
+		}
+
+		&.subsection-nu-in-het-museum-overzicht,
+		&.subsection-now-in-the-museum-exhibitions-exhibitions,
+		&.subsection-zien-en-doen-overzicht {
+			.title-container {
+				margin-right: auto;
+				margin-left: auto;
+				text-align: center;
+			}
 		}
 
 		@media (max-width: 768px) {
@@ -1758,6 +1770,17 @@ body.frontend, body#tinymce {
 				font-size: 35px;
 			}
 		}
+
+		&.subsection-nu-in-het-museum-overzicht,
+		&.subsection-now-in-the-museum-exhibitions-exhibitions,
+		&.subsection-zien-en-doen-overzicht {
+			h1 {
+				@media (max-width: 991px) {
+					font-size: 35px;
+				}
+			}
+		}
+
 
 		.separator-wrapper {
 			display: block !important;
@@ -5762,7 +5785,7 @@ th.header-titleAuthorImprintCollation_imprint_year {
 	width: 10%;
 }
 
-body:not(.portaltype-event) .event.summary {
+body:not(.portaltype-event):not(.portaltype-occurrence) .event.summary {
 	display: none;
 }
 
@@ -5897,7 +5920,8 @@ body:not(.frontend) .portlet-rrssb {
 }
 
 body.frontend.portaltype-document,
-body.frontend.portaltype-event {
+body.frontend.portaltype-event,
+body.frontend.portaltype-occurrence {
 	li.event-category {
 		display: none;
 	}
@@ -6065,7 +6089,9 @@ html.ie9 {
 }
 
 
-body.subsection-nu-in-het-museum-overzicht {
+body.subsection-nu-in-het-museum-overzicht,
+body.subsection-now-in-the-museum-exhibitions-exhibitions,
+body.subsection-zien-en-doen-overzicht {
 	#portletPageTopRow > div:first-child .portletWrapper {
 		border-bottom: 1px solid #e7e7e7;
 	}
@@ -7275,6 +7301,424 @@ body.portaltype-event, body.portaltype-document {
   text-shadow: none !important;
 }
 
+
+/* New zien en doen page */
+.show-more-header {
+	display: none;
+}
+
+body.frontend.portaltype-portlet-page.subsection-nu-in-het-museum-overzicht,
+body.frontend.portaltype-portlet-page.subsection-now-in-the-museum-exhibitions-exhibitions,
+body.frontend.portaltype-portlet-page.subsection-zien-en-doen-overzicht {
+	#content-core .portletCollection {
+		.show-more-header {
+			display: none;
+		}
+
+		padding-top: 30px;
+		padding-bottom: 30px;
+
+		.portletHeader {
+			h2 {
+				display: none;
+			}
+
+			a {
+				&:hover,
+				&:focus,
+				&:active,
+				&:active:focus {
+					text-decoration: underline;
+					color: @brand-primary;
+
+					h1 {
+						color: @brand-primary !important;
+					}
+				}
+			}
+
+			.arrow-title {
+				display: none !important;
+			}
+
+		}
+
+		.entry-wrapper {
+			p.event-date {
+				color: #a1a1a3;
+			}
+		}
+
+		@media(min-width: 992px) {
+			padding-top: 100px;
+			padding-left: 25px;
+			padding-bottom: 50px;
+
+			.show-more-a {
+				&:hover,
+				&:focus,
+				&:active,
+				&:focus {
+					text-decoration: none !important;
+				}
+			}
+			.show-more-header {
+				display: inline;
+
+				color: #494a51 !important;
+				text-decoration: none !important;
+
+			}
+
+			.portletHeader {
+				width: 20%;
+				float: right;
+
+				h1 {
+					max-width: 170px;
+				    font-size: 2.5vw;
+				    line-height: 2.5vw;
+				    margin-top: 0.8vw;
+				    text-align: left;
+
+				    @media(min-width: 1400px) {
+				    	font-size: 40px;
+				    	line-height: 40px;
+				    }
+				}
+			}
+
+			.portletFooter {
+				display: none;
+			}
+
+			#row-items {
+				width: 80%;
+				float: left;
+				padding-right: 15px !important;
+				padding-left: 15px !important;
+			}
+
+			.thumb-wrapper {
+				img {
+					margin-bottom: 15px;
+				}
+			}
+
+			.entry-wrapper {
+				h4.item-title {
+    				font-size: 20px;
+				    line-height: 25px;
+				    
+				    color: #494A51;
+
+				    a {
+				    	color: #494A51;
+				    	margin-top: 0px;
+				    }
+				}
+			}
+
+			p.item-description {
+				font-size: 1.100em;
+				display: none;
+			}
+		}
+	}
+}
+
+body.frontend.portaltype-portlet-page.subsection-nu-in-het-museum-overzicht,
+body.frontend.portaltype-portlet-page.subsection-now-in-the-museum-exhibitions-exhibitions,
+body.frontend.portaltype-portlet-page.subsection-zien-en-doen-overzicht {
+
+	@media screen and (min-width: 992px) {
+		#slickcarousel {
+		    height: 41vw;
+		}
+	}
+
+	#column2-container {
+		display: none;
+	}
+
+	.main-container {
+		padding-bottom: 0px;
+	}
+
+	@media(min-width: 992px) { 
+
+		.main-content {
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+
+		
+	}
+
+	#portletPageTopRow > div {
+		margin-left: -15px;
+		margin-right: -15px;
+	}
+
+	@media(max-width: 768px) {
+		#portletPageTopRow > div .portletCollection {
+			padding-left: 35px;
+			padding-right: 35px;
+		}
+
+		.page-container {
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+
+		.portlet-item {
+			margin-bottom: 35px;
+		}
+
+		#content-core {
+			padding-bottom: 0px;
+		}
+
+		.portletFooter {
+			padding-top: 0px;
+		}
+
+
+		#portletPageTopRow > div:last-child .portletCollection {
+			padding-bottom: 70px;
+		}
+	}
+
+	@media(min-width: 769px) and (max-width: 990px) {
+		.main-content {
+			padding-left: 0px;
+			padding-right: 0px;
+		}
+	}
+
+	#content-core .portletCollection {
+		p.item-description {
+			display: block;
+		}
+
+		@media(min-width: 992px) {
+			.portletFooter {
+				display: none;
+			}
+			
+			.portlet-item {
+				margin-bottom: 40px;
+			}
+
+			padding-top: 100px;
+			padding-left: 50px;
+			padding-right: 50px;
+			padding-bottom: 50px;
+
+			.portletHeader {
+				h1 {
+					max-width: 93%;
+				}
+			}
+
+		}
+	}
+
+	#content-core #portletPageTopRow > div:nth-child(even) .portletCollection {
+		/*background: #fbf9f2;*/
+		margin-bottom: 0px;
+
+		.portletFooter {
+			background: transparent;
+
+			.show-more {
+				background: transparent;
+
+				&:hover,
+				&:focus,
+				&:active,
+				&:active:focus {
+					background: #282931;
+				}
+			}
+		}
+
+		@media(min-width: 992px) {
+			#row-items {
+				float: right;
+			}
+
+			.portletHeader {
+				float: left;
+			}
+
+		}
+
+	}
+
+	#content-core #portletPageTopRow > div:last-child .portletCollection {
+		@media(min-width: 992px) {
+			padding-bottom: 100px;
+		}
+	}
+
+	#content-core #portletPageTopRow {
+		.portletMailChimp {
+			margin-left: 0px;
+			margin-right: 0px;
+		}
+	}
+}
+
+body.frontend.portaltype-portlet-page.subsection-nu-in-het-museum-overzicht,
+body.frontend.portaltype-portlet-page.subsection-now-in-the-museum-exhibitions-exhibitions,
+body.frontend.portaltype-portlet-page.subsection-zien-en-doen-overzicht {
+
+	#website-wrapper.empty-slideshow {
+		.title-container {
+			@media(max-width: 991px) {
+				h1.brand-name {
+					font-size: 45px !important;
+    				line-height: 42px;
+				}
+
+				span.subheading {
+					margin: 0 auto;
+					font-size: 1.180em;
+					line-height: 1.5;
+					color: @brand-primary;
+					text-align: center;
+				}
+			}
+			@media(min-width: 992px) {
+				h1.brand-name {
+					font-size: 60px !important;
+					margin-bottom: 10px;
+				}
+
+				span.subheading {
+					max-width: 660px;
+					margin: 0 auto;
+					font-size: 1.500em;
+					line-height: 1.5;
+					color: @brand-primary;
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+
+
+/* New events overview */
+body.portaltype-event .event.summary,
+body.portaltype-occurrence .event.summary {
+
+	li.event-url {
+		display: none !important;
+	}
+
+
+	abbr {
+		text-decoration: none !important;
+	}
+
+	a abbr {
+		cursor: pointer !important;
+	}
+
+	&.recurrence {
+		.event-date {
+			text-align: left;
+			padding-top: 12px;
+
+			.event-date-title {
+				display: block;
+				text-transform: uppercase;
+			}
+
+			span {
+				text-align: left;
+				display: none !important;
+			}
+
+			strong {
+				color: #282931;
+				text-align: left;
+			}
+		}
+
+		textarea {
+			display: none !important;
+		}
+
+		.ridisplay {
+			display: none !important;
+		}
+
+		li.event-dates {
+			display: block !important;
+			text-align: left;
+
+			strong {
+				display: none !important;
+			}
+
+			a {
+				border-bottom: 1px solid #494a51;
+				cursor: pointer;
+				&:hover,
+				&:focus,
+				&:active,
+				&:active:focus {
+					border-bottom: 0px solid #494a51;
+				}
+			}
+		}
+
+		li.event-url {
+			display: none !important;
+		}
+
+		li.event-location {
+			text-align: left;
+			margin-top: 20px;
+		}
+
+		li > span {
+			margin-bottom: 5px;
+		}
+
+		li.event-calendar {
+			display: none !important;
+			margin-top: 20px;
+			text-align: left;
+
+			a {
+				border-bottom: 1px solid #494a51;
+				&:hover,
+				&:focus,
+				&:active,
+				&:active:focus {
+					border-bottom: 0px solid #494a51;
+				}
+			}
+		}
+	}
+}
+
+body.portaltype-occurrence .event.summary {
+	&.recurrence { 
+		.event-date > span {
+			display: block !important;
+
+			&> span.datedisplay {
+				display: inline !important;
+			}
+		}
+
+	}
+}
 
 
 

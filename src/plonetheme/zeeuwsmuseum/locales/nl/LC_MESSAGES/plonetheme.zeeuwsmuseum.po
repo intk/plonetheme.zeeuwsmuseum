@@ -98,3 +98,27 @@ msgstr "Standplaats"
 msgid 'object_on_display'
 msgstr "Nu te zien"
 
+#: ../object.py
+msgid "DAILY"
+msgstr "Dagelijks"
+
+#: ../object.py
+msgid "MONDAYFRIDAY"
+msgstr "Maandag en vrijdag"
+
+#: ../object.py
+msgid "WEEKDAYS"
+msgstr "Dag van de week"
+
+#: ../object.py
+msgid "WEEKLY"
+msgstr "Wekelijks"
+
+#: ../object.py
+msgid "MONTHLY"
+msgstr "Maandelijks"
+
+#: ../object.py
+msgid "YEARLY"
+msgstr "Jaarlijks"
+

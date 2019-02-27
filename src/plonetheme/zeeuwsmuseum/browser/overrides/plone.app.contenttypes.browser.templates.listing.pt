@@ -20,7 +20,8 @@
 
   <metal:listingmacro define-macro="listing">
     <tal:results define="batch view/batch;
-                         b_start python: request.get('b_start', 0);">
+                         b_start python: request.get('b_start', 0);
+                         context_tools python: context.restrictedTraverse('@@context_tools');">
       <tal:listing condition="batch">
         <div class="entries" metal:define-slot="entries">
           <tal:repeat repeat="item batch" metal:define-macro="entries">
@@ -50,7 +51,7 @@
                 
                      <div class="thumb-wrapper">         
                             <a class="thumb-image" tal:condition="python: ((has_media != None and has_media != '' and 'Missing' not in str([has_media])) or item_type == 'Image')" href="" tal:attributes="href python: item_link+'?collection_id='+collection_id+'&b_start='+str(b_start+item_index) if context_portal_type == 'Collection' and item_type == 'Object' else item_link;"
-                              tal:define="item_img python:view.getImageObject(item)">
+                              tal:define="item_img python:context_tools.getImageObject(item)">
                               
                               <div class="on-display-wrapper" tal:condition="item_on_display" i18n:domain="plonetheme.zeeuwsmuseum">
                                 <div i18n:translate="object_on_display" class="label_inner">Nu te zien</div>
@@ -76,9 +77,9 @@
                             <metal:block metal:define-macro="document_byline">
                             
                             <tal:event condition="item_is_event"
-                             tal:define="is_past python: context.restrictedTraverse('@@context_tools').isEventPast(item)">
+                             tal:define="is_past python: context_tools.isEventPast(item)">
                               <p class="event-date" tal:attributes="class python: 'event-date past' if is_past else 'event-date'">
-                              <tal:date tal:replace="structure python:view.formatted_date(item)"/>
+                              <tal:date tal:replace="structure python:context_tools.formatted_date(item)"/>
                               <span tal:condition="item/location" i18n:translate="label_event_byline_location">&mdash;
                                 <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
                               </span>

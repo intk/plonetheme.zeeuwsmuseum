@@ -79,3 +79,28 @@ msgstr "path"
 msgid 'object_on_display'
 msgstr "Now on display"
 
+#: ../object.py
+msgid "DAILY"
+msgstr "Daily"
+
+#: ../object.py
+msgid "MONDAYFRIDAY"
+msgstr "Monday and Friday"
+
+#: ../object.py
+msgid "WEEKDAYS"
+msgstr "Day of the week"
+
+#: ../object.py
+msgid "WEEKLY"
+msgstr "Weekly"
+
+#: ../object.py
+msgid "MONTHLY"
+msgstr "Monthly"
+
+#: ../object.py
+msgid "YEARLY"
+msgstr "Yearly"
+
+

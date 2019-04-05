@@ -17,9 +17,32 @@
       <span tal:content="view/name">Title of the portlet</span>
     </dt>
 
-    <dd class="portletItem odd" tal:content="structure view/form/render">
-      here comes the subscriber-form
+    <dd class="portletItem odd">
+      <form tal:attributes="action view/endpoint_url|nothing;" id="newsletter-subscriber-form" method="get">
+
+        <div class="input-group">
+          <input type="text"
+            class="text-widget required form-control input-lg textline-field" placeholder="Email" id="form-widgets-email" name="EMAIL"></input>
+          <input type="hidden" value="c04600e3ceefae8c502cbabec" name="u" tal:attributes="value view/user_id|nothing"/>
+          <input type="hidden" value="42702e9770" name="id" tal:attributes="value view/list_id|nothing"/>
+
+          <span class="input-group-btn">
+            <button class="submit-button" name="form.buttons.subscribe" type="submit" role="submit">
+              <span class="mailchimp-btn-text">Inschrijven</span>
+              <span class="fa fa-chevron-right"></span>
+            </button>
+          </span>
+        </div>
+
+        <div id="subscribe-result">
+          <p class="error-msg" style="display:none;" tal:condition="python: getattr(context, 'language', 'nl') != 'nl'">Could not subscribe to newsletter. Either the email is already subscribed or something else is wrong. Try again later.</p>
+          <p class="error-msg" style="display:none;" tal:condition="python: getattr(context, 'language', 'nl') == 'nl'">Aanmelden op nieuwsbrief mislukt.</p>
+          
+          <p class="success-msg" style="display:none;" tal:condition="python: getattr(context, 'language', 'nl') != 'nl'">We have to confirm your email address. In order to finish the newsletter subscription, click on the link inside the email we just send you.</p>
+          <p class="success-msg" style="display:none;" tal:condition="python: getattr(context, 'language', 'nl') == 'nl'">Bedankt voor uw aanmelding. U ontvangt een e-mail waarin uw inschrijving wordt bevestigd.</p>
+        </div>
+      </form>
+
     </dd>
   </dl>
-
 </html>

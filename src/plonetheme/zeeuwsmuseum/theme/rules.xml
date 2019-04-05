@@ -237,7 +237,7 @@
       <drop css:content="footer .portlet-rrssb"/>-->
 
       <!-- Mailchimp portlet -->
-      <replace css:content-children=".portletMailChimp">
+      <!--<replace css:content-children=".portletMailChimp">
         
           <xsl:copy-of select="dt[@class='portletTitle']"/>
           <xsl:copy-of select="dt[@class='portletHeader']"/>
@@ -267,7 +267,7 @@
           </form>
           </dd>
         
-      </replace>
+      </replace>-->
 
       <replace css:content="#parent-fieldname-text iframe">
         <div class="iframe-wrapper">

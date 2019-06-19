@@ -1417,9 +1417,10 @@ body.frontend, body#tinymce {
     	margin-bottom: 35px;
 
     	&.image-description {
-    		font-size: 0.875em;
+    		font-size: 13px;
     		color: #666666;
     		margin-top: -15px;
+    		line-height: 25px;
     	}
 
     	@media (max-width: 768px) {
@@ -1575,6 +1576,7 @@ body.frontend, body#tinymce {
 
 	/* Multiple content page */
 	&.portaltype-collection, 
+	&.portaltype-event.template-event_listing,
 	&.portaltype-folder,
 	.portletCollection {
 		.title-container {
@@ -7724,11 +7726,11 @@ body.portaltype-occurrence .event.summary {
 }
 
 span.image-description {
-    font-size: 0.700em;
+    font-size: 13px;
     color: #666666;
     margin-top: -5px;
     display: block;
-    line-height: 2px;
+    line-height: 25px;
 }
 
 body.frontend {
@@ -7793,6 +7795,25 @@ body.frontend {
 	      transform: rotate(360deg);
 	    }
 	  }
+}
+
+
+.portaltype-event.template-event_listing {
+	.vevent div.cal_date {
+		display: none;
+	}
+
+	.vevent div.cal_info {
+		margin-left: 0px;
+	}
+
+	div.entries {
+		margin-top: 40px;
+	}
+
+	#content .vevent ul.horizontal {
+		display: none;
+	}
 }
 
 

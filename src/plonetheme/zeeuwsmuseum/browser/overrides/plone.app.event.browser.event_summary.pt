@@ -63,6 +63,12 @@
           </a>
           </tal:def>
         </span>
+        <span tal:condition="view/num_more_occurrences">
+          <a tal:attributes="href string:${view/event_context/absolute_url}/@@event_listing"
+              tal:content="view/more_occurrences_text">
+            There are 12 more occurrences.
+          </a>
+        </span>
       </li>
     </tal:cond>
     </tal:cond>
@@ -130,7 +136,7 @@
     </tal:cond>
 
   </ul>
-
+  
 </tal:def>
 
 </body>

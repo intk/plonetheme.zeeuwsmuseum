@@ -20,10 +20,42 @@
         </a>
     </header>
 
+  <div class="collection-slider-wrapper" tal:condition="python: view.data.show_collection_online">
+    <div class="collection-slider multiple-items">
+      <tal:items tal:repeat="obj python: view.results()">
+        <tal:item tal:define="has_media nocall:obj/leadMedia;
+                              item_type python:obj.portal_type;
+                              useView python:item_type in viewActions;
+                              itemUrl python:useView and obj.getURL() + '/view' or obj.getURL();">
+          <div class="collection-slide">
+            <div class="collection-slide-wrapper" tal:define="item_img python:context_tools.getImageObject(obj, 'large')" tal:condition="python: has_media">
+              <div class="collection-slide-img-wrapper">
+                <div class="slide-inner-img-wrapper">
+                  <img tal:define="images_src python: item_img" tal:attributes="data-lazy images_src; alt obj/Title; title obj/Title;">
+                  <div class="slide-inner-title">
+                    <h4>
+                      <a href="#"
+                         tal:attributes="href itemUrl;"
+                         tal:content="obj/Title"
+                         >
+                        Title
+                        </a>
+                    </h4>
+                    <p class="item-description"><span class="desc-mdash" tal:condition="obj/Description">&mdash;</span> <span tal:replace="python:obj.Description()" ></span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </tal:item>
+      </tal:items>
+    </div>
+  </div>
 
-  <div class="container-fluid" id="row-items">
+
+  <div class="container-fluid" id="row-items" tal:condition="python: not view.data.show_collection_online">
     <tal:events tal:repeat="obj python: view.results()"
-                tal:define="portlet_class python: 'col-lg-4 col-md-4 col-sm-6 col-xs-12' if context.portal_type in ['Portlet Page', 'Event', 'Document', 'Occurrence'] else 'col-lg-6 col-md-6 col-sm-6 col-xs-12'">
+                tal:define="portlet_class python: 'portlet-item col-lg-4 col-md-4 col-sm-6 col-xs-12' if context.portal_type in ['Portlet Page', 'Event', 'Document', 'Occurrence'] else 'portlet-item col-lg-6 col-md-6 col-sm-6 col-xs-12'">
 
     <div tal:attributes="class portlet_class" class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
         tal:define="plone_view python:context.restrictedTraverse('@@plone');
@@ -38,9 +70,10 @@
                     item_index repeat/obj/index;
                     number repeat/obj/number;"
         >
+        
         <div class="thumb-wrapper">         
-          <a class="thumb-image" tal:condition="python: ((has_media != None and has_media != '' and 'Missing' not in str([has_media])) or item_type == 'Image')" href="" tal:attributes="href python: itemUrl+'?collection_id='+collection_id+'&b_start='+str(item_index) if collection_item != None and item_type == 'Object' else itemUrl"
-            tal:define="item_img python:context_tools.getImageObject(obj)">
+          <a class="thumb-image" tal:condition="python: ((has_media != None and has_media != '' and 'Missing' not in str([has_media])) or item_type == 'Image')" href="" tal:attributes="href python: itemUrl"
+            tal:define="item_img python:context_tools.getImageObject(obj, scale='large') if view.data.show_frontpage else context_tools.getImageObject(obj)">
 
             <div class="on-display-wrapper" tal:condition="python:item_on_display" i18n:domain="plonetheme.zeeuwsmuseum">
               <div i18n:translate="object_on_display" class="label_inner">Nu te zien</div>
@@ -54,7 +87,13 @@
         </div>
         
         <div class="entry-wrapper">
-        
+            <tal:event condition="python: item_is_event and view.data.show_frontpage"
+               tal:define="is_past python: context_tools.isEventPast(obj)">
+                <p class="event-date" tal:attributes="class python: 'event-date past' if is_past else 'event-date'">
+                  <tal:date tal:replace="structure python:context_tools.formatted_date(obj)"/>
+                </p>
+            </tal:event>
+
             <h3 class="item-title">
               <a href="#"
                tal:attributes="href itemUrl;"
@@ -63,24 +102,28 @@
               Title
               </a>
           </h3>
-        </div>
-        <div>
+
+          <div>
           <metal:block metal:define-macro="document_byline">
-          <tal:event condition="item_is_event"
+          <tal:event condition="python: item_is_event and not view.data.show_frontpage"
            tal:define="is_past python: context_tools.isEventPast(obj)">
             <p class="event-date" tal:attributes="class python: 'event-date past' if is_past else 'event-date'">
-            <tal:date tal:replace="structure python:context_tools.formatted_date(obj)"/>
-            <span tal:condition="python: getattr(obj, 'location', None)" i18n:translate="label_event_byline_location">&mdash;
-              <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
-            </span>
+              <tal:date tal:replace="structure python:context_tools.formatted_date(obj)"/>
             </p>
           </tal:event>
           
-          
         </metal:block>
           <p tal:content="obj/Description" class="item-description"></p>
-        </div>
 
+          <div class="show-more-portlet-item" tal:condition="python:view.data.show_frontpage">
+            <a tal:attributes="href itemUrl">
+              <input i18n:domain="plonetheme.zeeuwsmuseum" i18n:attributes="value more_url" type="submit" class="btn-default show-more" value="More&hellip;"/>
+            </a>
+          </div>
+
+        </div>
+        
+        </div>
     </div>
     
     <tal:notportletpage tal:condition="python: context.portal_type not in ['Portlet Page', 'Event', 'Document', 'Occurrence']">

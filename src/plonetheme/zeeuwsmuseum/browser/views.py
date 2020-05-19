@@ -87,6 +87,21 @@ class ContextToolsView(BrowserView):
         else:
             return None
 
+    def trimText(self, text, limit):
+        try:
+            if text != None:
+                if len(text) > limit:
+                    res = text[0:limit]
+                    lastspace = res.rfind(" ")
+                    res = res[0:lastspace] + " ..."
+                    return res
+                else:
+                    return text
+            else:
+                return ""
+        except:
+            return text
+
 
     def isAnonymous(self):
         annon = True

@@ -6368,6 +6368,11 @@ body.template-checkout {
 		padding-top: 0px !important;
 	}
 
+
+	span.cart_item_alert {
+		line-height: 35px;
+	}
+
 	.cart_item.recurrent-event {
 		td:not(.type-ticket-td) {
 			span, select {
@@ -6743,12 +6748,13 @@ body.template-checkout {
 	}
 
 	.portlet.portletCalendar table .cal_has_events a:after {
-		left: -5px;
+		display: none;
 	}
 
 	.portletCalendar {
 		@media (min-width: 991px) {
-			width: 33%;
+			width: 100%;
+			max-width: 650px;
 		}
 
 
@@ -6767,7 +6773,7 @@ body.template-checkout {
 		}
 
 		.ploneCalendar td.today.selected {
-			border-color: #eee !important;
+			border-color: #f3f3f3;
 		}
 
 		.table-time .time-free:not(.time-ua):hover {
@@ -6798,8 +6804,53 @@ body.template-checkout {
 			}
 		}
 
-
 		/* portlet calendar styles */
+		table tbody tr:first-child td > *,
+		table tbody tr td > * {
+			margin-top: 0px !important;
+			padding-top: 10px !important;
+		}
+
+
+		.portletHeader {
+			background: #F3F3F3;
+			color: #000000;
+		}
+
+		table {
+			border: 2px solid #F3F3F3;
+		}
+
+		table thead {
+			background: #F3F3F3;
+		}
+
+		table thead th {
+			color: #000000;
+			font-weight: 700;
+		}
+
+		.event {
+			background-color: #F3F3F3;
+		}
+
+		.weekdays th {
+			background-color: #F3F3F3;
+		}
+
+		.portletContent > * {
+			color: #000000;
+		}
+
+		td {
+			background-color: #F3F3F3;
+			border: 2px solid #F3F3F3;
+			a {
+				color: #000000 !important;
+			}
+		}
+
+
 		table thead {
 			border-bottom: 0px;
 		}
@@ -6813,27 +6864,80 @@ body.template-checkout {
 		}
 
 		td:hover {
-			background-color: #eee;
+			background-color: #e8e8e8;
 		}
 
 		table td > * {
 			width: 100%;
+			height: 100%;
 			border-radius: 0px;
+			line-height: 25px;
 		}
 
 		table .cal_has_events a:hover {
-			background: #eee;
+			background: #e8e8e8;
 		    text-decoration: none;
 		    box-shadow: none;
+		    color: #000000 !important;
 		}
 
 		td.today.selected {
-			background-color: #eee;
+			background-color: #7BB0E7;
 		}
 
 		tr.weekdays {
 			text-transform: lowercase;
 		}
+
+		table tbody tr:last-child td > * {
+			margin-bottom: 0px;
+		}
+
+		/* Next month events */
+		td.cal_next_month,
+		td.cal_prev_month {
+			opacity: 1;
+			pointer-events: none;
+
+			span, a {
+				visibility: hidden;
+				pointer-events: none;
+			}
+		}
+
+		/* No events style */
+		td.event:not(.cal_has_events) {
+			pointer-events: none;
+			cursor: default !important;
+
+			span {
+				opacity: .2;
+				filter: Alpha(Opacity=35);
+			}
+		}
+
+		/* With events style */
+		td.event.cal_has_events {
+
+		}
+
+	
+		/* today */
+		table .today > * {
+			box-shadow: none;
+		}
+
+		/* Event is selected */
+		table td.event.selected {
+			border-color: #f3f3f3;
+    		border: 2px solid #f3f3f3;
+
+    		a {
+    			background: #7BB0E7;
+    			color: #ffffff !important;
+    		}
+		}
+
 	}
 
 	@media(max-width: 768px) {
@@ -7000,6 +7104,20 @@ body.template-checkout {
 
 		.cart_sum_content {
 			font-size: 1.125em !important;
+		}
+
+		.cart_item.recurrent-event:not(.disable) {
+			td:not(.type-ticket-td) {
+				span.cart_item_title, span.cart_item_alert {
+					visibility: visible !important;
+				}
+
+				span.cart_item_alert {
+					.universLight();
+					font-size: 1.125em;
+					line-height: 25px;
+				}
+			}
 		}
 	}
 

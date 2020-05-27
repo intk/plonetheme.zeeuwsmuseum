@@ -1475,7 +1475,7 @@ body.frontend, body#tinymce {
     }
 
    	#parent-fieldname-text table {
-		@media (min-width: 1080px) {
+		@media (min-width: 1145px) {
 			margin-left: -100px;
 		}
 	}
@@ -4452,7 +4452,7 @@ body.template-listing_view {
 
 .plone-navbar-nav li .submenu {
     background-color: #ffffff;
-    @media (min-width: 1080px) {
+    @media (min-width: 1145px) {
 	    padding-top: 22px;
 	    padding-bottom: 18px;
 	}
@@ -4566,13 +4566,13 @@ body:not(.plone-toolbar-left-expanded) {
 		&:active {
 			background: url("++resource++plonetheme.zeeuwsmuseum/icon-search-blue.svg") no-repeat center;
 			background-size: 25px;
-			@media (max-width: 1080px) {
+			@media (max-width: 1145px) {
 				background: url("++resource++plonetheme.zeeuwsmuseum/icon-search-blue.svg") no-repeat 20px;
 				background-size: 25px;
 			}
 		}
 
-		@media (max-width: 1080px) {
+		@media (max-width: 1145px) {
 			background: url("++resource++plonetheme.zeeuwsmuseum/icon-search.svg") no-repeat 20px;
 			background-size: 25px;
 		}
@@ -4906,7 +4906,7 @@ body.frontend {
 }
 
 body:not(.plone-toolbar-left-expanded) {
-	@media (max-width: 1080px) {
+	@media (max-width: 1145px) {
 		.navbar-default .menu-search-button > a,
 		.navbar-default .language-selector > a {
 			width: 100%;
@@ -4987,7 +4987,7 @@ body.plone-toolbar-left-expanded {
           transform: translateY(6px);
 }
 
-@media only screen and (min-width: 1080px) {
+@media only screen and (min-width: 1145px) {
 	body:not(.plone-toolbar-left-expanded) {
   		.nav-trigger {
     		display: none;
@@ -5031,7 +5031,7 @@ body.plone-toolbar-left-expanded {
 }
 
 body:not(.plone-toolbar-left-expanded) {
-	@media (min-width: 1080px) {
+	@media (min-width: 1145px) {
 		.navbar-default .language-selector {
 			margin-left: 30px;
 		}
@@ -5048,7 +5048,7 @@ body.plone-toolbar-left-expanded {
 
 
 body:not(.plone-toolbar-left-expanded) {
-	@media (max-width: 1080px) {
+	@media (max-width: 1145px) {
 	    .navbar-header {
 	        float: none;
 	    }
@@ -5203,7 +5203,7 @@ body.plone-toolbar-left-expanded {
 }
 
 body:not(.plone-toolbar-left-expanded) {
-	@media (max-width: 1080px) {
+	@media (max-width: 1145px) {
 		.nav li {
 		    clear: both;
 		}
@@ -6223,7 +6223,7 @@ body.frontend {
 }
 
 body:not(.plone-toolbar-left-expanded) {
-	@media (max-width: 1080px) {
+	@media (max-width: 1145px) {
 		.breadcrumbs-wrapper {
 			display: none;
 		}
@@ -8964,6 +8964,65 @@ body.frontend #top-alert-message {
 
 .pat-plone .contenttype-document:before {
     content: '\e80e';
+}
+
+body.template-bookings {
+
+	div.date_from_filter {
+		clear: both;
+		margin-top: 15px;
+	}
+
+	div.date_to_filter {
+		margin-top: 15px;
+	}
+
+	#bookings_wrapper {
+		padding-top: 50px;
+	}
+
+}
+
+body.template-timeslots {
+
+	div.date_from_filter,
+	div#field-from_date {
+		clear: both;
+		margin-top: 15px;
+	}
+	div.date_to_filter,
+	div#field-to_date {
+		margin-top: 15px;
+	}
+
+	#bookings_wrapper {
+		padding-top: 50px;
+	}
+
+	label[for="input-group_by"] {
+		margin-right: 0.5em;
+	}
+
+
+	select[name="bdaplonebookings_length"] {
+		margin-right: 0.5em;
+		margin-left: 0.5em;
+	}
+
+	label[for="input-group_by"],
+	select#input-group_by {
+		display: none !important;
+	}
+
+	label[for="input-vendor"],
+	select#input-vendor {
+		display: none !important;
+	}
+
+}
+
+body.template-timeslots #bdaplonebookings_paginate a:hover {
+    color: #000 !important;
 }
 
 

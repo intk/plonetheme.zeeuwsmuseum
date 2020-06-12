@@ -2310,6 +2310,8 @@ footer, body.mce-content-body {
 		margin-top: 30px;
 	}
 
+
+
 	border-top: 0px solid #e7e7e7;
 	padding-top: 90px;
 
@@ -5930,6 +5932,39 @@ body.frontend {
 	.buttonField();
 	line-height: 27px;
 	display: inline-block;
+
+	a {
+		color: @brand-primary !important;
+		border-bottom: 0px !important;
+	}
+
+	&:hover,
+	&:focus,
+	&:active,
+	&:active:focus {
+		a {
+			color: #ffffff !important;
+			border-bottom: 0px !important;
+		}
+	}
+
+
+	&.btn-orange {
+		a {
+
+			color: #ffffff !important;
+		}
+		color: #ffffff !important;
+		                        background: rgb(255, 102, 0);
+					                        border: 1px solid rgb(255, 102, 0);
+								                        &:hover,
+											                        &:focus {
+															                                background: @brand-primary;
+		border: 1px solid @brand-primary;
+	
+																							                        }
+																										                }
+
 }
 
 body.template-folder_contents .portlet-rrssb {
@@ -5997,6 +6032,18 @@ body.portaltype-collection.template-fullscreen_collection_view {
 		border: 1px solid #ffffff;
 		min-width: 228px;
 		
+		
+
+		&.btn-orange {
+			background: rgb(255, 102, 0);
+			border: 1px solid rgb(255, 102, 0);
+			&:hover,
+			&:focus {
+				background: @brand-primary;
+				border: 1px solid @brand-primary;
+			}
+		}
+
 		&:hover,
 		&:focus {
 			background: @brand-primary;
@@ -6363,7 +6410,9 @@ body.template-orders {
 }
 
 body.template-cart,
-body.template-checkout {
+body.template-checkout,
+body.template-summary_view_form,
+body.template-date {
 	article#content {
 		padding-top: 0px !important;
 	}
@@ -6385,10 +6434,15 @@ body.template-checkout {
 		width: 100% !important;
 	}
 
-	.subtotal-th, .subtotal-col {
+	.subtotal-th, .subtotal-col,
+	.quantity-th, .quantity-col {
 		padding-right: 0px !important;
 	}
 	
+	.cart-table th.quantity-th, .cart-table td.quantity-col {
+    	text-align: right;
+	}
+
 	.subtotal-col {
 		padding-top: 27px !important;
 	}
@@ -6398,11 +6452,14 @@ body.template-checkout {
 
 		a {
 			text-decoration: underline;
+			border-bottom: 0px !important;
 		}
 	}
 
 	.intro-header {
-		background-image: url(https://www.zeeuwsmuseum.nl/nl/over-het-museum/pers/persberichten-1/nieuwe-website-zeeuws-museum-volledige-museumcollectie-online-toegankelijk/slideshow/beeldmerk-zeeuws-museum-foto-koen-hauser-liggend.jpg/@@images/image/large);
+	    
+	        background-image: url("/nl/over-het-museum/pers/persberichten-1/nieuwe-website-zeeuws-museum-volledige-museumcollectie-online-toegankelijk/slideshow/beeldmerk-zeeuws-museum-foto-koen-hauser-liggend.jpg/@@images/image/large");
+
 	    position: relative;
 	    height: 100%;
 	    background-repeat: no-repeat;
@@ -6515,7 +6572,9 @@ body.template-checkout {
 	div.tickets-breadcrumbs button.btn,
 	div.tickets-breadcrumbs a.btn, 
 	a.btn.discount_coupon_button,
-	a.btn.cart_checkout_button {
+	a.btn.cart_checkout_button,
+	input.cart_checkout_button,
+	a.cart_back {
 	    font-family: 'UniversCn', Arial, sans-serif;
 	    padding: 17px;
 	    border: 1px solid #7bb0e7;
@@ -6535,6 +6594,18 @@ body.template-checkout {
 	    padding-bottom: 12px;
 	    text-align: center;
 	    margin-top: 30px;
+	}
+
+	a.cart_back {
+		margin-left: 0px !important;
+
+		&:before {
+			display: none;
+		}
+
+		&:hover {
+			border: 1px solid @brand-primary !important;
+		}
 	}
 
 	@media(max-width: 768px) {
@@ -6576,6 +6647,7 @@ body.template-checkout {
 		box-shadow: none !important;
 		border-color: @brand-primary !important;
 		color: #ffffff !important;
+		border: 1px solid @brand-primary !important;
 	}
 
 	div.tickets-breadcrumbs a.btn {
@@ -6608,8 +6680,8 @@ body.template-checkout {
 	    font-weight: 400 !important;
 	    vertical-align: top;
 	    height: 43px;
-	    padding: 15px 18px;
-	    line-height: 17px;
+	    padding: 13px 18px;
+	    line-height: 21px;
 	    -moz-appearance: none !important;
 	    text-indent: 0.01px !important;
 	    text-overflow: '' !important;
@@ -6734,6 +6806,12 @@ body.template-checkout {
 		margin-bottom: 5px;
 	}
 
+	.post-cart .not-visible-dates {
+		p {
+			font-size: 16px !important;
+		}
+	}
+
 	.cart_sum_content {
 		margin-top: 30px;
     	margin-bottom: 50px;
@@ -6741,7 +6819,9 @@ body.template-checkout {
 	}
 
 	a.btn.cart_checkout_button,
-	a.btn.discount_coupon_button {
+	a.btn.discount_coupon_button,
+	input.cart_checkout_button,
+	a.cart_back {
 		.buttonField();
 		display: inline-block;
 		margin-left: 10px;
@@ -6810,7 +6890,6 @@ body.template-checkout {
 			margin-top: 0px !important;
 			padding-top: 10px !important;
 		}
-
 
 		.portletHeader {
 			background: #F3F3F3;
@@ -6938,8 +7017,101 @@ body.template-checkout {
     		}
 		}
 
+		.block-time-picker {
+		    display: block;
+		    padding: 0;
+		    margin: 0;
+		    border-radius: 3px;
+		    max-width: 100%;
+		    border-top: 0px;
+		    border-left: 0px;
+		    box-sizing: content-box;
+		}
+
+
+		.block-time-picker .time-slot {
+		    display: block;
+		    position: relative;
+		    width: auto;
+		    min-width: 100px;
+		    margin: -1px 0 0 -1px;
+		    vertical-align: bottom;
+		    margin: 0;
+		    padding: 0;
+		    margin-top: 5px;
+		}
+
+
+		.block-time-picker .time-slot input[type="radio"] {
+			cursor: pointer;
+		    float: left;
+		    width: 15px;
+		    height: 15px;
+		    margin: 0 5px 0 0;
+		    padding: 0;
+		    vertical-align: top;
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		}
+
+		.block-time-picker .time-slot label {
+			cursor: pointer;
+		    display: inline-block;
+		    position: relative;
+
+		    width: auto;
+		    min-width: 100px;
+
+		    margin: -1px 0 0 -1px;
+		    padding: 10px 15px;
+		    padding-top: 12px;
+		    color: @brand-primary;
+		    background-color: white;
+		    text-align: center;
+		    font-weight: bold;
+		    border: 1px solid #eaeaea;
+		}
+
+		.block-time-picker .time-slot label:hover {
+		    color: white;
+		    background-color: @brand-primary;
+		    border: 1px solid @brand-primary;
+		}
+
+		.block-time-picker .time-slot input:checked + label {
+		    color: white;
+		    background-color: @brand-primary;
+		    border: 1px solid @brand-primary;
+		}
+
+		.block-time-picker .time-slot input:disabled + label {
+		    color: #eaeaea;
+		    cursor: default;
+		}
+
+		.block-time-picker .time-slot input:disabled + label:hover {
+		    color: #eaeaea;
+		    background-color: white;
+		    border: 1px solid #eaeaea;
+		}
+
+		p.timeslots-header {
+			margin-bottom: 15px !important;
+		}
+
+		span.timeslot-availability {
+			margin-left: 10px;
+		}
+
 	}
 
+	
+}
+
+body.template-cart,
+body.template-summary_view_form,
+body.template-date { 
 	@media(max-width: 768px) {
 		.subtotal-th, .subtotal-col {
 			display: none !important;
@@ -7098,7 +7270,9 @@ body.template-checkout {
 		}
 
 		.subtotal-col,
-		.subtotal-th {
+		.subtotal-th,
+		.quantity-th,
+		.quantity-col {
 			padding-right: 0px !important;
 		}
 
@@ -7150,7 +7324,6 @@ body.template-checkout {
 	#input-checkout-confirm_back,
 	#input-checkout-finish {
 		.buttonField();
-		
 	}
 
 	@media(max-width: 768px) {
@@ -7158,7 +7331,7 @@ body.template-checkout {
 			width: 100% !important;
 			clear: both !important;
 			display: block;
-			input:not([type="radio"]) {
+			input:not([type="radio"]):not([type="checkbox"]) {
 				width: 100% !important;
 			}
 
@@ -7241,9 +7414,15 @@ body.template-etickets {
 	}
 
 	.ticket-item #ticket-header {
-    	padding: 20px !important;
-    	background-color: @brand-primary !important;
+    	padding: 0px !important;
+    	background-color: transparent;
     	border-radius: 0px !important;
+    	text-align: left;
+
+    	img {
+    		max-width: 85%;
+    		height: auto;
+    	}
 	}
 
 	.cart_item {
@@ -7363,14 +7542,14 @@ body.template-etickets {
 	h1 {
 	    font-size: 20px !important;
 	    color: #ffffff !important;
-	    line-height: 160px !important;
+	    line-height: 0px !important;
 	    text-transform: uppercase !important;
-	    margin-top: 120px !important;
+	    margin-top: 50px !important;
 	    color: #ffffff !important;
 	}
 
 	.tickets-title {
-	    height: 100px !important;
+	    height: 20px !important;
 	}
 
 	.title-aux {
@@ -7444,7 +7623,9 @@ body.template-cart {
 body.template-mollie_payment_success {
 
 	.intro-header {
-		background-image: url(https://www.zeeuwsmuseum.nl/nl/over-het-museum/pers/persberichten-1/nieuwe-website-zeeuws-museum-volledige-museumcollectie-online-toegankelijk/slideshow/beeldmerk-zeeuws-museum-foto-koen-hauser-liggend.jpg/@@images/image/large);
+	            background-image: url("/nl/over-het-museum/pers/persberichten-1/nieuwe-website-zeeuws-museum-volledige-museumcollectie-online-toegankelijk/slideshow/beeldmerk-zeeuws-museum-foto-koen-hauser-liggend.jpg/@@images/image/large");
+
+		
 	    position: relative;
 	    height: 100%;
 	    background-repeat: no-repeat;
@@ -7596,7 +7777,6 @@ body.portaltype-event, body.portaltype-document {
 
 body.template-checkout {
 
-
 	form.mode_edit {
 		max-width: 500px;
 
@@ -7609,7 +7789,7 @@ body.template-checkout {
 			width: 100%;
 
 			input {
-				width: 100% !important;
+				
 			}
 		}
 
@@ -7619,6 +7799,10 @@ body.template-checkout {
 			margin-right: 0px !important;
 
 			float: left;
+
+			input {
+				width: 100% !important;
+			}
 
 			@media(min-width: 991px) {
 				width: 50% !important;
@@ -9018,14 +9202,363 @@ body.template-timeslots {
 	select#input-vendor {
 		display: none !important;
 	}
-
 }
 
 body.template-timeslots #bdaplonebookings_paginate a:hover {
     color: #000 !important;
 }
 
+body.frontend.template-summary_view_shop,
+body.frontend.template-shop_summary_view_zm,
+body.frontend.template-summary_view_form {
+	.listing-item {
+		width: 100% !important;
+		display: block;
+		float: left;
+	}
+}
+
+body.frontend.template-shop_summary_view_zm,
+body.frontend.template-summary_view_form {
+	.listing-item {
+		div.buyable {
+			a.buyable_add_to_cart,
+			a.buyable_update_cart {
+				display: none;
+			}
+		}
+	}
+}
+
+.ploneCalendar td.today {
+    background-color: #eee;
+    border-color: #eee;
+}
 
 
+.ploneCalendar td.today.selected {
+    background-color: white;
+    border-color: #205C90;
+}
 
+
+/* Timeslots */
+.table-time .time-free {
+    color: #7ED321;
+}
+
+.table-time .time-row {
+    margin-top: -1px;
+    margin-right: -1px;
+    border: 1px solid #E7E7E7 !important;
+    padding: 10px 0;
+    text-align: center;
+    cursor: pointer;
+    width: 33%;
+    float: left;
+    text-decoration: none;
+}
+
+.portletCalendar a.time-row:hover,
+.portletCalendar a.time-row:active,
+.portletCalendar a.time-row:focus {
+  border: 1px solid #E7E7E7 !important;
+}
+
+.portletCalendar a.time-row:not(.time-ua):focus {
+  color: #7ED321 !important;
+}
+
+.table-time {
+    overflow: hidden;
+    width: 100%;
+    padding: 1px 0 0 0;
+}
+
+.table-time .time-active {
+    background: #007C92 !important;
+    color: #FFF !important;
+}
+
+.table-time .time-ua {
+    color: #E7E7E7 !important;
+    cursor: default !important;
+    text-decoration: line-through !important;
+}
+
+
+body.frontend.template-date {
+	h1.brand-name {
+		display: none;
+	}
+
+	.not-visible-dates {
+		display: none !important;
+	}
+
+	.post-cart {
+		padding-top: 40px;
+	}
+
+	.portlet.portletCalendar table .cal_has_events a:after {
+		display: none;
+	}
+
+	.portletCalendar {
+		@media (min-width: 991px) {
+			width: 100%;
+			max-width: 650px;
+		}
+
+
+		.visit-msg {
+			margin-bottom: 30px;
+		}
+
+		box-shadow: none !important;
+
+		.portletHeader > a {
+			color: #7BB0E7;
+		}
+
+		.cal_has_events a:after {
+			color: @brand-primary !important;
+		}
+
+		.ploneCalendar td.today.selected {
+			border-color: #f3f3f3;
+		}
+
+		.table-time .time-free:not(.time-ua):hover {
+			color: #7ed321 !important;
+		}
+
+		.table-time .time-busy:not(.time-ua) {
+		    color: #7ed321 !important;
+		}
+
+		.table-time .time-busy:not(.time-ua):hover {
+		    color: #7ed321 !important;
+		}
+
+		a.calendarNext:hover {
+			
+		}
+
+		.item-stock-overview {
+			    line-height: 42px;
+    			margin-left: 10px;
+		}
+
+		div.timeslot {
+			p {
+				margin-top: 0px;
+				margin-bottom: 5px;
+			}
+		}
+
+		/* portlet calendar styles */
+		table tbody tr:first-child td > *,
+		table tbody tr td > * {
+			margin-top: 0px !important;
+			padding-top: 10px !important;
+		}
+
+
+		.portletHeader {
+			background: #F3F3F3;
+			color: #000000;
+		}
+
+		table {
+			border: 2px solid #F3F3F3;
+		}
+
+		table thead {
+			background: #F3F3F3;
+		}
+
+		table thead th {
+			color: #000000;
+			font-weight: 700;
+		}
+
+		.event {
+			background-color: #F3F3F3;
+		}
+
+		.weekdays th {
+			background-color: #F3F3F3;
+		}
+
+		.portletContent > * {
+			color: #000000;
+		}
+
+		td {
+			background-color: #F3F3F3;
+			border: 2px solid #F3F3F3;
+			a {
+				color: #000000 !important;
+			}
+		}
+
+
+		table thead {
+			border-bottom: 0px;
+		}
+
+		table > thead > tr > th, table > thead > tr > td {
+			border: 0px;
+		}
+
+		.portletContent {
+			border-top: 0px;
+		}
+
+		td:hover {
+			background-color: #e8e8e8;
+		}
+
+		table td > * {
+			width: 100%;
+			height: 100%;
+			border-radius: 0px;
+			line-height: 25px;
+		}
+
+		table .cal_has_events a:hover {
+			background: #e8e8e8;
+		    text-decoration: none;
+		    box-shadow: none;
+		    color: #000000 !important;
+		}
+
+		td.today.selected {
+			background-color: #7BB0E7;
+		}
+
+		tr.weekdays {
+			text-transform: lowercase;
+		}
+
+		table tbody tr:last-child td > * {
+			margin-bottom: 0px;
+		}
+
+		/* Next month events */
+		td.cal_next_month,
+		td.cal_prev_month {
+			opacity: 1;
+			pointer-events: none;
+
+			span, a {
+				visibility: hidden;
+				pointer-events: none;
+			}
+		}
+
+		/* No events style */
+		td.event:not(.cal_has_events) {
+			pointer-events: none;
+			cursor: default !important;
+
+			span {
+				opacity: .2;
+				filter: Alpha(Opacity=35);
+			}
+		}
+
+		/* With events style */
+		td.event.cal_has_events {
+
+		}
+	
+		/* today */
+		table .today > * {
+			box-shadow: none;
+		}
+
+		/* Event is selected */
+		table td.event.selected {
+			border-color: #f3f3f3;
+    		border: 2px solid #f3f3f3;
+
+    		a {
+    			background: #7BB0E7;
+    			color: #ffffff !important;
+    		}
+		}
+
+	}
+}
+
+dl#cart_viewlet {
+	display: none !important;
+}
+
+body.frontend.template-summary_view_form {
+	div.website-wrapper #ajax-spinner {
+		display: none !important;
+	}
+}
+
+label[for='input-checkout-payment_method_selection-payment_method-ideal'] {
+    height: 40px;
+    background-image: url(http://teylersmuseum-stage.intk.com/++resource++plonetheme.museumbase.css/payment_icons.png);
+    background-repeat: no-repeat;
+    background-position: 25px -69px;
+}
+
+label[for='input-checkout-payment_method_selection-payment_method-creditcard'] {
+    height: 40px;
+    background-image: url(http://teylersmuseum-stage.intk.com/++resource++plonetheme.museumbase.css/payment_icons.png);
+    background-repeat: no-repeat;
+    background-position: 25px -227px;
+}
+
+#input-checkout-payment_method_selection-payment_method-ideal {
+    margin-right: 65px !important;
+    vertical-align: middle;
+    height: auto;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    width: auto !important;
+}
+
+#input-checkout-payment_method_selection-payment_method-creditcard {
+    margin-right: 65px !important;
+    vertical-align: middle;
+    height: auto;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    width: auto !important;
+}
+
+#tag-checkout-payment_selection-heading {
+    display: none;
+}
+
+#field-checkout-payment_selection-payment {
+    display: none;
+}
+
+body.template-checkout {
+	#cart_items {
+		display: table-row-group !important;
+	}
+
+	.cart_item.timeslot {
+		td.quantity-col h4, td.subtotal-col h4 {
+			visibility: hidden;
+		}
+	}
+}
+
+
+body.template-checkout {
+div#radio-checkout-payment_method_selection-payment_method-creditcard {
+	display:none !important;
+}
+}
 

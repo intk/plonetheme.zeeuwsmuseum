@@ -24,6 +24,7 @@
                          context_tools python: context.restrictedTraverse('@@context_tools');">
       <tal:listing condition="batch">
         <div class="entries" metal:define-slot="entries">
+
           <tal:repeat repeat="item batch" metal:define-macro="entries">
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 listing-item" tal:define="
                 item_url item/getURL;
@@ -103,6 +104,7 @@
                           <div class="clearfix visible-sm"></div>
                         </tal:clearfixmd>
           </tal:repeat>
+          
         </div>
 
         <div metal:use-macro="context/batch_macros/macros/navigation" />

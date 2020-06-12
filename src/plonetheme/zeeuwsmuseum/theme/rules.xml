@@ -7,6 +7,8 @@
 
     <theme href="index_online_experience.html" css:if-content="body.template-etickets"/>
     <theme href="backend.html" css:if-content="body.template-cart"/>
+    <theme href="backend.html" css:if-content="body.template-summary_view_form"/>
+    <theme href="backend.html" css:if-content="body.template-date"/>
     <theme href="backend.html" css:if-content="body.template-mollie_payment_success"/>
     <theme href="backend.html" css:if-not-content="body.frontend"/>
     <theme href="index.html" css:if-content="body.frontend"/>
@@ -82,6 +84,15 @@
         css:theme-children="#website-title h1.website-title"
         css:content-children=".documentFirstHeading"
         method="raw" css:if-content="body.template-cart" />
+      <replace
+        css:theme-children="#website-title h1.website-title"
+        css:content-children=".documentFirstHeading"
+        method="raw" css:if-content="body.template-summary_view_form" />
+      <replace
+        css:theme-children="#website-title h1.website-title"
+        css:content-children=".documentFirstHeading"
+        method="raw" css:if-content="body.template-date" />
+
       <replace
         css:theme-children="#website-title h1.website-title"
         css:content-children=".documentFirstHeading"

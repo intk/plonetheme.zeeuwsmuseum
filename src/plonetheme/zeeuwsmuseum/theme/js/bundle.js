@@ -31,63 +31,48 @@ var isMobile = {
 };
 
 function do_ecommerce_transactions() {
-  /* Checkout steps */
-  if (jQuery("body.template-cart").length > 0) {
-    setTimeout(function() {
-      var category = "Product";
-      if (jQuery("body.section-tickets").length > 0) {
-        category = "Ticket";
-      }
-      /* Checkout step 1. */
-      products = [];
-      cart_items = jQuery("tr.cart_item");
-      for (var i = 0; i < cart_items.length; i++) {
-        var title = jQuery(cart_items[i]).find('.cart_item_title').text();
-        var price = jQuery(cart_items[i]).find('.cart_item_price').text();
-        var raw_quantity = jQuery(cart_items[i]).find('.cart_item_count').val();
-        var quantity = parseInt(raw_quantity);
-        if (quantity > 0) {
-          var new_product = {
-            "name": title,
-            "price": price,
-            "quantity": quantity,
-            "category": category
-          }
-          products.push(new_product);
-        }
-      }
 
-      if (typeof dataLayer != 'undefined') {
-        dataLayer.push({
-          'event': 'checkout',
-          'ecommerce': {
-            'checkout': {
-              'actionField': {'step': 1},
-              'products': products
-           }
-         },
-         'eventCallback': function() {
-            // do nothing
+  /* Checkout steps */
+  if (jQuery("body.template-summary_view_form").length > 0) {
+    var category = "Ticket";
+
+    /* Checkout step 1. */
+    products = [];
+
+    //console.log("[E-commerce] Step 1.");
+    
+    if (typeof dataLayer != 'undefined') {
+      dataLayer.push({
+        'event': 'checkout',
+        'ecommerce': {
+          'checkout': {
+            'actionField': {'step': 1},
+            'products': products
          }
-        });
-      }
-    }, 2000);
+       },
+       'eventCallback': function() {
+          // do nothing
+       }
+      });
+    }
   };
 
   /* Checkout step 2. */
-  if (jQuery("body.template-checkout").length > 0 && !jQuery("body.template-checkout #cart.final-checkout").length) {
-    var category = "Product";
-    if (jQuery("body.section-tickets").length > 0) {
-      category = "Ticket";
-    }
+  if (jQuery("body.template-date").length > 0) {
+    var category = "Ticket";
 
+    /* Checkout step 1. */
+    products = [];
+
+    //console.log("[E-commerce] Step 2.");
+    
     if (typeof dataLayer != 'undefined') {
       dataLayer.push({
         'event': 'checkout',
         'ecommerce': {
           'checkout': {
             'actionField': {'step': 2},
-            'products': []
+            'products': products
          }
        },
        'eventCallback': function() {
@@ -98,54 +83,38 @@ function do_ecommerce_transactions() {
   };
 
   /* Checkout step 3. */
-  if (jQuery("body.template-checkout").length > 0 && jQuery("body.template-checkout #cart.final-checkout").length) {
+  if (jQuery("body.template-checkout").length > 0) {
+    
+    //console.log("[E-commerce] Step 3.");
+
     var category = "Product";
     if (jQuery("body.section-tickets").length > 0) {
       category = "Ticket";
     }
 
-    setTimeout(function() {
-      products = [];
-      cart_items = jQuery("tr.cart_item");
-      for (var i = 0; i < cart_items.length; i++) {
-        var title = jQuery(cart_items[i]).find('.cart_item_title').text();
-        var price = jQuery(cart_items[i]).find('.cart_item_original_price').text();
-        var raw_quantity = jQuery(cart_items[i]).find('.cart_item_count').text();
-        var quantity = parseInt(raw_quantity);
-        if (quantity > 0) {
-          var new_product = {
-            "name": title,
-            "price": price,
-            "quantity": quantity,
-            "category": category
-          }
-          products.push(new_product);
-        }
-      }
-
-      if (typeof dataLayer != 'undefined') {
-        dataLayer.push({
-          'event': 'checkout',
-          'ecommerce': {
-            'checkout': {
-              'actionField': {'step': 3},
-              'products': products
-           }
-         },
-         'eventCallback': function() {
-            // do nothing
+    if (typeof dataLayer != 'undefined') {
+      dataLayer.push({
+        'event': 'checkout',
+        'ecommerce': {
+          'checkout': {
+            'actionField': {'step': 3},
+            'products': []
          }
-        });
-      }
-    }, 1500); 
+       },
+       'eventCallback': function() {
+          // do nothing
+       }
+      });
+    }
   };
 
-  if (jQuery("body.template-checkout #cart.final-checkout").length > 0) {
+
+  if (jQuery("body.template-checkout").length > 0) {
     jQuery("#form-checkout").submit(function(evt) {
-      var category = "Product";
-      if (jQuery("body.section-tickets").length > 0) {
-        category = "Ticket";
-      }
+
+      //console.log("[E-commerce] Step 4.");
+
+      var category = "Ticket";
 
       products = [];
       cart_items = jQuery("tr.cart_item");
@@ -181,6 +150,7 @@ function do_ecommerce_transactions() {
       }
     });
   };
+
 };
 
 function register($form) {

@@ -6607,10 +6607,16 @@ body.template-date {
 			border: 1px solid @brand-primary !important;
 		}
 	}
+	div.discount_coupon_wrapper {
+		margin-top: 30px;
+	}
 
 	@media(max-width: 768px) {
+
 		div.discount_coupon_wrapper {
-			padding: 15px !important;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			padding: 0px !important;
 		}
 
 		div.post-cart {
@@ -6814,7 +6820,7 @@ body.template-date {
 
 	.cart_sum_content {
 		margin-top: 30px;
-    	margin-bottom: 50px;
+    	margin-bottom: 20px;
     	font-size: 1.200em;
 	}
 
@@ -9362,6 +9368,7 @@ body.frontend.template-date {
 		table tbody tr td > * {
 			margin-top: 0px !important;
 			padding-top: 10px !important;
+			padding-bottom: 10px !important;
 		}
 
 
@@ -9505,16 +9512,37 @@ body.frontend.template-summary_view_form {
 
 label[for='input-checkout-payment_method_selection-payment_method-ideal'] {
     height: 40px;
-    background-image: url(http://teylersmuseum-stage.intk.com/++resource++plonetheme.museumbase.css/payment_icons.png);
+    background-image: url("/++resource++plonetheme.zeeuwsmuseum/payment_icons.png");
     background-repeat: no-repeat;
     background-position: 25px -69px;
 }
 
 label[for='input-checkout-payment_method_selection-payment_method-creditcard'] {
     height: 40px;
-    background-image: url(http://teylersmuseum-stage.intk.com/++resource++plonetheme.museumbase.css/payment_icons.png);
+    background-image: url("/++resource++plonetheme.zeeuwsmuseum/payment_icons.png");
     background-repeat: no-repeat;
     background-position: 25px -227px;
+}
+
+label[for='input-checkout-payment_method_selection-payment_method-bancontact'] {
+    height: 40px;
+    background-image: url("/++resource++plonetheme.zeeuwsmuseum/payment_icons.png");
+    background-repeat: no-repeat;
+    background-position: 25px -307px;
+}
+
+label[for='input-checkout-payment_method_selection-payment_method-giropay'] {
+    height: 40px;
+    background-image: url("/++resource++plonetheme.zeeuwsmuseum/payment_icons.png");
+    background-repeat: no-repeat;
+    background-position: 26px -348px;
+}
+
+label[for='input-checkout-payment_method_selection-payment_method-applepay'] {
+    height: 40px;
+    background-image: url("/++resource++plonetheme.zeeuwsmuseum/payment_icons.png");
+    background-repeat: no-repeat;
+    background-position: 26px -268px;
 }
 
 #input-checkout-payment_method_selection-payment_method-ideal {
@@ -9526,7 +9554,10 @@ label[for='input-checkout-payment_method_selection-payment_method-creditcard'] {
     width: auto !important;
 }
 
-#input-checkout-payment_method_selection-payment_method-creditcard {
+#input-checkout-payment_method_selection-payment_method-creditcard,
+#input-checkout-payment_method_selection-payment_method-bancontact,
+#input-checkout-payment_method_selection-payment_method-giropay,
+#input-checkout-payment_method_selection-payment_method-applepay {
     margin-right: 65px !important;
     vertical-align: middle;
     height: auto;
@@ -9555,10 +9586,18 @@ body.template-checkout {
 	}
 }
 
+span.coupon-success-msg {
+	color: @brand-primary;
+}
 
-body.template-checkout {
-div#radio-checkout-payment_method_selection-payment_method-creditcard {
-	display:none !important;
+span.coupon-error-msg {
+	color: red;
 }
+
+
+#radio-checkout-payment_method_selection-payment_method-applepay {
+	display: none;
 }
+
+
 

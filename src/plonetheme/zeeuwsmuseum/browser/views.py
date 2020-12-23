@@ -14,10 +14,15 @@ from DateTime import DateTime
 import time
 
 from plone.app.event.browser.event_listing import EventEventListing, EventListing, EventListingIcal
+from plone.app.contenttypes.browser.folder import FolderView
 import plone.api
-from zope.component import getMultiAdapter
+
 from plone.event.interfaces import IEvent
 from zope.contentprovider.interfaces import IContentProvider
+
+from zope.component import getMultiAdapter
+from urlparse import urlparse
+from wildcard.media.adapter import IVideoEmbedCode
 
 from Products.CMFCore.utils import getToolByName
 
@@ -25,6 +30,33 @@ from zope.i18nmessageid import MessageFactory
 _ = MessageFactory('plonetheme.zeeuwsmuseum')
 
 YEAR_LIMIT = 2024
+
+
+
+class VideoListingView(FolderView):
+    def getPlayerCode(self, item):
+        """ Fetch the correct adapter for the Video.
+        The video can be internal (inside the Plone site) or from an
+        external service."""
+
+        # Retrieve 'wcmedia-utils' view for the context then we check if
+        # the video is internal
+        util=getMultiAdapter((item, self.request), name = "wcmedia-utils")
+        if util.mp4_url():
+            name="internal"
+
+        # Extract the domain from the URL of the video. We use it as the
+        # name for the different adapters that handle different external services.
+        else:
+            name = urlparse(item.video_url)[1].replace('www.','')
+        try:
+            adapter = getMultiAdapter((item, self.request), IVideoEmbedCode, name = name)
+        except ComponentLookupError:
+            adapter = getMultiAdapter((item, self.request), IVideoEmbedCode)
+
+        return adapter()
+
+
 
 class ContextToolsView(BrowserView):
 
@@ -39,6 +71,11 @@ class ContextToolsView(BrowserView):
             (self.context, self.request, self),
             IContentProvider, name='formatted_date'
         )
+
+
+        location = getattr(item, 'location', None)
+        if location:
+            return location
 
         rec = getattr(item, 'recurrence', None)
         if rec and getattr(self.context, 'portal_type', None) != 'Event':

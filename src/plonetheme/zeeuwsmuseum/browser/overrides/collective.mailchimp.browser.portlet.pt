@@ -22,12 +22,12 @@
 
         <div class="input-group">
           <input type="text"
-            class="text-widget required form-control input-lg textline-field" placeholder="Email" id="form-widgets-email" name="EMAIL"></input>
+            class="text-widget required form-control input-lg textline-field" placeholder="Email" id="form-widgets-email" name="EMAIL" aria-label="mailchimp-email"></input>
           <input type="hidden" value="c04600e3ceefae8c502cbabec" name="u" tal:attributes="value view/user_id|nothing"/>
           <input type="hidden" value="42702e9770" name="id" tal:attributes="value view/list_id|nothing"/>
 
           <span class="input-group-btn">
-            <button class="submit-button" name="form.buttons.subscribe" type="submit" role="submit">
+            <button class="submit-button" name="form.buttons.subscribe" type="submit" aria-label="mailchimp-submit">
               <span class="mailchimp-btn-text">Inschrijven</span>
               <span class="fa fa-chevron-right"></span>
             </button>

@@ -2450,21 +2450,21 @@ footer {
 				font-size: 17px;
 				text-transform: uppercase;
 				text-decoration: none;
-				color: #848484;
+				color: #505050;
 				letter-spacing: 0.075em;
 				border-bottom: 0px;
 			}
 		}
 		a:not(.text-button) {
-			color: #848484;
+			color: #505050;
 			&:hover {
-				color: #848484;
+				color: #505050;
 				text-decoration: none;
 			}
 
 			&:active,
 			&:focus {
-				color: #848484;
+				color: #505050;
 				text-decoration: none;
 			}
 
@@ -2922,7 +2922,7 @@ footer {
 		font-size: 17px;
 		text-transform: uppercase;
 		text-decoration: none;
-		color: #848484;
+		color: #505050;
 		font-weight: 400;
 		letter-spacing: 0.075em;
 		margin-top: 0px;
@@ -6417,7 +6417,10 @@ body.template-date {
 		padding-top: 0px !important;
 	}
 
-
+	div.portalMessage {
+		margin-top: 20px;
+	}
+	
 	span.cart_item_alert {
 		line-height: 35px;
 	}
@@ -9292,7 +9295,6 @@ body.frontend.template-summary_view_form {
     text-decoration: line-through !important;
 }
 
-
 body.frontend.template-date {
 	h1.brand-name {
 		display: none;
@@ -9500,6 +9502,16 @@ body.frontend.template-date {
 	}
 }
 
+
+body.frontend.site-en.template-date {
+	.portletCalendar {
+		tr.weekdays {
+			text-transform: none;
+		}
+	}
+}
+
+
 dl#cart_viewlet {
 	display: none !important;
 }
@@ -9599,5 +9611,72 @@ span.coupon-error-msg {
 	display: none;
 }
 
+.discount_coupon_wrapper {
+	display: none !important;
+}
+
+.removeVideoURL {
+	display: none !important;
+}
+
+.vimeoEmbedWrapper iframe {
+	max-width: 100% !important;
+}
+
+body.template-video_listing {
+	#ajax-spinner {
+		display: none !important;
+	}
+	
+	.vimeoEmbedWrapper:before {
+		display: block;
+	    content: "";
+	    width: 100%;
+	    padding-top: 56.26%;
+		position: relative;
+
+		
+	}
+
+	.thumb-wrapper {
+		position: relative;
+	}
+
+	.vimeoEmbedWrapper {
+		iframe {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+
+	@media(min-width: 768px) {
+		.entries > .listing-item:nth-child(even) {
+			padding-top: 50px;
+		}
+
+		.entries > .listing-item[data-position='single'] {
+			width: 80%;
+		}
+
+		.entries > .listing-item[data-position='pair'] {
+			width: 50%;
+		}
+
+
+		.entries > .listing-item[data-position='single']:nth-child(even) {
+			float: right;
+		}
+	}
+
+	@media(max-width: 767px) {
+		.title-container {
+			padding-bottom: 50px;
+		}
+	}
+}
 
 

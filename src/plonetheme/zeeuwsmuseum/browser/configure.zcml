@@ -40,6 +40,22 @@
         description="Shows the online experience view"
         />
 
+  <browser:menuItem
+        for="*"
+        menu="plone_displayviews"
+        title="Video listing"
+        action="@@video_listing"
+        description="Shows view for listing videos"
+        />
+
+  <browser:page
+        name="video_listing"
+        for="*"
+        template="templates/video_listing.pt"
+        class=".views.VideoListingView"
+        permission="zope2.View"
+        />
+
   <browser:page
         name="fullscreen_collection_view"
         for="*"
@@ -47,6 +63,8 @@
         class=".views.FullScreenCollectionView"
         permission="zope2.View"
         />
+
+   
 
   <browser:menuItem
         for="*"

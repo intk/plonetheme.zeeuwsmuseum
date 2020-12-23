@@ -26,7 +26,7 @@
         <div class="entries" metal:define-slot="entries">
 
           <tal:repeat repeat="item batch" metal:define-macro="entries">
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 listing-item" tal:define="
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 listing-item" tal:define="
                 item_url item/getURL;
                 item_id item/getId;
                 item_title item/Title;
@@ -46,33 +46,17 @@
                 item_has_image python:item.getIcon;
                 context_portal_type context/portal_type|nothing;
                 item_index repeat/item/index;"
-                >
+                
+                tal:attributes="data-position python: 'single' if item_index == 0 or item_index % 3 == 0 else 'pair'">
               <metal:block define-slot="entry">
                 <article class="entry">
                 
-                     <div class="thumb-wrapper">         
-                            <a class="thumb-image" tal:condition="python: ((has_media != None and has_media != '' and 'Missing' not in str([has_media])) or item_type == 'Image')" href="" tal:attributes="href python: item_link+'?collection_id='+collection_id+'&b_start='+str(b_start+item_index) if context_portal_type == 'Collection' and item_type == 'Object' else item_link;"
-                              tal:define="item_img python:context_tools.getImageObject(item)">
-                              
-                              <div class="on-display-wrapper" tal:condition="item_on_display" i18n:domain="plonetheme.zeeuwsmuseum">
-                                <div i18n:translate="object_on_display" class="label_inner">Nu te zien</div>
-                              </div>
-                              <img tal:define="images_src python:item_img;
-                                                 "
-                                     src="" alt=""
-                                     tal:attributes="src images_src; class python:'tileImage'; alt item_title; title item_title;" /> 
-                            </a> 
+                          <div class="thumb-wrapper">         
+                            <div tal:replace="structure python: view.getPlayerCode(item.getObject())" />
                           </div>
 
                           <div class="entry-wrapper">
-                              <h3 class="item-title">
-                                <a href="#"
-                                 tal:attributes="href python: item_link+'?collection_id='+collection_id+'&b_start='+str(b_start+item_index) if context_portal_type == 'Collection' and item_type == 'Object' else item_link;"
-                                 tal:content="item_title"
-                                 >
-                                Title
-                                </a>
-                            </h3>
+                          
                           </div>
                           <div>
                             <metal:block metal:define-macro="document_byline">
@@ -80,7 +64,10 @@
                             <tal:event condition="item_is_event"
                              tal:define="is_past python: context_tools.isEventPast(item)">
                               <p class="event-date" tal:attributes="class python: 'event-date past' if is_past else 'event-date'">
-                                <tal:date tal:replace="structure python:context_tools.formatted_date(item)"/>
+                              <tal:date tal:replace="structure python:context_tools.formatted_date(item)"/>
+                              <span tal:condition="item/location" i18n:translate="label_event_byline_location">&mdash;
+                                <span tal:content="string:${item/location}" class="location" i18n:name="location">Oslo</span>,
+                              </span>
                               </p>
                             </tal:event>
                             
@@ -92,14 +79,12 @@
                       
                 </article>
               </metal:block>
-            </div>
-                      <tal:clearfix condition="python: number % 3 == 0" tal:define="number repeat/item/number">
-                          <div class="clearfix visible-lg visible-md"></div>
-                        </tal:clearfix> 
-
-                        <tal:clearfixmd condition="python: number % 2 == 0" tal:define="number repeat/item/number">
-                          <div class="clearfix visible-sm"></div>
+              <tal:clearfixmd condition="python: number % 2 == 0" tal:define="number repeat/item/number">
+                          <div class="clearfix visible-sm visible-md visible-lg"></div>
                         </tal:clearfixmd>
+            </div>
+
+                        
           </tal:repeat>
           
         </div>

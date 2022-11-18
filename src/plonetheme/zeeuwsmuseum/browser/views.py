@@ -29,8 +29,53 @@ from Products.CMFCore.utils import getToolByName
 from zope.i18nmessageid import MessageFactory
 _ = MessageFactory('plonetheme.zeeuwsmuseum')
 
+import re
+
 YEAR_LIMIT = 2024
 
+
+from bda.plone.shop.at import field_value
+
+
+def increase_timeslot_availability(obj, new_value):
+    field = obj.getField('item_available')
+    mutator = field.getMutator(obj)
+    mutator(new_value)
+    return obj
+
+def update_timeslots_availability():
+    import plone.api
+    import transaction
+
+    from bda.plone.shop.at import field_value
+
+    increase = 2.0
+
+    exceptions = ['2021-06-24', '2021-06-25']
+
+    all_occs = plone.api.content.find(portal_type="Ticket Occurrence")
+
+    for occ in all_occs:
+        occ_id = occ.id
+        if occ_id in exceptions:
+            continue
+
+        if '2020-' in occ_id or '2019-' in occ_id:
+            continue
+
+        occ_obj = occ.getObject()
+        occ_available = field_value(occ_obj, 'item_available')
+        
+        if occ_available == 8.0:
+            continue
+        
+        new_available = occ_available + increase
+
+        obj = increase_timeslot_availability(occ_obj, new_available)
+        obj.reindexObject()
+        transaction.get().commit()
+
+    return True
 
 
 class VideoListingView(FolderView):
@@ -59,6 +104,17 @@ class VideoListingView(FolderView):
 
 
 class ContextToolsView(BrowserView):
+
+    def getVimeoID(self, video_url):
+        if video_url:
+            try:
+                video_id = urlparse(video_url).path.lstrip("/")
+                return video_id
+            except:
+                return None
+        else:
+            return None
+
 
     def formatted_date(self, obj):
         try:
@@ -150,7 +206,7 @@ class ContextToolsView(BrowserView):
     def isSlideshowPublished(self, item):
         obj = item.getObject()
         slideshow = obj.get('slideshow', None)
-        
+
         if slideshow:
             slideshow_brain = uuidToCatalogBrain(slideshow.UID())
             if slideshow_brain:
@@ -248,7 +304,7 @@ class OnlineExperienceView(CollectionView):
         # L P L L L P P P
         TEST_INPUT = ["L", "P", "L", "L", "L", "P", "P", "P"]
         FIRST_ITEM = 0
-        
+
         items = results
         sequence_items = items._sequence
         total_items = len(sequence_items)
@@ -272,7 +328,7 @@ class OnlineExperienceView(CollectionView):
                     "right": right_pattern,
                     "bottom": ""
                 }
-               
+
                 if i == FIRST_ITEM:
                     pattern['position'] = "single"
                     pattern['size'] = "big"
@@ -408,7 +464,7 @@ class FullScreenCollectionView(CollectionView):
 
 class CustomEventEventListing(EventEventListing):
     def getLeadMedia(self, brain):
-            
+
         acc_context = brain.context
         lead_obj = acc_context
         if getattr(acc_context, 'portal_type', None) == "Occurrence":
@@ -418,7 +474,7 @@ class CustomEventEventListing(EventEventListing):
 
         if item.portal_type == "Image":
             return item.getURL()+"/@@images/image/mini"
-        
+
         if item.leadMedia != None:
             uuid = item.leadMedia
             media_object = uuidToCatalogBrain(uuid)
@@ -433,7 +489,7 @@ class CustomEventEventListing(EventEventListing):
 
 class CustomEventListing(EventListing):
     def getLeadMedia(self, brain):
-            
+
         acc_context = brain.context
         lead_obj = acc_context
         if getattr(acc_context, 'portal_type', None) == "Occurrence":
@@ -443,7 +499,7 @@ class CustomEventListing(EventListing):
 
         if item.portal_type == "Image":
             return item.getURL()+"/@@images/image/mini"
-        
+
         if item.leadMedia != None:
             uuid = item.leadMedia
             media_object = uuidToCatalogBrain(uuid)
@@ -469,14 +525,14 @@ def objectTranslated(ob, event):
                 if not hasattr(ob, 'slideshow'):
                     if ITranslationManager(ob).has_translation('nl'):
                         original_ob = ITranslationManager(ob).get_translation('nl')
-                        
+
                         if hasattr(original_ob, 'slideshow'):
                             slideshow = original_ob['slideshow']
                             ITranslationManager(slideshow).add_translation('en')
                             slideshow_trans = ITranslationManager(slideshow).get_translation('en')
                             slideshow_trans.title = slideshow.title
                             slideshow_trans.portal_workflow.doActionFor(slideshow_trans, "publish", comment="Slideshow published")
-                            
+
                             for sitem in slideshow:
                                 if slideshow[sitem].portal_type == "Image":
                                     ITranslationManager(slideshow[sitem]).add_translation('en')

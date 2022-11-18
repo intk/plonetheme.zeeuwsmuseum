@@ -122,3 +122,6 @@ msgstr "Maandelijks"
 msgid "YEARLY"
 msgstr "Jaarlijks"
 
+#: ../object.py
+msgid "more_url"
+msgstr "Lees meer"

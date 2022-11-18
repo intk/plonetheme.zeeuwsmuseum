@@ -75,7 +75,7 @@
 
     <tal:cond condition="python:'location' not in excludes">
     <tal:cond condition="data/location">
-      <li class="event-location">
+      <li class="event-location" tal:define="location data/location" tal:condition="python: location not in ['Online']">
         <strong i18n:translate="event_where">Where</strong>
         <span itemprop="location" tal:content="structure data/location">Location</span>
       </li>

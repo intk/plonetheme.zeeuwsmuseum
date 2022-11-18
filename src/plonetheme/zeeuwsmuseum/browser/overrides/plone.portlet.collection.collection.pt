@@ -16,7 +16,7 @@
         <h2 tal:content="collection_item/Description"></h2>
         <span class="portletTopRight"></span>
         <a tal:attributes="href python: collection_url()" class="show-more-a">
-           <span i18n:translate="more_url" class="show-more-header">More&hellip;</span>
+           <span i18n:translate="more_url" i18n:domain="plonetheme.zeeuwsmuseum" class="show-more-header">More&hellip;</span>
         </a>
     </header>
 
@@ -152,7 +152,7 @@
         <span tal:condition="python:showMore">
         <a tal:attributes="href collection_url">
            <span class="hiddenStructure"><span tal:replace="view/data/header" /> - </span>
-           <input i18n:attributes="value more_url" type="submit" class="btn-default show-more" value="More&hellip;"/>
+           <input i18n:attributes="value more_url" i18n:domain="plonetheme.zeeuwsmuseum" type="submit" class="btn-default show-more" value="More&hellip;"/>
         </a>
       
         </span>

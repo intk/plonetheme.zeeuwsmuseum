@@ -20,7 +20,9 @@
 
   <metal:listingmacro define-macro="listing">
     <tal:results define="batch view/batch;
-                         b_start python: request.get('b_start', 0);">
+                         b_start python: request.get('b_start', 0);
+			 context_subjects context/Subject;
+			 is_team_page python: True if 'team' in context_subjects else False;">
       <tal:listing condition="python:batch">
         <div class="entries online-experience" metal:define-slot="entries"
           tal:define="items python: view.pairItems(batch)">
@@ -57,7 +59,22 @@
               <tal:single tal:condition="python: current_item['position'] == 'single'">
                 <div class="col-xs-12 col-sm-12 col-lg-12" tal:attributes="class python: 'col-xs-12 col-sm-12 col-lg-12 %s single' %(current_item['right'])">
                   <article class="entry" tal:attributes="class python: 'entry %s %s' %(current_item['size'], current_item['orientation'])">
-                    <a href="#" class="image-wrapper" tal:attributes="href item_link">
+                    <a href="#" class="image-wrapper" tal:attributes="href python: item_link if not is_team_page else 'javascript:void()'">
+			    <tal:team_page tal:condition="is_team_page">
+				<style>
+					a.image-wrapper:hover,
+					a.image-wrapper:focus {
+						cursor: initial !important;
+					
+					}
+					
+					@media(min-width: 992px) {
+					div.team-text {
+						display:none !important;
+					}
+					}
+				</style>
+			    </tal:team_page>
                       <div class="on-display-wrapper" tal:condition="python:item_on_display" i18n:domain="plonetheme.zeeuwsmuseum">
                         <div i18n:translate="object_on_display" class="label_inner">Nu te zien</div>
                       </div>
@@ -71,6 +88,10 @@
                       </span>
                       
                     </a>
+		<div class="team-text" tal:condition="is_team_page">
+			<h3 tal:content="item_title"></h3>
+			<p tal:content="item_description"></p>
+		</div>
                   </article>
                 </div>
               </tal:single>
@@ -78,7 +99,7 @@
               <tal:pair tal:condition="python: current_item['position'] == 'pair'">
                 <div class="col-xs-12 col-sm-12 col-lg-6" tal:attributes="class python: 'col-xs-12 col-sm-12 col-md-6 col-lg-6 pair-landscape %s %s' %(current_item['size'], current_item['bottom']) if current_item['size'] == 'small' and current_item['orientation'] == 'landscape' else 'col-xs-12 col-sm-12 col-md-6 col-lg-6 %s %s pair-portrait' %(current_item['size'], current_item['bottom'])">
                   <article class="entry" tal:attributes="class python: 'entry %s %s' %(current_item['size'], current_item['orientation'])">
-                    <a href="#" class="image-wrapper" tal:attributes="href item_link">
+                    <a href="#" class="image-wrapper" tal:attributes="href python: item_link if not is_team_page else 'javascript:void()'">
                     <div class="on-display-wrapper" tal:condition="python:item_on_display" i18n:domain="plonetheme.zeeuwsmuseum">
                       <div i18n:translate="object_on_display" class="label_inner">Nu te zien</div>
                     </div>
@@ -90,7 +111,10 @@
                           <p tal:content="item_description"></p>
                         </span>
                     </span>
-                    
+		    <div class="team-text" tal:condition="is_team_page">
+			                            <h3 tal:content="item_title"></h3>
+						                            <p tal:content="item_description"></p>
+									                    </div>
                   </article>
                 </div>
                 <div class="clearfix" tal:condition="python: current_item['clearfix']"></div>

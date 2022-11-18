@@ -51,7 +51,7 @@
               <metal:block define-slot="entry">
                 <article class="entry">
                 
-                          <div class="thumb-wrapper">         
+                          <div class="thumb-wrapper video" tal:attributes="id python: context_tools.getVimeoID(getattr(item.getObject(), 'video_url', None))">         
                             <div tal:replace="structure python: view.getPlayerCode(item.getObject())" />
                           </div>
 
